@@ -2,16 +2,12 @@ import React, { useContext, useRef, useImperativeHandle, useState, useEffect } f
 import { LayoutContext } from './context/layoutcontext';
 import { getIdiomas } from '@/app/api-endpoints/idioma';
 import { Dropdown } from 'primereact/dropdown';
-import { getVistaTipoArchivoEmpresaSeccion } from "@/app/api-endpoints/tipo_archivo";
-import { getVistaArchivoEmpresa } from "@/app/api-endpoints/archivo";
 import { getVistaEmpresaMoneda } from "@/app/api-endpoints/empresa";
 import { getVistaEmpresaRol } from "@/app/api-endpoints/rol";
 import { Button } from 'primereact/button';
 import { InputText } from 'primereact/inputtext';
 import { getUsuarioAvatar } from "@/app/api-endpoints/usuario";
-import AppBreadcrumb from './AppBreadCrumb';
 import { devuelveBasePath, getUsuarioSesion } from "@/app/utility/Utils";
-import { set } from 'date-fns';
 
 const AppTopbar = React.forwardRef((props, ref) => {
     const { onMenuToggle, showProfileSidebar, showConfigSidebar } = useContext(LayoutContext);
@@ -35,28 +31,28 @@ const AppTopbar = React.forwardRef((props, ref) => {
 
         const fetchData = async () => {
             await obtenerListaIdiomas();
-            await obtenerAvatarUsuario();
+            // await obtenerAvatarUsuario();
             //Si el rol del usuario tiene permisos para ver la empresa
-            if (await obtenerRolUsuario()) {
-                obtenerNombreEmpresa();
-                //obtenerLogoEmpresa()
-            }
+            // if (await obtenerRolUsuario()) {
+            //     obtenerNombreEmpresa();
+            //     //obtenerLogoEmpresa()
+            // }
 
         }
         fetchData();
     }, []);
 
-    const obtenerAvatarUsuario = async () => {
-        let avatar = await getUsuarioAvatar(getUsuarioSesion()?.id);
-        if (avatar.length > 0){
-            avatar = avatar[0].url.replace(/(\/[^\/]+\/)([^\/]+\.\w+)$/, '$132x32_$2');
-            setAvatar(`${devuelveBasePath()}${avatar}`);
-        }
-        else{
-            setAvatar(`${devuelveBasePath()}/multimedia/sistemaNLE/imagen-no-disponible.jpeg`);
-        }
+    // const obtenerAvatarUsuario = async () => {
+    //     let avatar = await getUsuarioAvatar(getUsuarioSesion()?.id);
+    //     if (avatar.length > 0){
+    //         avatar = avatar[0].url.replace(/(\/[^\/]+\/)([^\/]+\.\w+)$/, '$132x32_$2');
+    //         setAvatar(`${devuelveBasePath()}${avatar}`);
+    //     }
+    //     else{
+    //         setAvatar(`${devuelveBasePath()}/multimedia/sistemaNLE/imagen-no-disponible.jpeg`);
+    //     }
 
-    }
+    // }
 
     const obtenerListaIdiomas = async () => {
         // const filtro = {
@@ -82,32 +78,32 @@ const AppTopbar = React.forwardRef((props, ref) => {
         setDropdownValues(jsonDeIdiomas);
     }
 
-    const obtenerRolUsuario = async () => {
-        const usuario = getUsuarioSesion();
-        const queryParamsRol = {
-            where: {
-                and: {
-                    id: usuario.rolId
-                }
-            },
-        };
-        const rol = await getVistaEmpresaRol(JSON.stringify(queryParamsRol));
-        //setMuestraEmpresa(rol[0].muestraEmpresa === 'S')
-        return rol[0].muestraEmpresa === 'S'
-    }
+    // const obtenerRolUsuario = async () => {
+    //     const usuario = getUsuarioSesion();
+    //     const queryParamsRol = {
+    //         where: {
+    //             and: {
+    //                 id: usuario.rolId
+    //             }
+    //         },
+    //     };
+    //     const rol = await getVistaEmpresaRol(JSON.stringify(queryParamsRol));
+    //     //setMuestraEmpresa(rol[0].muestraEmpresa === 'S')
+    //     return rol[0].muestraEmpresa === 'S'
+    // }
 
-    const obtenerNombreEmpresa = async () => {
-        const queryParamsTiposArchivo = {
-            where: {
-                and: {
-                    id: Number(localStorage.getItem('empresa'))
-                }
+    // const obtenerNombreEmpresa = async () => {
+    //     const queryParamsTiposArchivo = {
+    //         where: {
+    //             and: {
+    //                 id: Number(localStorage.getItem('empresa'))
+    //             }
 
-            },
-        };
-        const empresa = await getVistaEmpresaMoneda(JSON.stringify(queryParamsTiposArchivo));
-        setEmpresaNombre(empresa[0].nombre)
-    }
+    //         },
+    //     };
+    //     const empresa = await getVistaEmpresaMoneda(JSON.stringify(queryParamsTiposArchivo));
+    //     setEmpresaNombre(empresa[0].nombre)
+    // }
 
 
 

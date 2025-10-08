@@ -1,8 +1,6 @@
 import { TipoUsuarioControllerApi, TipoUsuarioUsuarioControllerApi, UsuariosControllerApi, settings } from "@/app/api-nathalie";
 
 const apiUsuario = new UsuariosControllerApi(settings)
-const apiTipoUsuarioUsuario = new TipoUsuarioUsuarioControllerApi(settings)
-const apiTipoUsuario = new TipoUsuarioControllerApi(settings)
 
 
 export const getUsuarios = async (filtro) => {
@@ -87,20 +85,5 @@ export const deleteUsuario = async (idUsuario) => {
 
 export const validarCodigoRecuperacion = async (filtro) => {
     const { data: dataUsuarios } = await apiUsuario.usuariosControllerValidarCodigoRecuperacion(filtro)
-    return dataUsuarios
-}
-
-export const getUsuarioTiposUsuario = async (filtro) => {
-    const { data: dataTipoUsuarioUsuarios } = await apiTipoUsuarioUsuario.tipoUsuarioUsuarioControllerFind(filtro)
-    const registros = []
-    for (const registro of dataTipoUsuarioUsuarios) {
-        const { data: dataTipoUsuarios } = await apiTipoUsuario.tipoUsuarioControllerFindById(registro.tipoUsuarioId)
-        registros.push(dataTipoUsuarios)
-    }
-    return registros
-}
-
-export const getTipoUsuario = async (filtro) => {
-    const { data: dataUsuarios } = await apiTipoUsuario.tipoUsuarioControllerFind(filtro)
     return dataUsuarios
 }

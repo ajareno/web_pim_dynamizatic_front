@@ -1,25 +1,10 @@
 "use client";
 
 import React, { useEffect, useRef, useState } from "react";
-import { FilterMatchMode, FilterOperator } from 'primereact/api';
 import { Toast } from "primereact/toast";
-import { DataTable } from "primereact/datatable";
-import { Column } from "primereact/column";
-import { comprobarImagen, templateGenerico, Header, esUrlImagen, DescargarCSVDialog, getIdiomaDefecto, tieneUsuarioPermiso } from "@/app/components/shared/componentes";
-import { formatearFechaDate, formatearFechaHoraDate, formatearFechaLocal_a_toISOString, formatNumber, getUsuarioSesion } from "@/app/utility/Utils";
-import CodigoQR from "./codigo_qr";
+import { esUrlImagen, getIdiomaDefecto, tieneUsuarioPermiso } from "@/app/components/shared/componentes";
 import { Divider } from "primereact/divider";
-import { postEnviarQR } from "@/app/api-endpoints/plantilla_email";
 import { Button } from "primereact/button";
-import { Dialog } from "primereact/dialog";
-import { InputText } from 'primereact/inputtext';
-import { Dropdown } from 'primereact/dropdown';
-import { Calendar } from "primereact/calendar";
-import { Badge } from 'primereact/badge';
-import { Paginator } from 'primereact/paginator';
-import { getVistaTipoArchivoEmpresaSeccion } from "@/app/api-endpoints/tipo_archivo";
-import { getVistaArchivoEmpresa } from "@/app/api-endpoints/archivo";
-import { borrarFichero } from "@/app/api-endpoints/ficheros"
 import { useIntl } from 'react-intl'
 import { devuelveBasePath } from "@/app/utility/Utils"
 
@@ -69,79 +54,79 @@ const CrudIconos = ({ getRegistros, editarComponente, editarComponenteParametros
         const registros = await getRegistros(JSON.stringify({where: whereFiltro}));
 
         //Si seccion no es null significa que la pantalla del crud tiene archivos, por lo que hay que obtenerlos
-        if (seccion) {
-            //Obtiene los tipos de archivo de la seccion
-            const queryParamsTiposArchivo = {
-                where: {
-                    and: {
-                        nombreSeccion: seccion || '',
-                        activoSn: 'S'
-                    }
+        // if (seccion) {
+        //     //Obtiene los tipos de archivo de la seccion
+        //     const queryParamsTiposArchivo = {
+        //         where: {
+        //             and: {
+        //                 nombreSeccion: seccion || '',
+        //                 activoSn: 'S'
+        //             }
 
-                },
-                order: "orden ASC"
-            };
-            const registrosTipoArchivos = await getVistaTipoArchivoEmpresaSeccion(JSON.stringify(queryParamsTiposArchivo));
+        //         },
+        //         order: "orden ASC"
+        //     };
+        //     const registrosTipoArchivos = await getVistaTipoArchivoEmpresaSeccion(JSON.stringify(queryParamsTiposArchivo));
 
-            //Por cada tipo de archivo que tiene la seccion, intentamos obtener los archivos del tipo si existen
-            for (const tipoArchivo of registrosTipoArchivos) {
-                for (const registro of registros) {
-                    const queryParamsArchivo = {
-                        where: {
-                            and: {
-                                tipoArchivoId: tipoArchivo.id,
-                                tablaId: registro.id
-                            }
-                        }
-                    };
-                    const archivos = await getVistaArchivoEmpresa(JSON.stringify(queryParamsArchivo))
-                    //Comprueba si el archivo existe
-                    if (archivos.length > 0) {
+        //     //Por cada tipo de archivo que tiene la seccion, intentamos obtener los archivos del tipo si existen
+        //     for (const tipoArchivo of registrosTipoArchivos) {
+        //         for (const registro of registros) {
+        //             const queryParamsArchivo = {
+        //                 where: {
+        //                     and: {
+        //                         tipoArchivoId: tipoArchivo.id,
+        //                         tablaId: registro.id
+        //                     }
+        //                 }
+        //             };
+        //             const archivos = await getVistaArchivoEmpresa(JSON.stringify(queryParamsArchivo))
+        //             //Comprueba si el archivo existe
+        //             if (archivos.length > 0) {
 
-                        //Si solo existe 1, se guarda en forma de variable
-                        if (tipoArchivo.multiple !== 'S') {
-                            //Guarda el archivo redimensionado en el registro
-                            let url = archivos[0].url;
-                            if (url !== '/multimedia/sistemaNLE/imagen-no-disponible.jpeg') {
-                                if ((tipoArchivo.tipo).toLowerCase() === 'imagen') {
-                                    url = archivos[0].url.replace(/(\/[^\/]+\/)([^\/]+\.\w+)$/, '$11250x850_$2');
-                                }
-                                //El id y el url de la imagen se almacenan en variables simples separades en vez de un objeto, para que a la
-                                //hora de mostrar las imagenes se pueda acceder al url con un simple rowData.campo
-                                registro[(tipoArchivo.nombre).toLowerCase()] = url
-                                registro[`${(tipoArchivo.nombre).toLowerCase()}Id`] = archivos[0].id
-                            }
-                            else {
-                                registro[(tipoArchivo.nombre).toLowerCase()] = null
-                                registro[`${(tipoArchivo.nombre).toLowerCase()}Id`] = null
-                            }
-                        }
-                        //Si existe mas de uno, se almacena en forma de array
-                        else {
-                            const archivosArray = []
-                            for (const archivo of archivos) {
-                                let url = archivo.url;
-                                if (esUrlImagen(url) && url !== '/multimedia/sistemaNLE/imagen-no-disponible.jpeg') {
-                                    url = archivo.url.replace(/(\/[^\/]+\/)([^\/]+\.\w+)$/, '$11250x850_$2');
-                                }
-                                archivosArray.push({ url: url, id: archivo.id });
-                            }
-                            registro[(tipoArchivo.nombre).toLowerCase()] = archivosArray
-                        }
+        //                 //Si solo existe 1, se guarda en forma de variable
+        //                 if (tipoArchivo.multiple !== 'S') {
+        //                     //Guarda el archivo redimensionado en el registro
+        //                     let url = archivos[0].url;
+        //                     if (url !== '/multimedia/sistemaNLE/imagen-no-disponible.jpeg') {
+        //                         if ((tipoArchivo.tipo).toLowerCase() === 'imagen') {
+        //                             url = archivos[0].url.replace(/(\/[^\/]+\/)([^\/]+\.\w+)$/, '$11250x850_$2');
+        //                         }
+        //                         //El id y el url de la imagen se almacenan en variables simples separades en vez de un objeto, para que a la
+        //                         //hora de mostrar las imagenes se pueda acceder al url con un simple rowData.campo
+        //                         registro[(tipoArchivo.nombre).toLowerCase()] = url
+        //                         registro[`${(tipoArchivo.nombre).toLowerCase()}Id`] = archivos[0].id
+        //                     }
+        //                     else {
+        //                         registro[(tipoArchivo.nombre).toLowerCase()] = null
+        //                         registro[`${(tipoArchivo.nombre).toLowerCase()}Id`] = null
+        //                     }
+        //                 }
+        //                 //Si existe mas de uno, se almacena en forma de array
+        //                 else {
+        //                     const archivosArray = []
+        //                     for (const archivo of archivos) {
+        //                         let url = archivo.url;
+        //                         if (esUrlImagen(url) && url !== '/multimedia/sistemaNLE/imagen-no-disponible.jpeg') {
+        //                             url = archivo.url.replace(/(\/[^\/]+\/)([^\/]+\.\w+)$/, '$11250x850_$2');
+        //                         }
+        //                         archivosArray.push({ url: url, id: archivo.id });
+        //                     }
+        //                     registro[(tipoArchivo.nombre).toLowerCase()] = archivosArray
+        //                 }
 
-                    }
-                    else {
-                        //Si no existe se guarda en null para que luego a futuro pueda ser rellenado el campo
-                        registro[(tipoArchivo.nombre).toLowerCase()] = null
-                        if (tipoArchivo.multiple !== 'S') {
-                            registro[`${(tipoArchivo.nombre).toLowerCase()}Id`] = null
-                        }
+        //             }
+        //             else {
+        //                 //Si no existe se guarda en null para que luego a futuro pueda ser rellenado el campo
+        //                 registro[(tipoArchivo.nombre).toLowerCase()] = null
+        //                 if (tipoArchivo.multiple !== 'S') {
+        //                     registro[`${(tipoArchivo.nombre).toLowerCase()}Id`] = null
+        //                 }
 
-                    }
-                }
-            }
-            setRegistrosTipoArchivos(registrosTipoArchivos)
-        }
+        //             }
+        //         }
+        //     }
+        //     setRegistrosTipoArchivos(registrosTipoArchivos)
+        // }
 
         setRegistros(registros);
     }

@@ -10,15 +10,8 @@ import Link from "next/link"; // Importa Link para la navegación
 // import { UsuariosControllerApi, settings } from "@/app/api-nathalie";
 import { useAuth } from "@/app/auth/AuthContext";
 import jwt from "@/app/auth/jwt/useJwt";
-import { getEmpresa } from "@/app/api-endpoints/empresa";
-import { postLogUsuario } from "@/app/api-endpoints/log_usuario";
-import { getIdioma } from "@/app/api-endpoints/idioma";
 import { useRouter } from 'next/navigation';
 import { ProgressSpinner } from 'primereact/progressspinner';
-import { getVistaEmpresaRol } from "@/app/api-endpoints/rol";
-import { getVistaTipoArchivoEmpresaSeccion } from "@/app/api-endpoints/tipo_archivo";
-import { getVistaArchivoEmpresa } from "@/app/api-endpoints/archivo";
-import { obtenerTodosLosPermisos } from "@/app/components/shared/componentes";
 const Login = () => {
     const router = useRouter();
     const config = jwt.jwtConfig;

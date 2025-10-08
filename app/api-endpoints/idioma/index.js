@@ -1,9 +1,7 @@
 import { IdiomaControllerApi, ExamenControllerApi, MensajePlantillaControllerApi, NivelIdiomaControllerApi, TraduccionControllerApi, settings } from "@/app/api-nathalie";
 
 const apiIdioma = new IdiomaControllerApi(settings)
-const apiExamen = new ExamenControllerApi(settings)
 const apiMensajePlantilla = new MensajePlantillaControllerApi(settings)
-const apiNivelIdioma = new NivelIdiomaControllerApi(settings)
 const apiTraduccion = new TraduccionControllerApi(settings)
 
 export const getIdiomas = async (filtro) => {

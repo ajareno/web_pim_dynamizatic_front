@@ -9,10 +9,8 @@ import { parse } from 'json2csv';
 import { devuelveBasePath, getUsuarioSesion } from "../../utility/Utils";
 import { useIntl } from 'react-intl'
 import { compruebaPermiso } from "../../api-endpoints/permisos";
-import { getVistaTipoArchivoEmpresaSeccion } from "@/app/api-endpoints/tipo_archivo";
-import { getVistaArchivoEmpresa } from "@/app/api-endpoints/archivo";
 import { Tooltip } from 'primereact/tooltip';
-import { getVistaEmpresaRolPermiso } from "@/app/api-endpoints/permisos";
+// import { getVistaEmpresaRolPermiso } from "@/app/api-endpoints/permisos";
 
 const templateGenerico = (campo, cabecera) => (rowData) => {
     if (rowData[campo]?.length > 30) {
@@ -40,81 +38,81 @@ const templateGenerico = (campo, cabecera) => (rowData) => {
 
 
 //Obtiene los tipos de archivo de la seccion y los archivos que tiene el registro como si fuese el crud
-export async function obtenerArchivosSeccion(registro, seccion) {
-    //Obtiene los tipos de archivo de la seccion
-    const queryParamsTiposArchivo = {
-        where: {
-            and: {
-                nombreSeccion: seccion,
-                activoSn: 'S'
-            }
+// export async function obtenerArchivosSeccion(registro, seccion) {
+//     //Obtiene los tipos de archivo de la seccion
+//     const queryParamsTiposArchivo = {
+//         where: {
+//             and: {
+//                 nombreSeccion: seccion,
+//                 activoSn: 'S'
+//             }
 
-        },
-        order: "orden ASC"
-    };
-    const registrosTipoArchivos = await getVistaTipoArchivoEmpresaSeccion(JSON.stringify(queryParamsTiposArchivo));
+//         },
+//         order: "orden ASC"
+//     };
+//     const registrosTipoArchivos = await getVistaTipoArchivoEmpresaSeccion(JSON.stringify(queryParamsTiposArchivo));
 
-    if (registro && registro.id) {
-        //Por cada tipo de archivo que tiene la seccion, intentamos obtener los archivos del tipo si existen
-        for (const tipoArchivo of registrosTipoArchivos) {
+//     if (registro && registro.id) {
+//         //Por cada tipo de archivo que tiene la seccion, intentamos obtener los archivos del tipo si existen
+//         for (const tipoArchivo of registrosTipoArchivos) {
 
-            const queryParamsArchivo = {
-                where: {
-                    and: {
-                        tipoArchivoId: tipoArchivo.id,
-                        tablaId: registro.id
-                    }
-                }
-            };
-            const archivos = await getVistaArchivoEmpresa(JSON.stringify(queryParamsArchivo))
-            //Comprueba si el archivo existe
-            if (archivos.length > 0) {
+//             const queryParamsArchivo = {
+//                 where: {
+//                     and: {
+//                         tipoArchivoId: tipoArchivo.id,
+//                         tablaId: registro.id
+//                     }
+//                 }
+//             };
+//             const archivos = await getVistaArchivoEmpresa(JSON.stringify(queryParamsArchivo))
+//             //Comprueba si el archivo existe
+//             if (archivos.length > 0) {
 
-                //Si solo existe 1, se guarda en forma de variable
-                if (tipoArchivo.multiple !== 'S') {
-                    //Guarda el archivo redimensionado en el registro
-                    let url = archivos[0].url;
-                    if (url !== '/multimedia/sistemaNLE/imagen-no-disponible.jpeg') {
-                        if ((tipoArchivo.tipo).toLowerCase() === 'imagen') {
-                            url = archivos[0].url.replace(/(\/[^\/]+\/)([^\/]+\.\w+)$/, '$11250x850_$2');
-                        }
-                        //El id y el url de la imagen se almacenan en variables simples separades en vez de un objeto, para que a la
-                        //hora de mostrar las imagenes se pueda acceder al url con un simple rowData.campo
-                        registro[(tipoArchivo.nombre).toLowerCase()] = url
-                        registro[`${(tipoArchivo.nombre).toLowerCase()}Id`] = archivos[0].id
-                    }
-                    else {
-                        registro[(tipoArchivo.nombre).toLowerCase()] = null
-                        registro[`${(tipoArchivo.nombre).toLowerCase()}Id`] = null
-                    }
-                }
-                //Si existe mas de uno, se almacena en forma de array
-                else {
-                    const archivosArray = []
-                    for (const archivo of archivos) {
-                        let url = archivo.url;
-                        if (esUrlImagen(url) && url !== '/multimedia/sistemaNLE/imagen-no-disponible.jpeg') {
-                            url = archivo.url.replace(/(\/[^\/]+\/)([^\/]+\.\w+)$/, '$11250x850_$2');
-                        }
-                        archivosArray.push({ url: url, id: archivo.id });
-                    }
-                    registro[(tipoArchivo.nombre).toLowerCase()] = archivosArray
-                }
+//                 //Si solo existe 1, se guarda en forma de variable
+//                 if (tipoArchivo.multiple !== 'S') {
+//                     //Guarda el archivo redimensionado en el registro
+//                     let url = archivos[0].url;
+//                     if (url !== '/multimedia/sistemaNLE/imagen-no-disponible.jpeg') {
+//                         if ((tipoArchivo.tipo).toLowerCase() === 'imagen') {
+//                             url = archivos[0].url.replace(/(\/[^\/]+\/)([^\/]+\.\w+)$/, '$11250x850_$2');
+//                         }
+//                         //El id y el url de la imagen se almacenan en variables simples separades en vez de un objeto, para que a la
+//                         //hora de mostrar las imagenes se pueda acceder al url con un simple rowData.campo
+//                         registro[(tipoArchivo.nombre).toLowerCase()] = url
+//                         registro[`${(tipoArchivo.nombre).toLowerCase()}Id`] = archivos[0].id
+//                     }
+//                     else {
+//                         registro[(tipoArchivo.nombre).toLowerCase()] = null
+//                         registro[`${(tipoArchivo.nombre).toLowerCase()}Id`] = null
+//                     }
+//                 }
+//                 //Si existe mas de uno, se almacena en forma de array
+//                 else {
+//                     const archivosArray = []
+//                     for (const archivo of archivos) {
+//                         let url = archivo.url;
+//                         if (esUrlImagen(url) && url !== '/multimedia/sistemaNLE/imagen-no-disponible.jpeg') {
+//                             url = archivo.url.replace(/(\/[^\/]+\/)([^\/]+\.\w+)$/, '$11250x850_$2');
+//                         }
+//                         archivosArray.push({ url: url, id: archivo.id });
+//                     }
+//                     registro[(tipoArchivo.nombre).toLowerCase()] = archivosArray
+//                 }
 
-            }
-            else {
-                //Si no existe se guarda en null para que luego a futuro pueda ser rellenado el campo
-                registro[(tipoArchivo.nombre).toLowerCase()] = null
-                if (tipoArchivo.multiple !== 'S') {
-                    registro[`${(tipoArchivo.nombre).toLowerCase()}Id`] = null
-                }
+//             }
+//             else {
+//                 //Si no existe se guarda en null para que luego a futuro pueda ser rellenado el campo
+//                 registro[(tipoArchivo.nombre).toLowerCase()] = null
+//                 if (tipoArchivo.multiple !== 'S') {
+//                     registro[`${(tipoArchivo.nombre).toLowerCase()}Id`] = null
+//                 }
 
-            }
+//             }
 
-        }
-    }
-    return registrosTipoArchivos
-}
+//         }
+//     }
+//     return registrosTipoArchivos
+// }
 
 
 const comprobarImagen = (campo, cabecera) => (rowData) => {
@@ -158,17 +156,18 @@ const tieneUsuarioPermiso = async (modulo, controlador, permiso) => {
     return await compruebaPermiso(usuario.rolId, modulo, controlador, permiso);
 }
 
-const obtenerTodosLosPermisos = async (accion) => {
-    const usuario = getUsuarioSesion();
-    const permisos = await getVistaEmpresaRolPermiso(JSON.stringify({
-        where: {
-            and: {
-                rol_id: usuario.rolId,
-                permiso_accion: accion
-            }
-        }
-    }));
-    return permisos
+const obtenerTodosLosPermisos = async () => {
+    // const usuario = getUsuarioSesion();
+    // const permisos = await getVistaEmpresaRolPermiso(JSON.stringify({
+    //     where: {
+    //         and: {
+    //             rol_id: usuario.rolId,
+    //             permiso_accion: accion
+    //         }
+    //     }
+    // }));
+    // return permisos
+    return [];
 };
 
 const ErrorDetail = () => {

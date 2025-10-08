@@ -4,10 +4,7 @@ import AppMenu from "./AppMenu";
 import { LayoutContext } from "./context/layoutcontext";
 //import { MenuProvider } from "./context/menucontext";
 import React, { useContext, useRef, useImperativeHandle, useState, useEffect } from 'react';
-import { getVistaTipoArchivoEmpresaSeccion } from "@/app/api-endpoints/tipo_archivo";
-import { getVistaArchivoEmpresa } from "@/app/api-endpoints/archivo";
-import { getVistaEmpresaRol } from "@/app/api-endpoints/rol";
-import { devuelveBasePath, getUsuarioSesion } from "@/app/utility/Utils";
+import { devuelveBasePath } from "@/app/utility/Utils";
 
 const AppSidebar = () => {
   const { setLayoutState } = useContext(LayoutContext);
