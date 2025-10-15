@@ -7,16 +7,19 @@ import Cookies from 'js-cookie';
 import { emptyCache } from '../utility/Utils';
 import jwt from "@/app/auth/jwt/useJwt";
 import { getEmpresa } from "@/app/api-endpoints/empresa";
-import { postLogUsuario } from "@/app/api-endpoints/log_usuario";
 import { getIdioma } from "@/app/api-endpoints/idioma";
 import { getVistaEmpresaRol } from "@/app/api-endpoints/rol";
+import { registrarLoginExitoso, registrarLoginFallido, registrarAccesoBloqueado, registrarLogout } from "@/app/utility/LogAccesoUtils";
 // import { getVistaArchivoEmpresa } from "@/app/api-endpoints/archivo";
 import { obtenerTodosLosPermisos } from "@/app/components/shared/componentes";
+
 interface AuthContextProps {
   usuarioAutenticado: boolean;
   login: (token: string, rememberMe: boolean, data: any) => void;
   loginSinDashboard: (token: string, rememberMe: boolean, data: any) => void;
   logout: () => void;
+  registrarAccesoFallido: (empresaId: number, usuarioId: number, motivoFallo: string) => Promise<void>;
+  registrarAccesoBloqueado: (empresaId: number, usuarioId: number, motivoFallo: string) => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextProps | undefined>(undefined);
@@ -66,6 +69,61 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
           label: "Usuarios",
           icon: "pi pi-fw pi-user-edit",
           to: "/usuarios"
+        },
+        {
+          label: "Empresas",
+          icon: "pi pi-fw pi-user-edit",
+          to: "/empresas"
+        }
+      ]
+      },
+      {
+        label: "Tablas maestras",
+        icon: "pi pi-fw pi-cog",
+        items: [{
+          label: "Archivos",
+          icon: "pi pi-fw pi-user-edit",
+          to: "/tablas-maestras/archivo"
+          },{
+          label: "Enviar email",
+          icon: "pi pi-fw pi-user-edit",
+          to: "/tablas-maestras/enviar-email"
+        },{
+          label: "Idiomas",
+          icon: "pi pi-fw pi-user-edit",
+          to: "/tablas-maestras/idioma"
+        },{
+          label: "Logs de acceso",
+          icon: "pi pi-fw pi-user-edit",
+          to: "/tablas-maestras/log-acceso"
+        },{
+          label: "Permisos",
+          icon: "pi pi-fw pi-user-edit",
+          to: "/tablas-maestras/permiso"
+        },{
+          label: "Planificador de categorias",
+          icon: "pi pi-fw pi-user-edit",
+          to: "/tablas-maestras/planificador-categorias"
+        },{
+          label: "Planificador de estados",
+          icon: "pi pi-fw pi-user-edit",
+          to: "/tablas-maestras/planificador-estados"
+        },{
+          label: "Plantillas de email",
+          icon: "pi pi-fw pi-user-edit",
+          to: "/tablas-maestras/plantillas-email"
+        },{
+          label: "Roles",
+          icon: "pi pi-fw pi-user-edit",
+          to: "/tablas-maestras/rol"
+        },{
+          label: "Sección",
+          icon: "pi pi-fw pi-user-edit",
+          to: "/tablas-maestras/seccion"
+        },{
+          label: "Traducción",
+          icon: "pi pi-fw pi-user-edit",
+          to: "/tablas-maestras/traduccion"
         }]
       }]
     }];
@@ -98,15 +156,14 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     const response = await fetch('https://api.ipify.org?format=json');
     const ip = (await response.json()).ip;
 
-    //Sube el log del login al servidor
-    const objLogUsuario = {
-      usuarioId: data.id,
-      ip: ip,
-      masDatos: 'login',
-      usuCreacion: data.id,
-      fechaRegistro: new Date(),
+    //Registra el login exitoso usando las nuevas utilidades
+    try {
+      await registrarLoginExitoso(data.empresaId, data.id, ip);
+    } catch (error) {
+      console.error('Error al registrar el log de acceso:', error);
+      // No bloquear el login si falla el log
     }
-    //await postLogUsuario(objLogUsuario);
+    
     await getMenuLateral();
   }
 
@@ -153,6 +210,20 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   // }
 
   const logout = (mensaje?: string) => {
+    // Registrar el logout antes de limpiar los datos
+    const userData = localStorage.getItem('userDataNathalie');
+    if (userData) {
+      try {
+        const user = JSON.parse(userData);
+        // Usar la nueva utilidad para registrar logout
+        registrarLogout(user.empresaId, user.id).catch(error => {
+          console.error('Error al registrar logout:', error);
+        });
+      } catch (error) {
+        console.error('Error al parsear datos del usuario para logout:', error);
+      }
+    }
+
     //Vaciamos localStorage y cookies
     Cookies.remove('authToken');
     localStorage.clear();
@@ -172,8 +243,26 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   };
 
+  // Función para registrar accesos fallidos
+  const registrarAccesoFallido = async (empresaId: number, usuarioId: number, motivoFallo: string) => {
+    try {
+      await registrarLoginFallido(empresaId, usuarioId, motivoFallo);
+    } catch (error) {
+      console.error('Error al registrar el acceso fallido:', error);
+    }
+  };
+
+  // Función para registrar accesos bloqueados
+  const registrarAccesoBloqueado = async (empresaId: number, usuarioId: number, motivoFallo: string) => {
+    try {
+      await registrarAccesoBloqueado(empresaId, usuarioId, motivoFallo);
+    } catch (error) {
+      console.error('Error al registrar el acceso bloqueado:', error);
+    }
+  };
+
   return (
-    <AuthContext.Provider value={{ usuarioAutenticado, login, logout, loginSinDashboard }}>
+    <AuthContext.Provider value={{ usuarioAutenticado, login, logout, loginSinDashboard, registrarAccesoFallido, registrarAccesoBloqueado }}>
       {children}
     </AuthContext.Provider>
   );

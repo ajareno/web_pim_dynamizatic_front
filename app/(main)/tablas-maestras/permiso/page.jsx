@@ -68,13 +68,10 @@ const Permiso = () => {
                 { header: intl.formatMessage({ id: 'Actualizar' }), seccion: 'Idiomas-Actualizar' },
                 { header: intl.formatMessage({ id: 'Borrar' }), seccion: 'Idiomas-Borrar' },
 
-                // Logs de usuarios
-                { header: intl.formatMessage({ id: 'Logs de usuarios' }), seccion: 'Logs de usuarios' },
-                { header: intl.formatMessage({ id: 'Acceder' }), seccion: 'Logs de usuarios-Acceder' },
-                { header: intl.formatMessage({ id: 'Ver' }), seccion: 'Logs de usuarios-Ver' },
-                { header: intl.formatMessage({ id: 'Nuevo' }), seccion: 'Logs de usuarios-Nuevo' },
-                { header: intl.formatMessage({ id: 'Actualizar' }), seccion: 'Logs de usuarios-Actualizar' },
-                { header: intl.formatMessage({ id: 'Borrar' }), seccion: 'Logs de usuarios-Borrar' },
+                // Logs de acceso
+                { header: intl.formatMessage({ id: 'Logs de acceso' }), seccion: 'Logs de acceso' },
+                { header: intl.formatMessage({ id: 'Acceder' }), seccion: 'Logs de acceso-Acceder' },
+                { header: intl.formatMessage({ id: 'Ver' }), seccion: 'Logs de acceso-Ver' },
 
                 // Categorias del planificador
                 { header: intl.formatMessage({ id: 'Categorias del planificador' }), seccion: 'Categorias del planificador' },

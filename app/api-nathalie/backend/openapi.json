@@ -5822,309 +5822,6 @@
         "operationId": "LogSincronizacionController.find"
       }
     },
-    "/log-usuarios/count": {
-      "get": {
-        "x-controller-name": "LogUsuarioController",
-        "x-operation-name": "count",
-        "tags": [
-          "LogUsuarioController"
-        ],
-        "responses": {
-          "200": {
-            "description": "LogUsuario model count",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/loopback.Count"
-                }
-              }
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "where",
-            "in": "query",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "title": "LogUsuario.WhereFilter",
-                  "additionalProperties": true,
-                  "x-typescript-type": "@loopback/repository#Where<LogUsuario>"
-                }
-              }
-            }
-          }
-        ],
-        "operationId": "LogUsuarioController.count"
-      }
-    },
-    "/log-usuarios/{id}": {
-      "put": {
-        "x-controller-name": "LogUsuarioController",
-        "x-operation-name": "replaceById",
-        "tags": [
-          "LogUsuarioController"
-        ],
-        "responses": {
-          "204": {
-            "description": "No Content",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "description": "LogUsuario PUT success"
-                }
-              }
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "schema": {
-              "type": "number"
-            },
-            "required": true
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/LogUsuario"
-              }
-            }
-          },
-          "x-parameter-index": 1
-        },
-        "operationId": "LogUsuarioController.replaceById"
-      },
-      "patch": {
-        "x-controller-name": "LogUsuarioController",
-        "x-operation-name": "updateById",
-        "tags": [
-          "LogUsuarioController"
-        ],
-        "responses": {
-          "204": {
-            "description": "No Content",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "description": "LogUsuario PATCH success"
-                }
-              }
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "schema": {
-              "type": "number"
-            },
-            "required": true
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/LogUsuarioPartial"
-              }
-            }
-          },
-          "x-parameter-index": 1
-        },
-        "operationId": "LogUsuarioController.updateById"
-      },
-      "get": {
-        "x-controller-name": "LogUsuarioController",
-        "x-operation-name": "findById",
-        "tags": [
-          "LogUsuarioController"
-        ],
-        "responses": {
-          "200": {
-            "description": "LogUsuario model instance",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/LogUsuarioWithRelations"
-                }
-              }
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "schema": {
-              "type": "number"
-            },
-            "required": true
-          },
-          {
-            "name": "filter",
-            "in": "query",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/LogUsuario.Filter"
-                }
-              }
-            }
-          }
-        ],
-        "operationId": "LogUsuarioController.findById"
-      },
-      "delete": {
-        "x-controller-name": "LogUsuarioController",
-        "x-operation-name": "deleteById",
-        "tags": [
-          "LogUsuarioController"
-        ],
-        "responses": {
-          "204": {
-            "description": "No Content",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "description": "LogUsuario DELETE success"
-                }
-              }
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "schema": {
-              "type": "number"
-            },
-            "required": true
-          }
-        ],
-        "operationId": "LogUsuarioController.deleteById"
-      }
-    },
-    "/log-usuarios": {
-      "post": {
-        "x-controller-name": "LogUsuarioController",
-        "x-operation-name": "create",
-        "tags": [
-          "LogUsuarioController"
-        ],
-        "responses": {
-          "200": {
-            "description": "LogUsuario model instance",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/LogUsuario"
-                }
-              }
-            }
-          }
-        },
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/NewLogUsuario"
-              }
-            }
-          }
-        },
-        "operationId": "LogUsuarioController.create"
-      },
-      "patch": {
-        "x-controller-name": "LogUsuarioController",
-        "x-operation-name": "updateAll",
-        "tags": [
-          "LogUsuarioController"
-        ],
-        "responses": {
-          "200": {
-            "description": "LogUsuario PATCH success count",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/loopback.Count"
-                }
-              }
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "where",
-            "in": "query",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "title": "LogUsuario.WhereFilter",
-                  "additionalProperties": true,
-                  "x-typescript-type": "@loopback/repository#Where<LogUsuario>"
-                }
-              }
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/LogUsuarioPartial"
-              }
-            }
-          }
-        },
-        "operationId": "LogUsuarioController.updateAll"
-      },
-      "get": {
-        "x-controller-name": "LogUsuarioController",
-        "x-operation-name": "find",
-        "tags": [
-          "LogUsuarioController"
-        ],
-        "responses": {
-          "200": {
-            "description": "Array of LogUsuario model instances",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/LogUsuarioWithRelations"
-                  }
-                }
-              }
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "filter",
-            "in": "query",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/LogUsuario.Filter1"
-                }
-              }
-            }
-          }
-        ],
-        "operationId": "LogUsuarioController.find"
-      }
-    },
     "/marcas/count": {
       "get": {
         "x-controller-name": "MarcaController",
@@ -15604,79 +15301,6 @@
         "operationId": "UsuariosController.vistaEmpresaRolUsuarioCount"
       }
     },
-    "/vistaLogUsuarioUsuario": {
-      "get": {
-        "x-controller-name": "LogUsuarioController",
-        "x-operation-name": "vistaLogUsuarioUsuario",
-        "tags": [
-          "LogUsuarioController"
-        ],
-        "responses": {
-          "200": {
-            "description": "Devuelve los logs de usuario con sus nombres",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object"
-                }
-              }
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "filter",
-            "in": "query",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/LogUsuario.Filter1"
-                }
-              }
-            }
-          }
-        ],
-        "operationId": "LogUsuarioController.vistaLogUsuarioUsuario"
-      }
-    },
-    "/vistaLogUsuarioUsuarioCount": {
-      "get": {
-        "x-controller-name": "LogUsuarioController",
-        "x-operation-name": "vistaLogUsuarioUsuarioCount",
-        "tags": [
-          "LogUsuarioController"
-        ],
-        "responses": {
-          "200": {
-            "description": "Devuelve los tipos de extras y el nombre de la empresa",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object"
-                }
-              }
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "where",
-            "in": "query",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "title": "LogUsuario.WhereFilter",
-                  "additionalProperties": true,
-                  "x-typescript-type": "@loopback/repository#Where<LogUsuario>"
-                }
-              }
-            }
-          }
-        ],
-        "operationId": "LogUsuarioController.vistaLogUsuarioUsuarioCount"
-      }
-    },
     "/vistaPlantillaEmailIdioma": {
       "get": {
         "x-controller-name": "PlantillaEmailController",
@@ -22355,204 +21979,6 @@
         "additionalProperties": false,
         "x-typescript-type": "Partial<Marca>"
       },
-      "LogUsuario": {
-        "title": "LogUsuario",
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "number",
-            "nullable": false
-          },
-          "usuarioId": {
-            "type": "number",
-            "nullable": false
-          },
-          "fechaRegistro": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "ip": {
-            "type": "string",
-            "nullable": true
-          },
-          "masDatos": {
-            "type": "string",
-            "nullable": true
-          },
-          "fechaCreacion": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "fechaModificacion": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "usuCreacion": {
-            "type": "number",
-            "nullable": false
-          },
-          "usuModificacion": {
-            "type": "number",
-            "nullable": true
-          }
-        },
-        "required": [
-          "usuarioId",
-          "usuCreacion"
-        ],
-        "additionalProperties": false
-      },
-      "NewLogUsuario": {
-        "title": "NewLogUsuario",
-        "type": "object",
-        "description": "(tsType: Omit<LogUsuario, 'id'>, schemaOptions: { title: 'NewLogUsuario', exclude: [ 'id' ] })",
-        "properties": {
-          "usuarioId": {
-            "type": "number",
-            "nullable": false
-          },
-          "fechaRegistro": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "ip": {
-            "type": "string",
-            "nullable": true
-          },
-          "masDatos": {
-            "type": "string",
-            "nullable": true
-          },
-          "fechaCreacion": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "fechaModificacion": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "usuCreacion": {
-            "type": "number",
-            "nullable": false
-          },
-          "usuModificacion": {
-            "type": "number",
-            "nullable": true
-          }
-        },
-        "required": [
-          "usuarioId",
-          "usuCreacion"
-        ],
-        "additionalProperties": false,
-        "x-typescript-type": "Omit<LogUsuario, 'id'>"
-      },
-      "LogUsuarioWithRelations": {
-        "title": "LogUsuarioWithRelations",
-        "type": "object",
-        "description": "(tsType: LogUsuarioWithRelations, schemaOptions: { includeRelations: true })",
-        "properties": {
-          "id": {
-            "type": "number",
-            "nullable": false
-          },
-          "usuarioId": {
-            "type": "number",
-            "nullable": false
-          },
-          "fechaRegistro": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "ip": {
-            "type": "string",
-            "nullable": true
-          },
-          "masDatos": {
-            "type": "string",
-            "nullable": true
-          },
-          "fechaCreacion": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "fechaModificacion": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "usuCreacion": {
-            "type": "number",
-            "nullable": false
-          },
-          "usuModificacion": {
-            "type": "number",
-            "nullable": true
-          }
-        },
-        "required": [
-          "usuarioId",
-          "usuCreacion"
-        ],
-        "additionalProperties": false,
-        "x-typescript-type": "LogUsuarioWithRelations"
-      },
-      "LogUsuarioPartial": {
-        "title": "LogUsuarioPartial",
-        "type": "object",
-        "description": "(tsType: Partial<LogUsuario>, schemaOptions: { partial: true })",
-        "properties": {
-          "id": {
-            "type": "number",
-            "nullable": false
-          },
-          "usuarioId": {
-            "type": "number",
-            "nullable": false
-          },
-          "fechaRegistro": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "ip": {
-            "type": "string",
-            "nullable": true
-          },
-          "masDatos": {
-            "type": "string",
-            "nullable": true
-          },
-          "fechaCreacion": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "fechaModificacion": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "usuCreacion": {
-            "type": "number",
-            "nullable": false
-          },
-          "usuModificacion": {
-            "type": "number",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false,
-        "x-typescript-type": "Partial<LogUsuario>"
-      },
       "LogSincronizacion": {
         "title": "LogSincronizacion",
         "type": "object",
@@ -24292,10 +23718,6 @@
             "type": "number",
             "nullable": false
           },
-          "monedaId": {
-            "type": "number",
-            "nullable": false
-          },
           "codigo": {
             "type": "string",
             "nullable": true
@@ -24308,15 +23730,7 @@
             "type": "string",
             "nullable": true
           },
-          "email": {
-            "type": "string",
-            "nullable": true
-          },
-          "password": {
-            "type": "string",
-            "nullable": true
-          },
-          "servicio": {
+          "activoSn": {
             "type": "string",
             "nullable": true
           },
@@ -24344,7 +23758,6 @@
           }
         },
         "required": [
-          "monedaId",
           "usuCreacion"
         ],
         "additionalProperties": false
@@ -24354,10 +23767,6 @@
         "type": "object",
         "description": "(tsType: Omit<Empresa, 'id'>, schemaOptions: { title: 'NewEmpresa', exclude: [ 'id' ] })",
         "properties": {
-          "monedaId": {
-            "type": "number",
-            "nullable": false
-          },
           "codigo": {
             "type": "string",
             "nullable": true
@@ -24370,15 +23779,7 @@
             "type": "string",
             "nullable": true
           },
-          "email": {
-            "type": "string",
-            "nullable": true
-          },
-          "password": {
-            "type": "string",
-            "nullable": true
-          },
-          "servicio": {
+          "activoSn": {
             "type": "string",
             "nullable": true
           },
@@ -24406,7 +23807,6 @@
           }
         },
         "required": [
-          "monedaId",
           "usuCreacion"
         ],
         "additionalProperties": false,
@@ -24421,10 +23821,6 @@
             "type": "number",
             "nullable": false
           },
-          "monedaId": {
-            "type": "number",
-            "nullable": false
-          },
           "codigo": {
             "type": "string",
             "nullable": true
@@ -24437,15 +23833,7 @@
             "type": "string",
             "nullable": true
           },
-          "email": {
-            "type": "string",
-            "nullable": true
-          },
-          "password": {
-            "type": "string",
-            "nullable": true
-          },
-          "servicio": {
+          "activoSn": {
             "type": "string",
             "nullable": true
           },
@@ -24473,7 +23861,6 @@
           }
         },
         "required": [
-          "monedaId",
           "usuCreacion"
         ],
         "additionalProperties": false,
@@ -24485,10 +23872,6 @@
         "description": "(tsType: Partial<Empresa>, schemaOptions: { partial: true })",
         "properties": {
           "id": {
-            "type": "number",
-            "nullable": false
-          },
-          "monedaId": {
             "type": "number",
             "nullable": false
           },
@@ -24504,15 +23887,7 @@
             "type": "string",
             "nullable": true
           },
-          "email": {
-            "type": "string",
-            "nullable": true
-          },
-          "password": {
-            "type": "string",
-            "nullable": true
-          },
-          "servicio": {
+          "activoSn": {
             "type": "string",
             "nullable": true
           },
@@ -29177,9 +28552,6 @@
                   "id": {
                     "type": "boolean"
                   },
-                  "monedaId": {
-                    "type": "boolean"
-                  },
                   "codigo": {
                     "type": "boolean"
                   },
@@ -29189,13 +28561,7 @@
                   "descripcion": {
                     "type": "boolean"
                   },
-                  "email": {
-                    "type": "boolean"
-                  },
-                  "password": {
-                    "type": "boolean"
-                  },
-                  "servicio": {
+                  "activoSn": {
                     "type": "boolean"
                   },
                   "fechaCreacion": {
@@ -29222,13 +28588,10 @@
                   "type": "string",
                   "enum": [
                     "id",
-                    "monedaId",
                     "codigo",
                     "nombre",
                     "descripcion",
-                    "email",
-                    "password",
-                    "servicio",
+                    "activoSn",
                     "fechaCreacion",
                     "fechaModificacion",
                     "usuCreacion",
@@ -29289,9 +28652,6 @@
                   "id": {
                     "type": "boolean"
                   },
-                  "monedaId": {
-                    "type": "boolean"
-                  },
                   "codigo": {
                     "type": "boolean"
                   },
@@ -29301,13 +28661,7 @@
                   "descripcion": {
                     "type": "boolean"
                   },
-                  "email": {
-                    "type": "boolean"
-                  },
-                  "password": {
-                    "type": "boolean"
-                  },
-                  "servicio": {
+                  "activoSn": {
                     "type": "boolean"
                   },
                   "fechaCreacion": {
@@ -29334,13 +28688,10 @@
                   "type": "string",
                   "enum": [
                     "id",
-                    "monedaId",
                     "codigo",
                     "nombre",
                     "descripcion",
-                    "email",
-                    "password",
-                    "servicio",
+                    "activoSn",
                     "fechaCreacion",
                     "fechaModificacion",
                     "usuCreacion",
@@ -30842,193 +30193,6 @@
         },
         "additionalProperties": false,
         "x-typescript-type": "@loopback/repository#Filter<LogSincronizacion>"
-      },
-      "LogUsuario.Filter": {
-        "type": "object",
-        "title": "LogUsuario.Filter",
-        "properties": {
-          "offset": {
-            "type": "integer",
-            "minimum": 0
-          },
-          "limit": {
-            "type": "integer",
-            "minimum": 1,
-            "example": 100
-          },
-          "skip": {
-            "type": "integer",
-            "minimum": 0
-          },
-          "order": {
-            "oneOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              }
-            ]
-          },
-          "fields": {
-            "oneOf": [
-              {
-                "type": "object",
-                "properties": {
-                  "id": {
-                    "type": "boolean"
-                  },
-                  "usuarioId": {
-                    "type": "boolean"
-                  },
-                  "fechaRegistro": {
-                    "type": "boolean"
-                  },
-                  "ip": {
-                    "type": "boolean"
-                  },
-                  "masDatos": {
-                    "type": "boolean"
-                  },
-                  "fechaCreacion": {
-                    "type": "boolean"
-                  },
-                  "fechaModificacion": {
-                    "type": "boolean"
-                  },
-                  "usuCreacion": {
-                    "type": "boolean"
-                  },
-                  "usuModificacion": {
-                    "type": "boolean"
-                  }
-                },
-                "additionalProperties": false
-              },
-              {
-                "type": "array",
-                "items": {
-                  "type": "string",
-                  "enum": [
-                    "id",
-                    "usuarioId",
-                    "fechaRegistro",
-                    "ip",
-                    "masDatos",
-                    "fechaCreacion",
-                    "fechaModificacion",
-                    "usuCreacion",
-                    "usuModificacion"
-                  ],
-                  "example": "id"
-                },
-                "uniqueItems": true
-              }
-            ],
-            "title": "LogUsuario.Fields"
-          }
-        },
-        "additionalProperties": false,
-        "x-typescript-type": "@loopback/repository#Filter<LogUsuario>"
-      },
-      "LogUsuario.Filter1": {
-        "type": "object",
-        "title": "LogUsuario.Filter",
-        "properties": {
-          "offset": {
-            "type": "integer",
-            "minimum": 0
-          },
-          "limit": {
-            "type": "integer",
-            "minimum": 1,
-            "example": 100
-          },
-          "skip": {
-            "type": "integer",
-            "minimum": 0
-          },
-          "order": {
-            "oneOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              }
-            ]
-          },
-          "where": {
-            "title": "LogUsuario.WhereFilter",
-            "type": "object",
-            "additionalProperties": true
-          },
-          "fields": {
-            "oneOf": [
-              {
-                "type": "object",
-                "properties": {
-                  "id": {
-                    "type": "boolean"
-                  },
-                  "usuarioId": {
-                    "type": "boolean"
-                  },
-                  "fechaRegistro": {
-                    "type": "boolean"
-                  },
-                  "ip": {
-                    "type": "boolean"
-                  },
-                  "masDatos": {
-                    "type": "boolean"
-                  },
-                  "fechaCreacion": {
-                    "type": "boolean"
-                  },
-                  "fechaModificacion": {
-                    "type": "boolean"
-                  },
-                  "usuCreacion": {
-                    "type": "boolean"
-                  },
-                  "usuModificacion": {
-                    "type": "boolean"
-                  }
-                },
-                "additionalProperties": false
-              },
-              {
-                "type": "array",
-                "items": {
-                  "type": "string",
-                  "enum": [
-                    "id",
-                    "usuarioId",
-                    "fechaRegistro",
-                    "ip",
-                    "masDatos",
-                    "fechaCreacion",
-                    "fechaModificacion",
-                    "usuCreacion",
-                    "usuModificacion"
-                  ],
-                  "example": "id"
-                },
-                "uniqueItems": true
-              }
-            ],
-            "title": "LogUsuario.Fields"
-          }
-        },
-        "additionalProperties": false,
-        "x-typescript-type": "@loopback/repository#Filter<LogUsuario>"
       },
       "Marca.Filter": {
         "type": "object",

@@ -78,18 +78,18 @@ export const getNombreRol = async (nombre) => {
 }
 
 export const obtenerRolDashboard = async () => {
-    // const usuario = getUsuarioSesion();
-    // if(usuario){
-    //     const queryParamsRol = {
-    //         where: {
-    //             and: {
-    //                 id: usuario.rolId
-    //             }
-    //         },
-    //     };
-    //     const rol = await getVistaEmpresaRol(JSON.stringify(queryParamsRol));
-    //     return rol[0].dashboardUrl || '/';
-    // }
+    const usuario = getUsuarioSesion();
+    if(usuario){
+        const queryParamsRol = {
+            where: {
+                and: {
+                    id: usuario.rolId
+                }
+            },
+        };
+        const rol = await getVistaEmpresaRol(JSON.stringify(queryParamsRol));
+        return rol[0].dashboardUrl || '/';
+    }
     return '/';
 
 }

@@ -5,17 +5,22 @@ import { FilterMatchMode, FilterOperator } from 'primereact/api';
 import { Toast } from "primereact/toast";
 import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
-import { comprobarImagen, templateGenerico, Header, DescargarCSVDialog, getIdiomaDefecto, tieneUsuarioPermiso } from "@/app/components/shared/componentes";
-import { formatearFechaDate, formatearFechaHoraDate, formatNumber, getUsuarioSesion } from "@/app/utility/Utils";
+import { comprobarImagen, templateGenerico, Header, esUrlImagen, DescargarCSVDialog, getIdiomaDefecto, tieneUsuarioPermiso } from "@/app/components/shared/componentes";
+import { formatearFechaDate, formatearFechaHoraDate, formatearFechaLocal_a_toISOString, formatNumber, getUsuarioSesion } from "@/app/utility/Utils";
 import CodigoQR from "./codigo_qr";
+import { Divider } from "primereact/divider";
 import { postEnviarQR } from "@/app/api-endpoints/plantilla_email";
 import { Button } from "primereact/button";
 import { Dialog } from "primereact/dialog";
 import { InputText } from 'primereact/inputtext';
+import { obtenerArchivosSeccion } from "@/app/components/shared/componentes";
 import { Dropdown } from 'primereact/dropdown';
 import { Calendar } from "primereact/calendar";
 import { Badge } from 'primereact/badge';
 import { Paginator } from 'primereact/paginator';
+import { getVistaTipoArchivoEmpresaSeccion } from "@/app/api-endpoints/tipo_archivo";
+import { getVistaArchivoEmpresa } from "@/app/api-endpoints/archivo";
+import { borrarFichero } from "@/app/api-endpoints/ficheros"
 import { useIntl } from 'react-intl'
 import { formatPhoneNumberIntl } from 'react-phone-number-input'
 import PhoneInput from 'react-phone-input-2'
@@ -153,79 +158,79 @@ const Crud = ({ getRegistros, getRegistrosCount, botones, columnas, deleteRegist
                 }
             }
             //Si seccion no es null significa que la pantalla del crud tiene archivos, por lo que hay que obtenerlos
-            // if (seccion) {
-            //     //Obtiene los tipos de archivo de la seccion
-            //     const queryParamsTiposArchivo = {
-            //         where: {
-            //             and: {
-            //                 nombreSeccion: seccion || '',
-            //                 activoSn: 'S'
-            //             }
+            if (seccion) {
+                //Obtiene los tipos de archivo de la seccion
+                const queryParamsTiposArchivo = {
+                    where: {
+                        and: {
+                            nombreSeccion: seccion || '',
+                            activoSn: 'S'
+                        }
 
-            //         },
-            //         order: "orden ASC"
-            //     };
-            //     const registrosTipoArchivos = await getVistaTipoArchivoEmpresaSeccion(JSON.stringify(queryParamsTiposArchivo));
+                    },
+                    order: "orden ASC"
+                };
+                const registrosTipoArchivos = await getVistaTipoArchivoEmpresaSeccion(JSON.stringify(queryParamsTiposArchivo));
 
-            //     //Por cada tipo de archivo que tiene la seccion, intentamos obtener los archivos del tipo si existen
-            //     for (const tipoArchivo of registrosTipoArchivos) {
-            //         for (const registro of registros) {
-            //             const queryParamsArchivo = {
-            //                 where: {
-            //                     and: {
-            //                         tipoArchivoId: tipoArchivo.id,
-            //                         tablaId: registro.id
-            //                     }
-            //                 }
-            //             };
-            //             const archivos = await getVistaArchivoEmpresa(JSON.stringify(queryParamsArchivo))
-            //             //Comprueba si el archivo existe
-            //             if (archivos.length > 0) {
+                //Por cada tipo de archivo que tiene la seccion, intentamos obtener los archivos del tipo si existen
+                for (const tipoArchivo of registrosTipoArchivos) {
+                    for (const registro of registros) {
+                        const queryParamsArchivo = {
+                            where: {
+                                and: {
+                                    tipoArchivoId: tipoArchivo.id,
+                                    tablaId: registro.id
+                                }
+                            }
+                        };
+                        const archivos = await getVistaArchivoEmpresa(JSON.stringify(queryParamsArchivo))
+                        //Comprueba si el archivo existe
+                        if (archivos.length > 0) {
 
-            //                 //Si solo existe 1, se guarda en forma de variable
-            //                 if (tipoArchivo.multiple !== 'S') {
-            //                     //Guarda el archivo redimensionado en el registro
-            //                     let url = archivos[0].url;
-            //                     if (url !== '/multimedia/sistemaNLE/imagen-no-disponible.jpeg') {
-            //                         if ((tipoArchivo.tipo).toLowerCase() === 'imagen') {
-            //                             url = archivos[0].url.replace(/(\/[^\/]+\/)([^\/]+\.\w+)$/, '$11250x850_$2');
-            //                         }
-            //                         //El id y el url de la imagen se almacenan en variables simples separades en vez de un objeto, para que a la
-            //                         //hora de mostrar las imagenes se pueda acceder al url con un simple rowData.campo
-            //                         registro[(tipoArchivo.nombre).toLowerCase()] = url
-            //                         registro[`${(tipoArchivo.nombre).toLowerCase()}Id`] = archivos[0].id
-            //                     }
-            //                     else {
-            //                         registro[(tipoArchivo.nombre).toLowerCase()] = null
-            //                         registro[`${(tipoArchivo.nombre).toLowerCase()}Id`] = null
-            //                     }
-            //                 }
-            //                 //Si existe mas de uno, se almacena en forma de array
-            //                 else {
-            //                     const archivosArray = []
-            //                     for (const archivo of archivos) {
-            //                         let url = archivo.url;
-            //                         if (esUrlImagen(url) && url !== '/multimedia/sistemaNLE/imagen-no-disponible.jpeg') {
-            //                             url = archivo.url.replace(/(\/[^\/]+\/)([^\/]+\.\w+)$/, '$11250x850_$2');
-            //                         }
-            //                         archivosArray.push({ url: url, id: archivo.id });
-            //                     }
-            //                     registro[(tipoArchivo.nombre).toLowerCase()] = archivosArray
-            //                 }
+                            //Si solo existe 1, se guarda en forma de variable
+                            if (tipoArchivo.multiple !== 'S') {
+                                //Guarda el archivo redimensionado en el registro
+                                let url = archivos[0].url;
+                                if (url !== '/multimedia/sistemaNLE/imagen-no-disponible.jpeg') {
+                                    if ((tipoArchivo.tipo).toLowerCase() === 'imagen') {
+                                        url = archivos[0].url.replace(/(\/[^\/]+\/)([^\/]+\.\w+)$/, '$11250x850_$2');
+                                    }
+                                    //El id y el url de la imagen se almacenan en variables simples separades en vez de un objeto, para que a la
+                                    //hora de mostrar las imagenes se pueda acceder al url con un simple rowData.campo
+                                    registro[(tipoArchivo.nombre).toLowerCase()] = url
+                                    registro[`${(tipoArchivo.nombre).toLowerCase()}Id`] = archivos[0].id
+                                }
+                                else {
+                                    registro[(tipoArchivo.nombre).toLowerCase()] = null
+                                    registro[`${(tipoArchivo.nombre).toLowerCase()}Id`] = null
+                                }
+                            }
+                            //Si existe mas de uno, se almacena en forma de array
+                            else {
+                                const archivosArray = []
+                                for (const archivo of archivos) {
+                                    let url = archivo.url;
+                                    if (esUrlImagen(url) && url !== '/multimedia/sistemaNLE/imagen-no-disponible.jpeg') {
+                                        url = archivo.url.replace(/(\/[^\/]+\/)([^\/]+\.\w+)$/, '$11250x850_$2');
+                                    }
+                                    archivosArray.push({ url: url, id: archivo.id });
+                                }
+                                registro[(tipoArchivo.nombre).toLowerCase()] = archivosArray
+                            }
 
-            //             }
-            //             else {
-            //                 //Si no existe se guarda en null para que luego a futuro pueda ser rellenado el campo
-            //                 registro[(tipoArchivo.nombre).toLowerCase()] = null
-            //                 if (tipoArchivo.multiple !== 'S') {
-            //                     registro[`${(tipoArchivo.nombre).toLowerCase()}Id`] = null
-            //                 }
+                        }
+                        else {
+                            //Si no existe se guarda en null para que luego a futuro pueda ser rellenado el campo
+                            registro[(tipoArchivo.nombre).toLowerCase()] = null
+                            if (tipoArchivo.multiple !== 'S') {
+                                registro[`${(tipoArchivo.nombre).toLowerCase()}Id`] = null
+                            }
 
-            //             }
-            //         }
-            //     }
-            //     setRegistrosTipoArchivos(registrosTipoArchivos)
-            // }
+                        }
+                    }
+                }
+                setRegistrosTipoArchivos(registrosTipoArchivos)
+            }
             setRegistros(registros);
 
             //Obtenemos el numero del total de registros
@@ -240,10 +245,10 @@ const Crud = ({ getRegistros, getRegistrosCount, botones, columnas, deleteRegist
                 setTotalRegistros(registrosTotal.count);
             }
 
-            // if (registroEditarFlag) {
-            //     setEditable(true);
-            //     setIdEditar(registroEditar);
-            // }
+            if (registroEditarFlag) {
+                setEditable(true);
+                setIdEditar(registroEditar);
+            }
 
         } catch (err) {
             console.log(err.message);
@@ -256,28 +261,27 @@ const Crud = ({ getRegistros, getRegistrosCount, botones, columnas, deleteRegist
         //Obtiene los permisos del usuario
         if (!registroEditar) {
             const sePuedeAcceder = await tieneUsuarioPermiso('Nathalie', controlador, 'acceder')
-            // TEMPORAL: Comentado para desarrollo
-            // if (!sePuedeAcceder) {
-            //     //Si no puede acceder, redirige a la pantalla de error
-            //     window.location.href = '/error';
-            // }
+            if (!sePuedeAcceder) {
+                //Si no puede acceder, redirige a la pantalla de error
+                window.location.href = '/error';
+            }
         }
 
-        // setPuedeCrear(await tieneUsuarioPermiso('Nathalie', controlador, 'nuevo'))
-        // setPuedeVer(await tieneUsuarioPermiso('Nathalie', controlador, 'ver'))
-        // setPuedeEditar(await tieneUsuarioPermiso('Nathalie', controlador, 'actualizar'))
-        // setPuedeBorrar(await tieneUsuarioPermiso('Nathalie', controlador, 'borrar'))
-        // setPuedeRealizar(await tieneUsuarioPermiso('Nathalie', controlador, 'actualizar'));
+        setPuedeCrear(await tieneUsuarioPermiso('Nathalie', controlador, 'nuevo'))
+        setPuedeVer(await tieneUsuarioPermiso('Nathalie', controlador, 'ver'))
+        setPuedeEditar(await tieneUsuarioPermiso('Nathalie', controlador, 'actualizar'))
+        setPuedeBorrar(await tieneUsuarioPermiso('Nathalie', controlador, 'borrar'))
+        setPuedeRealizar(await tieneUsuarioPermiso('Nathalie', controlador, 'actualizar'));
 
     }
 
     useEffect(() => {
         //Si no hay un controlador declarado, no se revisan los permisos
-        // if (controlador) {
-        //     obtenerPermisos()
-        // }
+        if (controlador) {
+            obtenerPermisos()
+        }
         //Si hay que obtener los datos foraneos, se obtienen al montar el componente
-        //obtenerDatosForaneos();
+        obtenerDatosForaneos();
         //Encriptamos el url del qr
         if (urlQR) {
             const urlEncriptado = `${urlQR.normal}${btoa(urlQR.encriptado)}`;
@@ -285,30 +289,28 @@ const Crud = ({ getRegistros, getRegistrosCount, botones, columnas, deleteRegist
         }
         //Cada vez que se modifica lazyParams o registroResult, se obtienen los datos
         //Solo se obtienen datos si hay algun filtro de busqueda
-        // for (const campo in parametrosCrud.filters) {
-        //     if (parametrosCrud.filters[campo]) {
-        //         //Como el objeto filters es distinto para booleanos, tenemos que hacer una comprobación para aplicar bien los cambios
-        //         //Comprueba si es un filtro booleano
-        //         if (parametrosCrud.filters[campo].value) {
-        //             setBusquedaRealizada(true);
-        //             obtenerDatos();
-        //             break;
-        //         }
-        //         else {
-        //             //Si el filtro no es booleano
-        //             if (parametrosCrud.filters[campo].constraints[0].value !== null) {
-        //                 setBusquedaRealizada(true);
-        //                 obtenerDatos();
-        //                 break;
-        //             }
-        //         }
-        //     }
-        //     else {
-        //         setBusquedaRealizada(false);
-        //     }
-
-        // }
-
+        for (const campo in parametrosCrud.filters) {
+            if (parametrosCrud.filters[campo]) {
+                //Como el objeto filters es distinto para booleanos, tenemos que hacer una comprobación para aplicar bien los cambios
+                //Comprueba si es un filtro booleano
+                if (parametrosCrud.filters[campo].value) {
+                    setBusquedaRealizada(true);
+                    obtenerDatos();
+                    break;
+                }
+                else {
+                    //Si el filtro no es booleano
+                    if (parametrosCrud.filters[campo].constraints[0].value !== null) {
+                        setBusquedaRealizada(true);
+                        obtenerDatos();
+                        break;
+                    }
+                }
+            }
+            else {
+                setBusquedaRealizada(false);
+            }
+        }
         //obtenerDatos();
         //En caso de que haya que mostrar el resultado de una edicion de la bbdd se muestra
         if (registroResult === "editado") {
@@ -646,6 +648,11 @@ const Crud = ({ getRegistros, getRegistrosCount, botones, columnas, deleteRegist
         //obtenerDatos()
 
         // Verificamos que no falten campos de archivos
+        if (seccion && registrosTipoArchivos.length === 0) {
+            const listaTipoArchivos = await obtenerArchivosSeccion(registro, seccion)
+            console.log('Lista de tipos de archivos:', listaTipoArchivos)
+            setRegistrosTipoArchivos(listaTipoArchivos)
+        }
         setEditable(true);
         setIdEditar(0);
     };
@@ -788,19 +795,23 @@ const Crud = ({ getRegistros, getRegistrosCount, botones, columnas, deleteRegist
                         if (typeof registro[(tipoArchivo.nombre).toLowerCase()] === 'string') {
                             //Borra la version sin redimensionar
                             const url = (registro[(tipoArchivo.nombre).toLowerCase()]).replace(/(\/[^\/]+\/)1250x850_([^\/]+\.\w+)$/, '$1$2');
+                            await borrarFichero(url);
                             if ((tipoArchivo.tipo).toLowerCase() === 'imagen') {
                                 //Tambien borra la version redimensionada
+                                await borrarFichero(registro[(tipoArchivo.nombre).toLowerCase()]);
                             }
                         }
                         //En cambio si el archivo contiene vario se borran todos
                         else if ((Array.isArray(registro[(tipoArchivo.nombre).toLowerCase()]))) {
                             for (const archivo of registro[(tipoArchivo.nombre).toLowerCase()]) {
                                 const url = (archivo.url).replace(/(\/[^\/]+\/)1250x850_([^\/]+\.\w+)$/, '$1$2');
+                                await borrarFichero(url);
                                 //Comprueba la extension del archivo para comprobar el tipo, porque al ser un campo con multiples archivos
                                 //ya no sirve comprobarlo por el tipoArchivo
                                 const imagenExtensionesRegex = /\.(jpeg|png|webp|tiff|avif|jpg)$/i;
                                 if (imagenExtensionesRegex.test(archivo.url)) {
                                     //Tambien borra la version sin redimensionar
+                                    await borrarFichero(archivo.url);
                                 }
                             }
                         }

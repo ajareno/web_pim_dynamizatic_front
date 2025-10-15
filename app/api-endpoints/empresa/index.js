@@ -2,24 +2,19 @@ import { EmpresaControllerApi, settings } from "@/app/api-nathalie";
 
 const apiEmpresa = new EmpresaControllerApi(settings)
 
-export const getEmpresas = async () => {
-    const { data: dataEmpresaMonedas } = await apiEmpresa.empresaControllerFind()
-    return dataEmpresaMonedas
+export const getEmpresas = async (filtro) => {
+    const { data: dataEmpresas } = await apiEmpresa.empresaControllerFind(filtro)
+    return dataEmpresas
+}
+
+export const getEmpresasCount = async (filtro) => {
+    const { data: dataEmpresas } = await apiEmpresa.empresaControllerCount(filtro)
+    return dataEmpresas
 }
 
 export const getEmpresa = async (id) => {
-    const { data: dataEmpresaMonedas } = await apiEmpresa.empresaControllerFindById(id)
-    return dataEmpresaMonedas
-}
-
-export const getVistaEmpresaMoneda = async (filtro) => {
-    const { data: dataEmpresaMonedas } = await apiEmpresa.empresaControllerVistaEmpresaMoneda(filtro)
-    return dataEmpresaMonedas
-}
-
-export const getVistaEmpresaMonedaCount = async (filtro) => {
-    const { data: dataEmpresaMonedas } = await apiEmpresa.empresaControllerVistaEmpresaMonedaCount(filtro)
-    return dataEmpresaMonedas
+    const { data: dataEmpresas } = await apiEmpresa.empresaControllerFindById(id)
+    return dataEmpresas
 }
 
 export const postEmpresa = async (objEmpresa) => {
