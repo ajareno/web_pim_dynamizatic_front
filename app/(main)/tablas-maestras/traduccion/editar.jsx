@@ -9,7 +9,7 @@ import EditarDatosTraduccion from "./EditarDatosTraduccion";
 import 'primeicons/primeicons.css';
 import { getUsuarioSesion } from "@/app/utility/Utils";
 import { useIntl } from 'react-intl';
-const EditarTraduccion = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegistroResult, listaTipoArchivos, seccion, editable }) => {
+const EditarTraduccionLiteral = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegistroResult, listaTipoArchivos, seccion, editable }) => {
     const intl = useIntl();
     const toast = useRef(null);
     const [traduccion, setTraduccion] = useState(emptyRegistro);
@@ -48,12 +48,20 @@ const EditarTraduccion = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRe
     const validaciones = async () => {
         //const validaIdioma = idiomaSeleccionado == null || idiomaSeleccionado.id === "";
         const validaClave = traduccion.clave === undefined || traduccion.clave === "";
-        //const validaValor = traduccion.valor === undefined || traduccion.valor === "";
-
+        
+        // Validar que al menos un campo dinámico (idioma) tenga contenido
+        // Excluimos 'id' y 'clave' de la validación
+        const camposExcluidos = ['id', 'clave'];
+        const camposDinamicos = Object.keys(traduccion).filter(key => !camposExcluidos.includes(key));
+        
+        const alMenosUnCampoConContenido = camposDinamicos.some(campo => {
+            const valor = traduccion[campo];
+            return valor !== undefined && valor !== null && valor !== "" && String(valor).trim() !== "";
+        });
         //
         //Si existe algún bloque vacio entonces no se puede guardar
         //
-        return !validaClave // (!validaClave && !validaValor && !validaIdioma)
+        return !validaClave && alMenosUnCampoConContenido
     }
 
     const guardar = async () => {
@@ -72,9 +80,11 @@ const EditarTraduccion = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRe
                             usuarioCreacion: usuarioActual,
                             idiomaId: idioma.id,
                             clave: objGuardar.clave,
-                            valor: objGuardar[idioma.nombre.toLowerCase()],
+                            valor: objGuardar[idioma.nombre],
                         }
-                        await postTraduccion(objTraduccion);
+                        if (objTraduccion.valor && objTraduccion.valor.length > 0) {
+                            await postTraduccionLiteral(objTraduccion);
+                        }
                     }
                     setRegistroResult("insertado");
                     setIdEditar(null);
@@ -90,23 +100,15 @@ const EditarTraduccion = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRe
             } else {
                 try {
                     for (const idioma of listaIdiomas) {
-                        //Si la traduccion ya existe, hacemos el patch
-                        if (objGuardar[idioma.nombre.toLowerCase() + 'Id']) {
-                            const objTraduccion = {
-                                usuarioModificacion: usuarioActual,
-                                clave: objGuardar.clave,
-                                valor: objGuardar[idioma.nombre.toLowerCase()],
-                            }
-                            await patchTraduccionLiteral(objGuardar[idioma.nombre.toLowerCase() + 'Id'], objTraduccion);
+                        
+                        const objTraduccion = {
+                            usuarioCreacion: usuarioActual,
+                            idiomaId: idioma.id,
+                            clave: objGuardar.clave,
+                            valor: objGuardar[idioma.nombre],
+                            id: objGuardar.id
                         }
-                        //Si la traduccion no existe, hacemos el post
-                        else if (objGuardar[idioma.nombre.toLowerCase()]) {
-                            const objTraduccion = {
-                                usuarioCreacion: usuarioActual,
-                                idiomaId: idioma.id,
-                                clave: objGuardar.clave,
-                                valor: objGuardar[idioma.nombre.toLowerCase()],
-                            }
+                        if (objTraduccion.valor && objTraduccion.valor.length > 0) {
                             await postTraduccionLiteral(objTraduccion);
                         }
                     }
@@ -176,4 +178,4 @@ const EditarTraduccion = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRe
     );
 };
 
-export default EditarTraduccion;
+export default EditarTraduccionLiteral;

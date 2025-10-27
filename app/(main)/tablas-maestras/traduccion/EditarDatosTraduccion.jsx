@@ -5,10 +5,8 @@ import { Dropdown } from 'primereact/dropdown';
 import { useIntl } from 'react-intl';
 import { getIdiomas } from "@/app/api-endpoints/idioma";
 
-const EditarDatosTraduccion = ({ traduccion, setTraduccion, estadoGuardando, idiomas }) => {
+const EditarDatosTraduccionLiteral = ({ traduccion, setTraduccion, estadoGuardando, idiomas }) => {
     const intl = useIntl();
-
-
     return (
         <Fieldset legend={intl.formatMessage({ id: 'Datos para la traduccion' })}>	
             <div className="formgrid grid">
@@ -25,11 +23,11 @@ const EditarDatosTraduccion = ({ traduccion, setTraduccion, estadoGuardando, idi
                     <div key={idioma.id} className="flex flex-column field gap-2 mt-2 col-12 lg:col-12">
                         <label htmlFor={`valor-${idioma.nombre}`}>{idioma.nombre}</label>
                         <InputText 
-                            value={traduccion[idioma.nombre.toLowerCase()] || ''}
-                            placeholder={intl.formatMessage({ id: 'Valor de la traduccion en' }) + ' ' + idioma.nombre.toLowerCase()}
+                            value={traduccion[idioma.nombre] || ''}
+                            placeholder={intl.formatMessage({ id: 'Valor de la traduccion en' }) + ' ' + idioma.nombre}
                             onChange={(e) => setTraduccion({ 
                                 ...traduccion, 
-                                [idioma.nombre.toLowerCase()]: e.target.value 
+                                [idioma.nombre]: e.target.value 
                             })}
                             rows={5} 
                             cols={30} 
@@ -41,4 +39,4 @@ const EditarDatosTraduccion = ({ traduccion, setTraduccion, estadoGuardando, idi
     );
 };
 
-export default EditarDatosTraduccion;
+export default EditarDatosTraduccionLiteral;

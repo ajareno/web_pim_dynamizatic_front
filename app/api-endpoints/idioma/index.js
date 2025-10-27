@@ -1,8 +1,7 @@
-import { IdiomaControllerApi, MensajePlantillaControllerApi, TraduccionControllerApi, settings } from "@/app/api-nathalie";
+import { IdiomaControllerApi, MensajePlantillaControllerApi, settings } from "@/app/api-nathalie";
 
 const apiIdioma = new IdiomaControllerApi(settings)
 const apiMensajePlantilla = new MensajePlantillaControllerApi(settings)
-const apiTraduccion = new TraduccionControllerApi(settings)
 
 export const getIdiomas = async (filtro) => {
     const { data: dataIdiomas } = await apiIdioma.idiomaControllerFind(filtro)
@@ -44,9 +43,3 @@ export const buscarMensajePlantillaExistente = async (idIdioma) => {
     return dataIdioma;
 }
 
-export const buscarTraduccionExistente = async (idIdioma) => {
-    const { data: dataIdioma } = await apiTraduccion.traduccionControllerFind(JSON.stringify(
-        { where: { idiomaId: idIdioma } }
-    ));
-    return dataIdioma;
-}

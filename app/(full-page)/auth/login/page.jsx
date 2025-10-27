@@ -117,8 +117,6 @@ const Login = () => {
         }
     }
 
-
-
     const manejarLogin = async () => {
         bloquearPantalla(true);
         try {

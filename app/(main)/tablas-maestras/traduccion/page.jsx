@@ -6,7 +6,7 @@ import Crud from "../../../components/shared/crud";
 import { useIntl } from 'react-intl'
 import { useEffect, useState } from 'react';
 
-const Traduccion = () => {
+const TraduccionLiteral = () => {
     const intl = useIntl();
     const [columnas, setColumnas] = useState([{ campo: 'clave', header: intl.formatMessage({ id: 'Clave' }), tipo: 'string' }]);
 
@@ -18,7 +18,7 @@ const Traduccion = () => {
                 const idiomasOrdenados = idiomas.sort((a, b) => a.nombre.localeCompare(b.nombre));
                 // Añadir una columna por cada idioma
                 const columnasIdiomas = idiomasOrdenados.map(idioma => ({
-                    campo: idioma.nombre.toLowerCase(),
+                    campo: idioma.nombre,
                     header: idioma.nombre,
                     tipo: 'string'
                 }));
@@ -49,4 +49,4 @@ const Traduccion = () => {
     );
 };
 
-export default Traduccion;
+export default TraduccionLiteral;

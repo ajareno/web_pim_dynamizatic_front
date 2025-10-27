@@ -1066,37 +1066,6 @@
         "operationId": "PermisoController.buscarPermiso"
       }
     },
-    "/buscarTraduccion": {
-      "get": {
-        "x-controller-name": "TraduccionController",
-        "x-operation-name": "buscarTraduccion",
-        "tags": [
-          "TraduccionController"
-        ],
-        "responses": {
-          "200": {
-            "description": "Devuelve la traducciÃ³n basada en el cÃ³digo ISO",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object"
-                }
-              }
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "iso",
-            "in": "query",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "operationId": "TraduccionController.buscarTraduccion"
-      }
-    },
     "/calendarios-disponibilidades/count": {
       "get": {
         "x-controller-name": "CalendariosDisponibilidadController",
@@ -12335,612 +12304,6 @@
         "operationId": "TipoArchivoController.find"
       }
     },
-    "/tipo-usuario-usuarios/count": {
-      "get": {
-        "x-controller-name": "TipoUsuarioUsuarioController",
-        "x-operation-name": "count",
-        "tags": [
-          "TipoUsuarioUsuarioController"
-        ],
-        "responses": {
-          "200": {
-            "description": "TipoUsuarioUsuario model count",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/loopback.Count"
-                }
-              }
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "where",
-            "in": "query",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "title": "TipoUsuarioUsuario.WhereFilter",
-                  "additionalProperties": true,
-                  "x-typescript-type": "@loopback/repository#Where<TipoUsuarioUsuario>"
-                }
-              }
-            }
-          }
-        ],
-        "operationId": "TipoUsuarioUsuarioController.count"
-      }
-    },
-    "/tipo-usuario-usuarios/{id}": {
-      "put": {
-        "x-controller-name": "TipoUsuarioUsuarioController",
-        "x-operation-name": "replaceById",
-        "tags": [
-          "TipoUsuarioUsuarioController"
-        ],
-        "responses": {
-          "204": {
-            "description": "No Content",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "description": "TipoUsuarioUsuario PUT success"
-                }
-              }
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "schema": {
-              "type": "number"
-            },
-            "required": true
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/TipoUsuarioUsuario"
-              }
-            }
-          },
-          "x-parameter-index": 1
-        },
-        "operationId": "TipoUsuarioUsuarioController.replaceById"
-      },
-      "patch": {
-        "x-controller-name": "TipoUsuarioUsuarioController",
-        "x-operation-name": "updateById",
-        "tags": [
-          "TipoUsuarioUsuarioController"
-        ],
-        "responses": {
-          "204": {
-            "description": "No Content",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "description": "TipoUsuarioUsuario PATCH success"
-                }
-              }
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "schema": {
-              "type": "number"
-            },
-            "required": true
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/TipoUsuarioUsuarioPartial"
-              }
-            }
-          },
-          "x-parameter-index": 1
-        },
-        "operationId": "TipoUsuarioUsuarioController.updateById"
-      },
-      "get": {
-        "x-controller-name": "TipoUsuarioUsuarioController",
-        "x-operation-name": "findById",
-        "tags": [
-          "TipoUsuarioUsuarioController"
-        ],
-        "responses": {
-          "200": {
-            "description": "TipoUsuarioUsuario model instance",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/TipoUsuarioUsuarioWithRelations"
-                }
-              }
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "schema": {
-              "type": "number"
-            },
-            "required": true
-          },
-          {
-            "name": "filter",
-            "in": "query",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/TipoUsuarioUsuario.Filter"
-                }
-              }
-            }
-          }
-        ],
-        "operationId": "TipoUsuarioUsuarioController.findById"
-      },
-      "delete": {
-        "x-controller-name": "TipoUsuarioUsuarioController",
-        "x-operation-name": "deleteById",
-        "tags": [
-          "TipoUsuarioUsuarioController"
-        ],
-        "responses": {
-          "204": {
-            "description": "No Content",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "description": "TipoUsuarioUsuario DELETE success"
-                }
-              }
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "schema": {
-              "type": "number"
-            },
-            "required": true
-          }
-        ],
-        "operationId": "TipoUsuarioUsuarioController.deleteById"
-      }
-    },
-    "/tipo-usuario-usuarios": {
-      "post": {
-        "x-controller-name": "TipoUsuarioUsuarioController",
-        "x-operation-name": "create",
-        "tags": [
-          "TipoUsuarioUsuarioController"
-        ],
-        "responses": {
-          "200": {
-            "description": "TipoUsuarioUsuario model instance",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/TipoUsuarioUsuario"
-                }
-              }
-            }
-          }
-        },
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/NewTipoUsuarioUsuario"
-              }
-            }
-          }
-        },
-        "operationId": "TipoUsuarioUsuarioController.create"
-      },
-      "patch": {
-        "x-controller-name": "TipoUsuarioUsuarioController",
-        "x-operation-name": "updateAll",
-        "tags": [
-          "TipoUsuarioUsuarioController"
-        ],
-        "responses": {
-          "200": {
-            "description": "TipoUsuarioUsuario PATCH success count",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/loopback.Count"
-                }
-              }
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "where",
-            "in": "query",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "title": "TipoUsuarioUsuario.WhereFilter",
-                  "additionalProperties": true,
-                  "x-typescript-type": "@loopback/repository#Where<TipoUsuarioUsuario>"
-                }
-              }
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/TipoUsuarioUsuarioPartial"
-              }
-            }
-          }
-        },
-        "operationId": "TipoUsuarioUsuarioController.updateAll"
-      },
-      "get": {
-        "x-controller-name": "TipoUsuarioUsuarioController",
-        "x-operation-name": "find",
-        "tags": [
-          "TipoUsuarioUsuarioController"
-        ],
-        "responses": {
-          "200": {
-            "description": "Array of TipoUsuarioUsuario model instances",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/TipoUsuarioUsuarioWithRelations"
-                  }
-                }
-              }
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "filter",
-            "in": "query",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/TipoUsuarioUsuario.Filter1"
-                }
-              }
-            }
-          }
-        ],
-        "operationId": "TipoUsuarioUsuarioController.find"
-      }
-    },
-    "/tipo-usuarios/count": {
-      "get": {
-        "x-controller-name": "TipoUsuarioController",
-        "x-operation-name": "count",
-        "tags": [
-          "TipoUsuarioController"
-        ],
-        "responses": {
-          "200": {
-            "description": "TipoUsuario model count",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/loopback.Count"
-                }
-              }
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "where",
-            "in": "query",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "title": "TipoUsuario.WhereFilter",
-                  "additionalProperties": true,
-                  "x-typescript-type": "@loopback/repository#Where<TipoUsuario>"
-                }
-              }
-            }
-          }
-        ],
-        "operationId": "TipoUsuarioController.count"
-      }
-    },
-    "/tipo-usuarios/{id}": {
-      "put": {
-        "x-controller-name": "TipoUsuarioController",
-        "x-operation-name": "replaceById",
-        "tags": [
-          "TipoUsuarioController"
-        ],
-        "responses": {
-          "204": {
-            "description": "No Content",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "description": "TipoUsuario PUT success"
-                }
-              }
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "schema": {
-              "type": "number"
-            },
-            "required": true
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/TipoUsuario"
-              }
-            }
-          },
-          "x-parameter-index": 1
-        },
-        "operationId": "TipoUsuarioController.replaceById"
-      },
-      "patch": {
-        "x-controller-name": "TipoUsuarioController",
-        "x-operation-name": "updateById",
-        "tags": [
-          "TipoUsuarioController"
-        ],
-        "responses": {
-          "204": {
-            "description": "No Content",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "description": "TipoUsuario PATCH success"
-                }
-              }
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "schema": {
-              "type": "number"
-            },
-            "required": true
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/TipoUsuarioPartial"
-              }
-            }
-          },
-          "x-parameter-index": 1
-        },
-        "operationId": "TipoUsuarioController.updateById"
-      },
-      "get": {
-        "x-controller-name": "TipoUsuarioController",
-        "x-operation-name": "findById",
-        "tags": [
-          "TipoUsuarioController"
-        ],
-        "responses": {
-          "200": {
-            "description": "TipoUsuario model instance",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/TipoUsuarioWithRelations"
-                }
-              }
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "schema": {
-              "type": "number"
-            },
-            "required": true
-          },
-          {
-            "name": "filter",
-            "in": "query",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/TipoUsuario.Filter"
-                }
-              }
-            }
-          }
-        ],
-        "operationId": "TipoUsuarioController.findById"
-      },
-      "delete": {
-        "x-controller-name": "TipoUsuarioController",
-        "x-operation-name": "deleteById",
-        "tags": [
-          "TipoUsuarioController"
-        ],
-        "responses": {
-          "204": {
-            "description": "No Content",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "description": "TipoUsuario DELETE success"
-                }
-              }
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "schema": {
-              "type": "number"
-            },
-            "required": true
-          }
-        ],
-        "operationId": "TipoUsuarioController.deleteById"
-      }
-    },
-    "/tipo-usuarios": {
-      "post": {
-        "x-controller-name": "TipoUsuarioController",
-        "x-operation-name": "create",
-        "tags": [
-          "TipoUsuarioController"
-        ],
-        "responses": {
-          "200": {
-            "description": "TipoUsuario model instance",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/TipoUsuario"
-                }
-              }
-            }
-          }
-        },
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/NewTipoUsuario"
-              }
-            }
-          }
-        },
-        "operationId": "TipoUsuarioController.create"
-      },
-      "patch": {
-        "x-controller-name": "TipoUsuarioController",
-        "x-operation-name": "updateAll",
-        "tags": [
-          "TipoUsuarioController"
-        ],
-        "responses": {
-          "200": {
-            "description": "TipoUsuario PATCH success count",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/loopback.Count"
-                }
-              }
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "where",
-            "in": "query",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "title": "TipoUsuario.WhereFilter",
-                  "additionalProperties": true,
-                  "x-typescript-type": "@loopback/repository#Where<TipoUsuario>"
-                }
-              }
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/TipoUsuarioPartial"
-              }
-            }
-          }
-        },
-        "operationId": "TipoUsuarioController.updateAll"
-      },
-      "get": {
-        "x-controller-name": "TipoUsuarioController",
-        "x-operation-name": "find",
-        "tags": [
-          "TipoUsuarioController"
-        ],
-        "responses": {
-          "200": {
-            "description": "Array of TipoUsuario model instances",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/TipoUsuarioWithRelations"
-                  }
-                }
-              }
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "filter",
-            "in": "query",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/TipoUsuario.Filter1"
-                }
-              }
-            }
-          }
-        ],
-        "operationId": "TipoUsuarioController.find"
-      }
-    },
     "/traduccion-contenidos/count": {
       "get": {
         "x-controller-name": "TraduccionContenidoController",
@@ -13545,309 +12908,6 @@
           }
         ],
         "operationId": "TraduccionLiteralController.find"
-      }
-    },
-    "/traducciones/count": {
-      "get": {
-        "x-controller-name": "TraduccionController",
-        "x-operation-name": "count",
-        "tags": [
-          "TraduccionController"
-        ],
-        "responses": {
-          "200": {
-            "description": "Traduccion model count",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/loopback.Count"
-                }
-              }
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "where",
-            "in": "query",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "title": "Traduccion.WhereFilter",
-                  "additionalProperties": true,
-                  "x-typescript-type": "@loopback/repository#Where<Traduccion>"
-                }
-              }
-            }
-          }
-        ],
-        "operationId": "TraduccionController.count"
-      }
-    },
-    "/traducciones/{id}": {
-      "put": {
-        "x-controller-name": "TraduccionController",
-        "x-operation-name": "replaceById",
-        "tags": [
-          "TraduccionController"
-        ],
-        "responses": {
-          "204": {
-            "description": "No Content",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "description": "Traduccion PUT success"
-                }
-              }
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "schema": {
-              "type": "number"
-            },
-            "required": true
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/Traduccion"
-              }
-            }
-          },
-          "x-parameter-index": 1
-        },
-        "operationId": "TraduccionController.replaceById"
-      },
-      "patch": {
-        "x-controller-name": "TraduccionController",
-        "x-operation-name": "updateById",
-        "tags": [
-          "TraduccionController"
-        ],
-        "responses": {
-          "204": {
-            "description": "No Content",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "description": "Traduccion PATCH success"
-                }
-              }
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "schema": {
-              "type": "number"
-            },
-            "required": true
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/TraduccionPartial"
-              }
-            }
-          },
-          "x-parameter-index": 1
-        },
-        "operationId": "TraduccionController.updateById"
-      },
-      "get": {
-        "x-controller-name": "TraduccionController",
-        "x-operation-name": "findById",
-        "tags": [
-          "TraduccionController"
-        ],
-        "responses": {
-          "200": {
-            "description": "Traduccion model instance",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/TraduccionWithRelations"
-                }
-              }
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "schema": {
-              "type": "number"
-            },
-            "required": true
-          },
-          {
-            "name": "filter",
-            "in": "query",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Traduccion.Filter"
-                }
-              }
-            }
-          }
-        ],
-        "operationId": "TraduccionController.findById"
-      },
-      "delete": {
-        "x-controller-name": "TraduccionController",
-        "x-operation-name": "deleteById",
-        "tags": [
-          "TraduccionController"
-        ],
-        "responses": {
-          "204": {
-            "description": "No Content",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "description": "Traduccion DELETE success"
-                }
-              }
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "schema": {
-              "type": "number"
-            },
-            "required": true
-          }
-        ],
-        "operationId": "TraduccionController.deleteById"
-      }
-    },
-    "/traducciones": {
-      "post": {
-        "x-controller-name": "TraduccionController",
-        "x-operation-name": "create",
-        "tags": [
-          "TraduccionController"
-        ],
-        "responses": {
-          "200": {
-            "description": "Traduccion model instance",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Traduccion"
-                }
-              }
-            }
-          }
-        },
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/NewTraduccion"
-              }
-            }
-          }
-        },
-        "operationId": "TraduccionController.create"
-      },
-      "patch": {
-        "x-controller-name": "TraduccionController",
-        "x-operation-name": "updateAll",
-        "tags": [
-          "TraduccionController"
-        ],
-        "responses": {
-          "200": {
-            "description": "Traduccion PATCH success count",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/loopback.Count"
-                }
-              }
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "where",
-            "in": "query",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "title": "Traduccion.WhereFilter",
-                  "additionalProperties": true,
-                  "x-typescript-type": "@loopback/repository#Where<Traduccion>"
-                }
-              }
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/TraduccionPartial"
-              }
-            }
-          }
-        },
-        "operationId": "TraduccionController.updateAll"
-      },
-      "get": {
-        "x-controller-name": "TraduccionController",
-        "x-operation-name": "find",
-        "tags": [
-          "TraduccionController"
-        ],
-        "responses": {
-          "200": {
-            "description": "Array of Traduccion model instances",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/TraduccionWithRelations"
-                  }
-                }
-              }
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "filter",
-            "in": "query",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Traduccion.Filter1"
-                }
-              }
-            }
-          }
-        ],
-        "operationId": "TraduccionController.find"
       }
     },
     "/usuario-credenciales/count": {
@@ -15446,79 +14506,6 @@
         ],
         "operationId": "TipoArchivoController.vistaTipoArchivoEmpresaSeccionCount"
       }
-    },
-    "/vistaTraduccionIdioma": {
-      "get": {
-        "x-controller-name": "TraduccionController",
-        "x-operation-name": "vistaTraduccionIdioma",
-        "tags": [
-          "TraduccionController"
-        ],
-        "responses": {
-          "200": {
-            "description": "Devuelve las traducciones y sus idiomas",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object"
-                }
-              }
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "filter",
-            "in": "query",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Traduccion.Filter1"
-                }
-              }
-            }
-          }
-        ],
-        "operationId": "TraduccionController.vistaTraduccionIdioma"
-      }
-    },
-    "/vistaTraduccionIdiomaCount": {
-      "get": {
-        "x-controller-name": "TraduccionController",
-        "x-operation-name": "vistaTraduccionIdiomaCount",
-        "tags": [
-          "TraduccionController"
-        ],
-        "responses": {
-          "200": {
-            "description": "Devuelve las traducciones y sus idiomas",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object"
-                }
-              }
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "where",
-            "in": "query",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "title": "Traduccion.WhereFilter",
-                  "additionalProperties": true,
-                  "x-typescript-type": "@loopback/repository#Where<Traduccion>"
-                }
-              }
-            }
-          }
-        ],
-        "operationId": "TraduccionController.vistaTraduccionIdiomaCount"
-      }
     }
   },
   "components": {
@@ -15582,7 +14569,7 @@
             "type": "number",
             "nullable": false
           },
-          "usuModificacion": {
+          "usuarioModificacion": {
             "type": "number",
             "nullable": true
           },
@@ -15654,7 +14641,7 @@
             "type": "number",
             "nullable": false
           },
-          "usuModificacion": {
+          "usuarioModificacion": {
             "type": "number",
             "nullable": true
           },
@@ -15754,7 +14741,7 @@
             "type": "number",
             "nullable": false
           },
-          "usuModificacion": {
+          "usuarioModificacion": {
             "type": "number",
             "nullable": true
           },
@@ -15833,7 +14820,7 @@
             "type": "number",
             "nullable": false
           },
-          "usuModificacion": {
+          "usuarioModificacion": {
             "type": "number",
             "nullable": true
           },
@@ -16115,184 +15102,6 @@
         "additionalProperties": false,
         "x-typescript-type": "Omit<UsuarioCredenciales, 'id'>"
       },
-      "Traduccion": {
-        "title": "Traduccion",
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "number",
-            "nullable": false
-          },
-          "idiomaId": {
-            "type": "number",
-            "nullable": false
-          },
-          "clave": {
-            "type": "string",
-            "nullable": true
-          },
-          "valor": {
-            "type": "string",
-            "nullable": true
-          },
-          "fechaCreacion": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "fechaModificacion": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "usuCreacion": {
-            "type": "number",
-            "nullable": false
-          },
-          "usuModificacion": {
-            "type": "number",
-            "nullable": true
-          }
-        },
-        "required": [
-          "idiomaId",
-          "usuCreacion"
-        ],
-        "additionalProperties": false
-      },
-      "NewTraduccion": {
-        "title": "NewTraduccion",
-        "type": "object",
-        "description": "(tsType: Omit<Traduccion, 'id'>, schemaOptions: { title: 'NewTraduccion', exclude: [ 'id' ] })",
-        "properties": {
-          "idiomaId": {
-            "type": "number",
-            "nullable": false
-          },
-          "clave": {
-            "type": "string",
-            "nullable": true
-          },
-          "valor": {
-            "type": "string",
-            "nullable": true
-          },
-          "fechaCreacion": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "fechaModificacion": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "usuCreacion": {
-            "type": "number",
-            "nullable": false
-          },
-          "usuModificacion": {
-            "type": "number",
-            "nullable": true
-          }
-        },
-        "required": [
-          "idiomaId",
-          "usuCreacion"
-        ],
-        "additionalProperties": false,
-        "x-typescript-type": "Omit<Traduccion, 'id'>"
-      },
-      "TraduccionWithRelations": {
-        "title": "TraduccionWithRelations",
-        "type": "object",
-        "description": "(tsType: TraduccionWithRelations, schemaOptions: { includeRelations: true })",
-        "properties": {
-          "id": {
-            "type": "number",
-            "nullable": false
-          },
-          "idiomaId": {
-            "type": "number",
-            "nullable": false
-          },
-          "clave": {
-            "type": "string",
-            "nullable": true
-          },
-          "valor": {
-            "type": "string",
-            "nullable": true
-          },
-          "fechaCreacion": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "fechaModificacion": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "usuCreacion": {
-            "type": "number",
-            "nullable": false
-          },
-          "usuModificacion": {
-            "type": "number",
-            "nullable": true
-          }
-        },
-        "required": [
-          "idiomaId",
-          "usuCreacion"
-        ],
-        "additionalProperties": false,
-        "x-typescript-type": "TraduccionWithRelations"
-      },
-      "TraduccionPartial": {
-        "title": "TraduccionPartial",
-        "type": "object",
-        "description": "(tsType: Partial<Traduccion>, schemaOptions: { partial: true })",
-        "properties": {
-          "id": {
-            "type": "number",
-            "nullable": false
-          },
-          "idiomaId": {
-            "type": "number",
-            "nullable": false
-          },
-          "clave": {
-            "type": "string",
-            "nullable": true
-          },
-          "valor": {
-            "type": "string",
-            "nullable": true
-          },
-          "fechaCreacion": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "fechaModificacion": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "usuCreacion": {
-            "type": "number",
-            "nullable": false
-          },
-          "usuModificacion": {
-            "type": "number",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false,
-        "x-typescript-type": "Partial<Traduccion>"
-      },
       "TraduccionLiteral": {
         "title": "TraduccionLiteral",
         "type": "object",
@@ -16342,8 +15151,11 @@
       "NewTraduccionLiteral": {
         "title": "NewTraduccionLiteral",
         "type": "object",
-        "description": "(tsType: Omit<TraduccionLiteral, 'id'>, schemaOptions: { title: 'NewTraduccionLiteral', exclude: [ 'id' ] })",
+        "description": "(tsType: TraduccionLiteral, schemaOptions: { title: 'NewTraduccionLiteral' })",
         "properties": {
+          "id": {
+            "type": "number"
+          },
           "clave": {
             "type": "string",
             "nullable": false
@@ -16382,7 +15194,7 @@
           "usuarioCreacion"
         ],
         "additionalProperties": false,
-        "x-typescript-type": "Omit<TraduccionLiteral, 'id'>"
+        "x-typescript-type": "TraduccionLiteral"
       },
       "TraduccionLiteralWithRelations": {
         "title": "TraduccionLiteralWithRelations",
@@ -16693,227 +15505,6 @@
         "additionalProperties": false,
         "x-typescript-type": "Partial<TraduccionContenido>"
       },
-      "TipoUsuario": {
-        "title": "TipoUsuario",
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "number",
-            "nullable": false
-          },
-          "nombre": {
-            "type": "string",
-            "nullable": true
-          },
-          "fechaCreacion": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "fechaModificacion": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "usuCreacion": {
-            "type": "number",
-            "nullable": false
-          },
-          "usuModificacion": {
-            "type": "number",
-            "nullable": true
-          }
-        },
-        "required": [
-          "usuCreacion"
-        ],
-        "additionalProperties": false
-      },
-      "NewTipoUsuario": {
-        "title": "NewTipoUsuario",
-        "type": "object",
-        "description": "(tsType: Omit<TipoUsuario, 'id'>, schemaOptions: { title: 'NewTipoUsuario', exclude: [ 'id' ] })",
-        "properties": {
-          "nombre": {
-            "type": "string",
-            "nullable": true
-          },
-          "fechaCreacion": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "fechaModificacion": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "usuCreacion": {
-            "type": "number",
-            "nullable": false
-          },
-          "usuModificacion": {
-            "type": "number",
-            "nullable": true
-          }
-        },
-        "required": [
-          "usuCreacion"
-        ],
-        "additionalProperties": false,
-        "x-typescript-type": "Omit<TipoUsuario, 'id'>"
-      },
-      "TipoUsuarioWithRelations": {
-        "title": "TipoUsuarioWithRelations",
-        "type": "object",
-        "description": "(tsType: TipoUsuarioWithRelations, schemaOptions: { includeRelations: true })",
-        "properties": {
-          "id": {
-            "type": "number",
-            "nullable": false
-          },
-          "nombre": {
-            "type": "string",
-            "nullable": true
-          },
-          "fechaCreacion": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "fechaModificacion": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "usuCreacion": {
-            "type": "number",
-            "nullable": false
-          },
-          "usuModificacion": {
-            "type": "number",
-            "nullable": true
-          }
-        },
-        "required": [
-          "usuCreacion"
-        ],
-        "additionalProperties": false,
-        "x-typescript-type": "TipoUsuarioWithRelations"
-      },
-      "TipoUsuarioPartial": {
-        "title": "TipoUsuarioPartial",
-        "type": "object",
-        "description": "(tsType: Partial<TipoUsuario>, schemaOptions: { partial: true })",
-        "properties": {
-          "id": {
-            "type": "number",
-            "nullable": false
-          },
-          "nombre": {
-            "type": "string",
-            "nullable": true
-          },
-          "fechaCreacion": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "fechaModificacion": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "usuCreacion": {
-            "type": "number",
-            "nullable": false
-          },
-          "usuModificacion": {
-            "type": "number",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false,
-        "x-typescript-type": "Partial<TipoUsuario>"
-      },
-      "TipoUsuarioUsuario": {
-        "title": "TipoUsuarioUsuario",
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "number",
-            "nullable": false
-          },
-          "usuarioId": {
-            "type": "number",
-            "nullable": false
-          },
-          "tipoUsuarioId": {
-            "type": "number",
-            "nullable": false
-          }
-        },
-        "additionalProperties": false
-      },
-      "NewTipoUsuarioUsuario": {
-        "title": "NewTipoUsuarioUsuario",
-        "type": "object",
-        "description": "(tsType: Omit<TipoUsuarioUsuario, 'id'>, schemaOptions: { title: 'NewTipoUsuarioUsuario', exclude: [ 'id' ] })",
-        "properties": {
-          "usuarioId": {
-            "type": "number",
-            "nullable": false
-          },
-          "tipoUsuarioId": {
-            "type": "number",
-            "nullable": false
-          }
-        },
-        "additionalProperties": false,
-        "x-typescript-type": "Omit<TipoUsuarioUsuario, 'id'>"
-      },
-      "TipoUsuarioUsuarioWithRelations": {
-        "title": "TipoUsuarioUsuarioWithRelations",
-        "type": "object",
-        "description": "(tsType: TipoUsuarioUsuarioWithRelations, schemaOptions: { includeRelations: true })",
-        "properties": {
-          "id": {
-            "type": "number",
-            "nullable": false
-          },
-          "usuarioId": {
-            "type": "number",
-            "nullable": false
-          },
-          "tipoUsuarioId": {
-            "type": "number",
-            "nullable": false
-          }
-        },
-        "additionalProperties": false,
-        "x-typescript-type": "TipoUsuarioUsuarioWithRelations"
-      },
-      "TipoUsuarioUsuarioPartial": {
-        "title": "TipoUsuarioUsuarioPartial",
-        "type": "object",
-        "description": "(tsType: Partial<TipoUsuarioUsuario>, schemaOptions: { partial: true })",
-        "properties": {
-          "id": {
-            "type": "number",
-            "nullable": false
-          },
-          "usuarioId": {
-            "type": "number",
-            "nullable": false
-          },
-          "tipoUsuarioId": {
-            "type": "number",
-            "nullable": false
-          }
-        },
-        "additionalProperties": false,
-        "x-typescript-type": "Partial<TipoUsuarioUsuario>"
-      },
       "TipoArchivo": {
         "title": "TipoArchivo",
         "type": "object",
@@ -17192,11 +15783,23 @@
           },
           "estado": {
             "type": "string",
-            "nullable": false
+            "nullable": false,
+            "enum": [
+              "pendiente",
+              "en_progreso",
+              "completada",
+              "cancelada"
+            ]
           },
           "prioridad": {
             "type": "string",
-            "nullable": false
+            "nullable": false,
+            "enum": [
+              "baja",
+              "media",
+              "alta",
+              "critica"
+            ]
           },
           "fechaInicio": {
             "type": "string",
@@ -17219,7 +15822,13 @@
           },
           "tipoNotificacion": {
             "type": "string",
-            "nullable": true
+            "nullable": true,
+            "enum": [
+              "dias_antes_fin",
+              "al_completar",
+              "diario",
+              "semanal"
+            ]
           },
           "tareaDependienteId": {
             "type": "number",
@@ -17293,11 +15902,23 @@
           },
           "estado": {
             "type": "string",
-            "nullable": false
+            "nullable": false,
+            "enum": [
+              "pendiente",
+              "en_progreso",
+              "completada",
+              "cancelada"
+            ]
           },
           "prioridad": {
             "type": "string",
-            "nullable": false
+            "nullable": false,
+            "enum": [
+              "baja",
+              "media",
+              "alta",
+              "critica"
+            ]
           },
           "fechaInicio": {
             "type": "string",
@@ -17320,7 +15941,13 @@
           },
           "tipoNotificacion": {
             "type": "string",
-            "nullable": true
+            "nullable": true,
+            "enum": [
+              "dias_antes_fin",
+              "al_completar",
+              "diario",
+              "semanal"
+            ]
           },
           "tareaDependienteId": {
             "type": "number",
@@ -17398,11 +16025,23 @@
           },
           "estado": {
             "type": "string",
-            "nullable": false
+            "nullable": false,
+            "enum": [
+              "pendiente",
+              "en_progreso",
+              "completada",
+              "cancelada"
+            ]
           },
           "prioridad": {
             "type": "string",
-            "nullable": false
+            "nullable": false,
+            "enum": [
+              "baja",
+              "media",
+              "alta",
+              "critica"
+            ]
           },
           "fechaInicio": {
             "type": "string",
@@ -17425,7 +16064,13 @@
           },
           "tipoNotificacion": {
             "type": "string",
-            "nullable": true
+            "nullable": true,
+            "enum": [
+              "dias_antes_fin",
+              "al_completar",
+              "diario",
+              "semanal"
+            ]
           },
           "tareaDependienteId": {
             "type": "number",
@@ -17503,11 +16148,23 @@
           },
           "estado": {
             "type": "string",
-            "nullable": false
+            "nullable": false,
+            "enum": [
+              "pendiente",
+              "en_progreso",
+              "completada",
+              "cancelada"
+            ]
           },
           "prioridad": {
             "type": "string",
-            "nullable": false
+            "nullable": false,
+            "enum": [
+              "baja",
+              "media",
+              "alta",
+              "critica"
+            ]
           },
           "fechaInicio": {
             "type": "string",
@@ -17530,7 +16187,13 @@
           },
           "tipoNotificacion": {
             "type": "string",
-            "nullable": true
+            "nullable": true,
+            "enum": [
+              "dias_antes_fin",
+              "al_completar",
+              "diario",
+              "semanal"
+            ]
           },
           "tareaDependienteId": {
             "type": "number",
@@ -17751,7 +16414,7 @@
             "type": "number",
             "nullable": false
           },
-          "usuModificacion": {
+          "usuarioModificacion": {
             "type": "number",
             "nullable": true
           },
@@ -17810,7 +16473,7 @@
             "type": "number",
             "nullable": false
           },
-          "usuModificacion": {
+          "usuarioModificacion": {
             "type": "number",
             "nullable": true
           },
@@ -17874,7 +16537,7 @@
             "type": "number",
             "nullable": false
           },
-          "usuModificacion": {
+          "usuarioModificacion": {
             "type": "number",
             "nullable": true
           },
@@ -17938,7 +16601,7 @@
             "type": "number",
             "nullable": false
           },
-          "usuModificacion": {
+          "usuarioModificacion": {
             "type": "number",
             "nullable": true
           },
@@ -18086,7 +16749,14 @@
           },
           "estado": {
             "type": "string",
-            "nullable": false
+            "nullable": false,
+            "enum": [
+              "borrador",
+              "revision",
+              "aprobado",
+              "publicado",
+              "archivado"
+            ]
           },
           "finalizadoSn": {
             "type": "string",
@@ -18196,7 +16866,14 @@
           },
           "estado": {
             "type": "string",
-            "nullable": false
+            "nullable": false,
+            "enum": [
+              "borrador",
+              "revision",
+              "aprobado",
+              "publicado",
+              "archivado"
+            ]
           },
           "finalizadoSn": {
             "type": "string",
@@ -18310,7 +16987,14 @@
           },
           "estado": {
             "type": "string",
-            "nullable": false
+            "nullable": false,
+            "enum": [
+              "borrador",
+              "revision",
+              "aprobado",
+              "publicado",
+              "archivado"
+            ]
           },
           "finalizadoSn": {
             "type": "string",
@@ -18424,7 +17108,14 @@
           },
           "estado": {
             "type": "string",
-            "nullable": false
+            "nullable": false,
+            "enum": [
+              "borrador",
+              "revision",
+              "aprobado",
+              "publicado",
+              "archivado"
+            ]
           },
           "finalizadoSn": {
             "type": "string",
@@ -18493,7 +17184,13 @@
           },
           "tipoUso": {
             "type": "string",
-            "nullable": true
+            "nullable": true,
+            "enum": [
+              "galeria",
+              "principal",
+              "miniatura",
+              "detalle"
+            ]
           },
           "esPrincipal": {
             "type": "string",
@@ -18544,7 +17241,13 @@
           },
           "tipoUso": {
             "type": "string",
-            "nullable": true
+            "nullable": true,
+            "enum": [
+              "galeria",
+              "principal",
+              "miniatura",
+              "detalle"
+            ]
           },
           "esPrincipal": {
             "type": "string",
@@ -18599,7 +17302,13 @@
           },
           "tipoUso": {
             "type": "string",
-            "nullable": true
+            "nullable": true,
+            "enum": [
+              "galeria",
+              "principal",
+              "miniatura",
+              "detalle"
+            ]
           },
           "esPrincipal": {
             "type": "string",
@@ -18654,7 +17363,13 @@
           },
           "tipoUso": {
             "type": "string",
-            "nullable": true
+            "nullable": true,
+            "enum": [
+              "galeria",
+              "principal",
+              "miniatura",
+              "detalle"
+            ]
           },
           "esPrincipal": {
             "type": "string",
@@ -18724,7 +17439,13 @@
           },
           "estadoSincronizacion": {
             "type": "string",
-            "nullable": true
+            "nullable": true,
+            "enum": [
+              "pendiente",
+              "sincronizado",
+              "error",
+              "procesando"
+            ]
           },
           "mensajeError": {
             "type": "string",
@@ -18792,7 +17513,13 @@
           },
           "estadoSincronizacion": {
             "type": "string",
-            "nullable": true
+            "nullable": true,
+            "enum": [
+              "pendiente",
+              "sincronizado",
+              "error",
+              "procesando"
+            ]
           },
           "mensajeError": {
             "type": "string",
@@ -18864,7 +17591,13 @@
           },
           "estadoSincronizacion": {
             "type": "string",
-            "nullable": true
+            "nullable": true,
+            "enum": [
+              "pendiente",
+              "sincronizado",
+              "error",
+              "procesando"
+            ]
           },
           "mensajeError": {
             "type": "string",
@@ -18936,7 +17669,13 @@
           },
           "estadoSincronizacion": {
             "type": "string",
-            "nullable": true
+            "nullable": true,
+            "enum": [
+              "pendiente",
+              "sincronizado",
+              "error",
+              "procesando"
+            ]
           },
           "mensajeError": {
             "type": "string",
@@ -19594,7 +18333,7 @@
             "type": "number",
             "nullable": false
           },
-          "usuModificacion": {
+          "usuarioModificacion": {
             "type": "number",
             "nullable": true
           },
@@ -19661,7 +18400,7 @@
             "type": "number",
             "nullable": false
           },
-          "usuModificacion": {
+          "usuarioModificacion": {
             "type": "number",
             "nullable": true
           },
@@ -19733,7 +18472,7 @@
             "type": "number",
             "nullable": false
           },
-          "usuModificacion": {
+          "usuarioModificacion": {
             "type": "number",
             "nullable": true
           },
@@ -19805,7 +18544,7 @@
             "type": "number",
             "nullable": false
           },
-          "usuModificacion": {
+          "usuarioModificacion": {
             "type": "number",
             "nullable": true
           },
@@ -20037,7 +18776,14 @@
           },
           "tipoDato": {
             "type": "string",
-            "nullable": false
+            "nullable": false,
+            "enum": [
+              "texto",
+              "numero",
+              "fecha",
+              "booleano",
+              "json"
+            ]
           },
           "modificable": {
             "type": "string",
@@ -20088,7 +18834,14 @@
           },
           "tipoDato": {
             "type": "string",
-            "nullable": false
+            "nullable": false,
+            "enum": [
+              "texto",
+              "numero",
+              "fecha",
+              "booleano",
+              "json"
+            ]
           },
           "modificable": {
             "type": "string",
@@ -20143,7 +18896,14 @@
           },
           "tipoDato": {
             "type": "string",
-            "nullable": false
+            "nullable": false,
+            "enum": [
+              "texto",
+              "numero",
+              "fecha",
+              "booleano",
+              "json"
+            ]
           },
           "modificable": {
             "type": "string",
@@ -20198,7 +18958,14 @@
           },
           "tipoDato": {
             "type": "string",
-            "nullable": false
+            "nullable": false,
+            "enum": [
+              "texto",
+              "numero",
+              "fecha",
+              "booleano",
+              "json"
+            ]
           },
           "modificable": {
             "type": "string",
@@ -20255,11 +19022,23 @@
           },
           "tipo": {
             "type": "string",
-            "nullable": false
+            "nullable": false,
+            "enum": [
+              "sistema",
+              "email",
+              "push",
+              "sms"
+            ]
           },
           "estado": {
             "type": "string",
-            "nullable": false
+            "nullable": false,
+            "enum": [
+              "pendiente",
+              "enviado",
+              "leido",
+              "error"
+            ]
           },
           "fechaEnvio": {
             "type": "string",
@@ -20340,11 +19119,23 @@
           },
           "tipo": {
             "type": "string",
-            "nullable": false
+            "nullable": false,
+            "enum": [
+              "sistema",
+              "email",
+              "push",
+              "sms"
+            ]
           },
           "estado": {
             "type": "string",
-            "nullable": false
+            "nullable": false,
+            "enum": [
+              "pendiente",
+              "enviado",
+              "leido",
+              "error"
+            ]
           },
           "fechaEnvio": {
             "type": "string",
@@ -20429,11 +19220,23 @@
           },
           "tipo": {
             "type": "string",
-            "nullable": false
+            "nullable": false,
+            "enum": [
+              "sistema",
+              "email",
+              "push",
+              "sms"
+            ]
           },
           "estado": {
             "type": "string",
-            "nullable": false
+            "nullable": false,
+            "enum": [
+              "pendiente",
+              "enviado",
+              "leido",
+              "error"
+            ]
           },
           "fechaEnvio": {
             "type": "string",
@@ -20518,11 +19321,23 @@
           },
           "tipo": {
             "type": "string",
-            "nullable": false
+            "nullable": false,
+            "enum": [
+              "sistema",
+              "email",
+              "push",
+              "sms"
+            ]
           },
           "estado": {
             "type": "string",
-            "nullable": false
+            "nullable": false,
+            "enum": [
+              "pendiente",
+              "enviado",
+              "leido",
+              "error"
+            ]
           },
           "fechaEnvio": {
             "type": "string",
@@ -20589,7 +19404,13 @@
           },
           "tipo": {
             "type": "string",
-            "nullable": false
+            "nullable": false,
+            "enum": [
+              "imagen",
+              "video",
+              "audio",
+              "documento"
+            ]
           },
           "formato": {
             "type": "string",
@@ -20666,7 +19487,13 @@
           },
           "tipo": {
             "type": "string",
-            "nullable": false
+            "nullable": false,
+            "enum": [
+              "imagen",
+              "video",
+              "audio",
+              "documento"
+            ]
           },
           "formato": {
             "type": "string",
@@ -20747,7 +19574,13 @@
           },
           "tipo": {
             "type": "string",
-            "nullable": false
+            "nullable": false,
+            "enum": [
+              "imagen",
+              "video",
+              "audio",
+              "documento"
+            ]
           },
           "formato": {
             "type": "string",
@@ -20828,7 +19661,13 @@
           },
           "tipo": {
             "type": "string",
-            "nullable": false
+            "nullable": false,
+            "enum": [
+              "imagen",
+              "video",
+              "audio",
+              "documento"
+            ]
           },
           "formato": {
             "type": "string",
@@ -20914,7 +19753,7 @@
             "type": "number",
             "nullable": false
           },
-          "usuModificacion": {
+          "usuarioModificacion": {
             "type": "number",
             "nullable": true
           },
@@ -20965,7 +19804,7 @@
             "type": "number",
             "nullable": false
           },
-          "usuModificacion": {
+          "usuarioModificacion": {
             "type": "number",
             "nullable": true
           },
@@ -21021,7 +19860,7 @@
             "type": "number",
             "nullable": false
           },
-          "usuModificacion": {
+          "usuarioModificacion": {
             "type": "number",
             "nullable": true
           },
@@ -21077,7 +19916,7 @@
             "type": "number",
             "nullable": false
           },
-          "usuModificacion": {
+          "usuarioModificacion": {
             "type": "number",
             "nullable": true
           },
@@ -21132,11 +19971,11 @@
             "format": "date-time",
             "nullable": true
           },
-          "usuCreacion": {
+          "usuarioCreacion": {
             "type": "number",
             "nullable": false
           },
-          "usuModificacion": {
+          "usuarioModificacion": {
             "type": "number",
             "nullable": true
           }
@@ -21145,7 +19984,7 @@
           "mensajePlantillaCategoriaId",
           "empresaId",
           "idiomaId",
-          "usuCreacion"
+          "usuarioCreacion"
         ],
         "additionalProperties": false
       },
@@ -21184,11 +20023,11 @@
             "format": "date-time",
             "nullable": true
           },
-          "usuCreacion": {
+          "usuarioCreacion": {
             "type": "number",
             "nullable": false
           },
-          "usuModificacion": {
+          "usuarioModificacion": {
             "type": "number",
             "nullable": true
           }
@@ -21197,7 +20036,7 @@
           "mensajePlantillaCategoriaId",
           "empresaId",
           "idiomaId",
-          "usuCreacion"
+          "usuarioCreacion"
         ],
         "additionalProperties": false,
         "x-typescript-type": "Omit<MensajePlantilla, 'id'>"
@@ -21241,11 +20080,11 @@
             "format": "date-time",
             "nullable": true
           },
-          "usuCreacion": {
+          "usuarioCreacion": {
             "type": "number",
             "nullable": false
           },
-          "usuModificacion": {
+          "usuarioModificacion": {
             "type": "number",
             "nullable": true
           }
@@ -21254,7 +20093,7 @@
           "mensajePlantillaCategoriaId",
           "empresaId",
           "idiomaId",
-          "usuCreacion"
+          "usuarioCreacion"
         ],
         "additionalProperties": false,
         "x-typescript-type": "MensajePlantillaWithRelations"
@@ -21298,11 +20137,11 @@
             "format": "date-time",
             "nullable": true
           },
-          "usuCreacion": {
+          "usuarioCreacion": {
             "type": "number",
             "nullable": false
           },
-          "usuModificacion": {
+          "usuarioModificacion": {
             "type": "number",
             "nullable": true
           }
@@ -21336,18 +20175,18 @@
             "format": "date-time",
             "nullable": true
           },
-          "usuCreacion": {
+          "usuarioCreacion": {
             "type": "number",
             "nullable": false
           },
-          "usuModificacion": {
+          "usuarioModificacion": {
             "type": "number",
             "nullable": true
           }
         },
         "required": [
           "empresaId",
-          "usuCreacion"
+          "usuarioCreacion"
         ],
         "additionalProperties": false
       },
@@ -21374,18 +20213,18 @@
             "format": "date-time",
             "nullable": true
           },
-          "usuCreacion": {
+          "usuarioCreacion": {
             "type": "number",
             "nullable": false
           },
-          "usuModificacion": {
+          "usuarioModificacion": {
             "type": "number",
             "nullable": true
           }
         },
         "required": [
           "empresaId",
-          "usuCreacion"
+          "usuarioCreacion"
         ],
         "additionalProperties": false,
         "x-typescript-type": "Omit<MensajePlantillaCategoria, 'id'>"
@@ -21417,18 +20256,18 @@
             "format": "date-time",
             "nullable": true
           },
-          "usuCreacion": {
+          "usuarioCreacion": {
             "type": "number",
             "nullable": false
           },
-          "usuModificacion": {
+          "usuarioModificacion": {
             "type": "number",
             "nullable": true
           }
         },
         "required": [
           "empresaId",
-          "usuCreacion"
+          "usuarioCreacion"
         ],
         "additionalProperties": false,
         "x-typescript-type": "MensajePlantillaCategoriaWithRelations"
@@ -21460,11 +20299,11 @@
             "format": "date-time",
             "nullable": true
           },
-          "usuCreacion": {
+          "usuarioCreacion": {
             "type": "number",
             "nullable": false
           },
-          "usuModificacion": {
+          "usuarioModificacion": {
             "type": "number",
             "nullable": true
           }
@@ -21489,7 +20328,13 @@
           },
           "tipo": {
             "type": "string",
-            "nullable": false
+            "nullable": false,
+            "enum": [
+              "ecommerce",
+              "social",
+              "b2b",
+              "catalogo"
+            ]
           },
           "urlApi": {
             "type": "string",
@@ -21554,7 +20399,13 @@
           },
           "tipo": {
             "type": "string",
-            "nullable": false
+            "nullable": false,
+            "enum": [
+              "ecommerce",
+              "social",
+              "b2b",
+              "catalogo"
+            ]
           },
           "urlApi": {
             "type": "string",
@@ -21623,7 +20474,13 @@
           },
           "tipo": {
             "type": "string",
-            "nullable": false
+            "nullable": false,
+            "enum": [
+              "ecommerce",
+              "social",
+              "b2b",
+              "catalogo"
+            ]
           },
           "urlApi": {
             "type": "string",
@@ -21692,7 +20549,13 @@
           },
           "tipo": {
             "type": "string",
-            "nullable": false
+            "nullable": false,
+            "enum": [
+              "ecommerce",
+              "social",
+              "b2b",
+              "catalogo"
+            ]
           },
           "urlApi": {
             "type": "string",
@@ -21996,11 +20859,22 @@
           },
           "tipoSincronizacion": {
             "type": "string",
-            "nullable": false
+            "nullable": false,
+            "enum": [
+              "exportacion",
+              "importacion",
+              "bidireccional"
+            ]
           },
           "estado": {
             "type": "string",
-            "nullable": false
+            "nullable": false,
+            "enum": [
+              "iniciado",
+              "en_progreso",
+              "completado",
+              "error"
+            ]
           },
           "registrosProcesados": {
             "type": "number",
@@ -22060,11 +20934,22 @@
           },
           "tipoSincronizacion": {
             "type": "string",
-            "nullable": false
+            "nullable": false,
+            "enum": [
+              "exportacion",
+              "importacion",
+              "bidireccional"
+            ]
           },
           "estado": {
             "type": "string",
-            "nullable": false
+            "nullable": false,
+            "enum": [
+              "iniciado",
+              "en_progreso",
+              "completado",
+              "error"
+            ]
           },
           "registrosProcesados": {
             "type": "number",
@@ -22128,11 +21013,22 @@
           },
           "tipoSincronizacion": {
             "type": "string",
-            "nullable": false
+            "nullable": false,
+            "enum": [
+              "exportacion",
+              "importacion",
+              "bidireccional"
+            ]
           },
           "estado": {
             "type": "string",
-            "nullable": false
+            "nullable": false,
+            "enum": [
+              "iniciado",
+              "en_progreso",
+              "completado",
+              "error"
+            ]
           },
           "registrosProcesados": {
             "type": "number",
@@ -22196,11 +21092,22 @@
           },
           "tipoSincronizacion": {
             "type": "string",
-            "nullable": false
+            "nullable": false,
+            "enum": [
+              "exportacion",
+              "importacion",
+              "bidireccional"
+            ]
           },
           "estado": {
             "type": "string",
-            "nullable": false
+            "nullable": false,
+            "enum": [
+              "iniciado",
+              "en_progreso",
+              "completado",
+              "error"
+            ]
           },
           "registrosProcesados": {
             "type": "number",
@@ -22269,7 +21176,14 @@
           },
           "estado": {
             "type": "string",
-            "nullable": false
+            "nullable": false,
+            "enum": [
+              "iniciado",
+              "procesando",
+              "completado",
+              "error",
+              "cancelado"
+            ]
           },
           "totalRegistros": {
             "type": "number",
@@ -22347,7 +21261,14 @@
           },
           "estado": {
             "type": "string",
-            "nullable": false
+            "nullable": false,
+            "enum": [
+              "iniciado",
+              "procesando",
+              "completado",
+              "error",
+              "cancelado"
+            ]
           },
           "totalRegistros": {
             "type": "number",
@@ -22429,7 +21350,14 @@
           },
           "estado": {
             "type": "string",
-            "nullable": false
+            "nullable": false,
+            "enum": [
+              "iniciado",
+              "procesando",
+              "completado",
+              "error",
+              "cancelado"
+            ]
           },
           "totalRegistros": {
             "type": "number",
@@ -22511,7 +21439,14 @@
           },
           "estado": {
             "type": "string",
-            "nullable": false
+            "nullable": false,
+            "enum": [
+              "iniciado",
+              "procesando",
+              "completado",
+              "error",
+              "cancelado"
+            ]
           },
           "totalRegistros": {
             "type": "number",
@@ -22592,7 +21527,14 @@
           },
           "estado": {
             "type": "string",
-            "nullable": false
+            "nullable": false,
+            "enum": [
+              "iniciado",
+              "procesando",
+              "completado",
+              "error",
+              "cancelado"
+            ]
           },
           "totalRegistros": {
             "type": "number",
@@ -22662,7 +21604,14 @@
           },
           "estado": {
             "type": "string",
-            "nullable": false
+            "nullable": false,
+            "enum": [
+              "iniciado",
+              "procesando",
+              "completado",
+              "error",
+              "cancelado"
+            ]
           },
           "totalRegistros": {
             "type": "number",
@@ -22736,7 +21685,14 @@
           },
           "estado": {
             "type": "string",
-            "nullable": false
+            "nullable": false,
+            "enum": [
+              "iniciado",
+              "procesando",
+              "completado",
+              "error",
+              "cancelado"
+            ]
           },
           "totalRegistros": {
             "type": "number",
@@ -22810,7 +21766,14 @@
           },
           "estado": {
             "type": "string",
-            "nullable": false
+            "nullable": false,
+            "enum": [
+              "iniciado",
+              "procesando",
+              "completado",
+              "error",
+              "cancelado"
+            ]
           },
           "totalRegistros": {
             "type": "number",
@@ -22875,7 +21838,12 @@
           },
           "resultado": {
             "type": "string",
-            "nullable": false
+            "nullable": false,
+            "enum": [
+              "exitoso",
+              "fallido",
+              "bloqueado"
+            ]
           },
           "motivoFallo": {
             "type": "string",
@@ -22929,7 +21897,12 @@
           },
           "resultado": {
             "type": "string",
-            "nullable": false
+            "nullable": false,
+            "enum": [
+              "exitoso",
+              "fallido",
+              "bloqueado"
+            ]
           },
           "motivoFallo": {
             "type": "string",
@@ -22987,7 +21960,12 @@
           },
           "resultado": {
             "type": "string",
-            "nullable": false
+            "nullable": false,
+            "enum": [
+              "exitoso",
+              "fallido",
+              "bloqueado"
+            ]
           },
           "motivoFallo": {
             "type": "string",
@@ -23045,7 +22023,12 @@
           },
           "resultado": {
             "type": "string",
-            "nullable": false
+            "nullable": false,
+            "enum": [
+              "exitoso",
+              "fallido",
+              "bloqueado"
+            ]
           },
           "motivoFallo": {
             "type": "string",
@@ -23094,7 +22077,7 @@
             "type": "number",
             "nullable": false
           },
-          "usuModificacion": {
+          "usuarioModificacion": {
             "type": "number",
             "nullable": true
           },
@@ -23144,7 +22127,7 @@
             "type": "number",
             "nullable": false
           },
-          "usuModificacion": {
+          "usuarioModificacion": {
             "type": "number",
             "nullable": true
           },
@@ -23199,7 +22182,7 @@
             "type": "number",
             "nullable": false
           },
-          "usuModificacion": {
+          "usuarioModificacion": {
             "type": "number",
             "nullable": true
           },
@@ -23254,7 +22237,7 @@
             "type": "number",
             "nullable": false
           },
-          "usuModificacion": {
+          "usuarioModificacion": {
             "type": "number",
             "nullable": true
           },
@@ -24629,11 +23612,23 @@
           },
           "tipo": {
             "type": "string",
-            "nullable": false
+            "nullable": false,
+            "enum": [
+              "digital",
+              "impreso",
+              "web",
+              "app"
+            ]
           },
           "estado": {
             "type": "string",
-            "nullable": false
+            "nullable": false,
+            "enum": [
+              "borrador",
+              "revision",
+              "aprobado",
+              "publicado"
+            ]
           },
           "fechaPublicacion": {
             "type": "string",
@@ -24696,11 +23691,23 @@
           },
           "tipo": {
             "type": "string",
-            "nullable": false
+            "nullable": false,
+            "enum": [
+              "digital",
+              "impreso",
+              "web",
+              "app"
+            ]
           },
           "estado": {
             "type": "string",
-            "nullable": false
+            "nullable": false,
+            "enum": [
+              "borrador",
+              "revision",
+              "aprobado",
+              "publicado"
+            ]
           },
           "fechaPublicacion": {
             "type": "string",
@@ -24767,11 +23774,23 @@
           },
           "tipo": {
             "type": "string",
-            "nullable": false
+            "nullable": false,
+            "enum": [
+              "digital",
+              "impreso",
+              "web",
+              "app"
+            ]
           },
           "estado": {
             "type": "string",
-            "nullable": false
+            "nullable": false,
+            "enum": [
+              "borrador",
+              "revision",
+              "aprobado",
+              "publicado"
+            ]
           },
           "fechaPublicacion": {
             "type": "string",
@@ -24838,11 +23857,23 @@
           },
           "tipo": {
             "type": "string",
-            "nullable": false
+            "nullable": false,
+            "enum": [
+              "digital",
+              "impreso",
+              "web",
+              "app"
+            ]
           },
           "estado": {
             "type": "string",
-            "nullable": false
+            "nullable": false,
+            "enum": [
+              "borrador",
+              "revision",
+              "aprobado",
+              "publicado"
+            ]
           },
           "fechaPublicacion": {
             "type": "string",
@@ -25103,7 +24134,16 @@
           },
           "tipoCampo": {
             "type": "string",
-            "nullable": false
+            "nullable": false,
+            "enum": [
+              "texto",
+              "numero",
+              "fecha",
+              "select",
+              "checkbox",
+              "radio",
+              "textarea"
+            ]
           },
           "opciones": {
             "type": "string",
@@ -25176,7 +24216,16 @@
           },
           "tipoCampo": {
             "type": "string",
-            "nullable": false
+            "nullable": false,
+            "enum": [
+              "texto",
+              "numero",
+              "fecha",
+              "select",
+              "checkbox",
+              "radio",
+              "textarea"
+            ]
           },
           "opciones": {
             "type": "string",
@@ -25253,7 +24302,16 @@
           },
           "tipoCampo": {
             "type": "string",
-            "nullable": false
+            "nullable": false,
+            "enum": [
+              "texto",
+              "numero",
+              "fecha",
+              "select",
+              "checkbox",
+              "radio",
+              "textarea"
+            ]
           },
           "opciones": {
             "type": "string",
@@ -25330,7 +24388,16 @@
           },
           "tipoCampo": {
             "type": "string",
-            "nullable": false
+            "nullable": false,
+            "enum": [
+              "texto",
+              "numero",
+              "fecha",
+              "select",
+              "checkbox",
+              "radio",
+              "textarea"
+            ]
           },
           "opciones": {
             "type": "string",
@@ -25413,11 +24480,11 @@
             "format": "date-time",
             "nullable": true
           },
-          "usuCreacion": {
+          "usuarioCreacion": {
             "type": "number",
             "nullable": false
           },
-          "usuModificacion": {
+          "usuarioModificacion": {
             "type": "number",
             "nullable": true
           }
@@ -25425,7 +24492,7 @@
         "required": [
           "usuarioId",
           "empresaId",
-          "usuCreacion"
+          "usuarioCreacion"
         ],
         "additionalProperties": false
       },
@@ -25465,11 +24532,11 @@
             "format": "date-time",
             "nullable": true
           },
-          "usuCreacion": {
+          "usuarioCreacion": {
             "type": "number",
             "nullable": false
           },
-          "usuModificacion": {
+          "usuarioModificacion": {
             "type": "number",
             "nullable": true
           }
@@ -25477,7 +24544,7 @@
         "required": [
           "usuarioId",
           "empresaId",
-          "usuCreacion"
+          "usuarioCreacion"
         ],
         "additionalProperties": false,
         "x-typescript-type": "Omit<CalendariosDisponibilidad, 'id'>"
@@ -25522,11 +24589,11 @@
             "format": "date-time",
             "nullable": true
           },
-          "usuCreacion": {
+          "usuarioCreacion": {
             "type": "number",
             "nullable": false
           },
-          "usuModificacion": {
+          "usuarioModificacion": {
             "type": "number",
             "nullable": true
           }
@@ -25534,7 +24601,7 @@
         "required": [
           "usuarioId",
           "empresaId",
-          "usuCreacion"
+          "usuarioCreacion"
         ],
         "additionalProperties": false,
         "x-typescript-type": "CalendariosDisponibilidadWithRelations"
@@ -25579,11 +24646,11 @@
             "format": "date-time",
             "nullable": true
           },
-          "usuCreacion": {
+          "usuarioCreacion": {
             "type": "number",
             "nullable": false
           },
-          "usuModificacion": {
+          "usuarioModificacion": {
             "type": "number",
             "nullable": true
           }
@@ -25612,7 +24679,13 @@
           },
           "accion": {
             "type": "string",
-            "nullable": false
+            "nullable": false,
+            "enum": [
+              "crear",
+              "editar",
+              "eliminar",
+              "consultar"
+            ]
           },
           "usuarioId": {
             "type": "number",
@@ -25668,7 +24741,13 @@
           },
           "accion": {
             "type": "string",
-            "nullable": false
+            "nullable": false,
+            "enum": [
+              "crear",
+              "editar",
+              "eliminar",
+              "consultar"
+            ]
           },
           "usuarioId": {
             "type": "number",
@@ -25728,7 +24807,13 @@
           },
           "accion": {
             "type": "string",
-            "nullable": false
+            "nullable": false,
+            "enum": [
+              "crear",
+              "editar",
+              "eliminar",
+              "consultar"
+            ]
           },
           "usuarioId": {
             "type": "number",
@@ -25788,7 +24873,13 @@
           },
           "accion": {
             "type": "string",
-            "nullable": false
+            "nullable": false,
+            "enum": [
+              "crear",
+              "editar",
+              "eliminar",
+              "consultar"
+            ]
           },
           "usuarioId": {
             "type": "number",
@@ -25844,7 +24935,15 @@
           },
           "tipoDato": {
             "type": "string",
-            "nullable": false
+            "nullable": false,
+            "enum": [
+              "texto",
+              "numero",
+              "fecha",
+              "booleano",
+              "lista",
+              "archivo"
+            ]
           },
           "unidadMedida": {
             "type": "string",
@@ -25920,7 +25019,15 @@
           },
           "tipoDato": {
             "type": "string",
-            "nullable": false
+            "nullable": false,
+            "enum": [
+              "texto",
+              "numero",
+              "fecha",
+              "booleano",
+              "lista",
+              "archivo"
+            ]
           },
           "unidadMedida": {
             "type": "string",
@@ -26000,7 +25107,15 @@
           },
           "tipoDato": {
             "type": "string",
-            "nullable": false
+            "nullable": false,
+            "enum": [
+              "texto",
+              "numero",
+              "fecha",
+              "booleano",
+              "lista",
+              "archivo"
+            ]
           },
           "unidadMedida": {
             "type": "string",
@@ -26080,7 +25195,15 @@
           },
           "tipoDato": {
             "type": "string",
-            "nullable": false
+            "nullable": false,
+            "enum": [
+              "texto",
+              "numero",
+              "fecha",
+              "booleano",
+              "lista",
+              "archivo"
+            ]
           },
           "unidadMedida": {
             "type": "string",
@@ -26182,7 +25305,7 @@
             "type": "number",
             "nullable": false
           },
-          "usuModificacion": {
+          "usuarioModificacion": {
             "type": "number",
             "nullable": true
           }
@@ -26244,7 +25367,7 @@
             "type": "number",
             "nullable": false
           },
-          "usuModificacion": {
+          "usuarioModificacion": {
             "type": "number",
             "nullable": true
           }
@@ -26311,7 +25434,7 @@
             "type": "number",
             "nullable": false
           },
-          "usuModificacion": {
+          "usuarioModificacion": {
             "type": "number",
             "nullable": true
           }
@@ -26378,7 +25501,7 @@
             "type": "number",
             "nullable": false
           },
-          "usuModificacion": {
+          "usuarioModificacion": {
             "type": "number",
             "nullable": true
           }
@@ -26467,7 +25590,7 @@
                   "usuarioCreacion": {
                     "type": "boolean"
                   },
-                  "usuModificacion": {
+                  "usuarioModificacion": {
                     "type": "boolean"
                   }
                 },
@@ -26490,7 +25613,7 @@
                     "fechaCreacion",
                     "fechaModificacion",
                     "usuarioCreacion",
-                    "usuModificacion"
+                    "usuarioModificacion"
                   ],
                   "example": "id"
                 },
@@ -26579,7 +25702,7 @@
                   "usuarioCreacion": {
                     "type": "boolean"
                   },
-                  "usuModificacion": {
+                  "usuarioModificacion": {
                     "type": "boolean"
                   }
                 },
@@ -26602,7 +25725,7 @@
                     "fechaCreacion",
                     "fechaModificacion",
                     "usuarioCreacion",
-                    "usuModificacion"
+                    "usuarioModificacion"
                   ],
                   "example": "id"
                 },
@@ -27120,10 +26243,10 @@
                   "fechaModificacion": {
                     "type": "boolean"
                   },
-                  "usuCreacion": {
+                  "usuarioCreacion": {
                     "type": "boolean"
                   },
-                  "usuModificacion": {
+                  "usuarioModificacion": {
                     "type": "boolean"
                   }
                 },
@@ -27142,8 +26265,8 @@
                     "observaciones",
                     "fechaCreacion",
                     "fechaModificacion",
-                    "usuCreacion",
-                    "usuModificacion"
+                    "usuarioCreacion",
+                    "usuarioModificacion"
                   ],
                   "example": "id"
                 },
@@ -27220,10 +26343,10 @@
                   "fechaModificacion": {
                     "type": "boolean"
                   },
-                  "usuCreacion": {
+                  "usuarioCreacion": {
                     "type": "boolean"
                   },
-                  "usuModificacion": {
+                  "usuarioModificacion": {
                     "type": "boolean"
                   }
                 },
@@ -27242,8 +26365,8 @@
                     "observaciones",
                     "fechaCreacion",
                     "fechaModificacion",
-                    "usuCreacion",
-                    "usuModificacion"
+                    "usuarioCreacion",
+                    "usuarioModificacion"
                   ],
                   "example": "id"
                 },
@@ -29163,7 +28286,7 @@
                   "usuarioCreacion": {
                     "type": "boolean"
                   },
-                  "usuModificacion": {
+                  "usuarioModificacion": {
                     "type": "boolean"
                   },
                   "fechaInactivo": {
@@ -29187,7 +28310,7 @@
                     "fechaCreacion",
                     "fechaModificacion",
                     "usuarioCreacion",
-                    "usuModificacion",
+                    "usuarioModificacion",
                     "fechaInactivo",
                     "usuarioInactivo"
                   ],
@@ -29263,7 +28386,7 @@
                   "usuarioCreacion": {
                     "type": "boolean"
                   },
-                  "usuModificacion": {
+                  "usuarioModificacion": {
                     "type": "boolean"
                   },
                   "fechaInactivo": {
@@ -29287,7 +28410,7 @@
                     "fechaCreacion",
                     "fechaModificacion",
                     "usuarioCreacion",
-                    "usuModificacion",
+                    "usuarioModificacion",
                     "fechaInactivo",
                     "usuarioInactivo"
                   ],
@@ -30674,10 +29797,10 @@
                   "fechaModificacion": {
                     "type": "boolean"
                   },
-                  "usuCreacion": {
+                  "usuarioCreacion": {
                     "type": "boolean"
                   },
-                  "usuModificacion": {
+                  "usuarioModificacion": {
                     "type": "boolean"
                   }
                 },
@@ -30693,8 +29816,8 @@
                     "nombre",
                     "fechaCreacion",
                     "fechaModificacion",
-                    "usuCreacion",
-                    "usuModificacion"
+                    "usuarioCreacion",
+                    "usuarioModificacion"
                   ],
                   "example": "id"
                 },
@@ -30762,10 +29885,10 @@
                   "fechaModificacion": {
                     "type": "boolean"
                   },
-                  "usuCreacion": {
+                  "usuarioCreacion": {
                     "type": "boolean"
                   },
-                  "usuModificacion": {
+                  "usuarioModificacion": {
                     "type": "boolean"
                   }
                 },
@@ -30781,8 +29904,8 @@
                     "nombre",
                     "fechaCreacion",
                     "fechaModificacion",
-                    "usuCreacion",
-                    "usuModificacion"
+                    "usuarioCreacion",
+                    "usuarioModificacion"
                   ],
                   "example": "id"
                 },
@@ -30854,10 +29977,10 @@
                   "fechaModificacion": {
                     "type": "boolean"
                   },
-                  "usuCreacion": {
+                  "usuarioCreacion": {
                     "type": "boolean"
                   },
-                  "usuModificacion": {
+                  "usuarioModificacion": {
                     "type": "boolean"
                   }
                 },
@@ -30876,8 +29999,8 @@
                     "textoCuerpo",
                     "fechaCreacion",
                     "fechaModificacion",
-                    "usuCreacion",
-                    "usuModificacion"
+                    "usuarioCreacion",
+                    "usuarioModificacion"
                   ],
                   "example": "id"
                 },
@@ -30954,10 +30077,10 @@
                   "fechaModificacion": {
                     "type": "boolean"
                   },
-                  "usuCreacion": {
+                  "usuarioCreacion": {
                     "type": "boolean"
                   },
-                  "usuModificacion": {
+                  "usuarioModificacion": {
                     "type": "boolean"
                   }
                 },
@@ -30976,8 +30099,8 @@
                     "textoCuerpo",
                     "fechaCreacion",
                     "fechaModificacion",
-                    "usuCreacion",
-                    "usuModificacion"
+                    "usuarioCreacion",
+                    "usuarioModificacion"
                   ],
                   "example": "id"
                 },
@@ -31046,7 +30169,7 @@
                   "usuarioCreacion": {
                     "type": "boolean"
                   },
-                  "usuModificacion": {
+                  "usuarioModificacion": {
                     "type": "boolean"
                   },
                   "fechaInactivo": {
@@ -31070,7 +30193,7 @@
                     "fechaCreacion",
                     "fechaModificacion",
                     "usuarioCreacion",
-                    "usuModificacion",
+                    "usuarioModificacion",
                     "fechaInactivo",
                     "usuarioInactivo"
                   ],
@@ -31146,7 +30269,7 @@
                   "usuarioCreacion": {
                     "type": "boolean"
                   },
-                  "usuModificacion": {
+                  "usuarioModificacion": {
                     "type": "boolean"
                   },
                   "fechaInactivo": {
@@ -31170,7 +30293,7 @@
                     "fechaCreacion",
                     "fechaModificacion",
                     "usuarioCreacion",
-                    "usuModificacion",
+                    "usuarioModificacion",
                     "fechaInactivo",
                     "usuarioInactivo"
                   ],
@@ -32150,7 +31273,7 @@
                   "usuarioCreacion": {
                     "type": "boolean"
                   },
-                  "usuModificacion": {
+                  "usuarioModificacion": {
                     "type": "boolean"
                   },
                   "fechaInactivo": {
@@ -32177,7 +31300,7 @@
                     "fechaCreacion",
                     "fechaModificacion",
                     "usuarioCreacion",
-                    "usuModificacion",
+                    "usuarioModificacion",
                     "fechaInactivo",
                     "usuarioInactivo"
                   ],
@@ -32262,7 +31385,7 @@
                   "usuarioCreacion": {
                     "type": "boolean"
                   },
-                  "usuModificacion": {
+                  "usuarioModificacion": {
                     "type": "boolean"
                   },
                   "fechaInactivo": {
@@ -32289,7 +31412,7 @@
                     "fechaCreacion",
                     "fechaModificacion",
                     "usuarioCreacion",
-                    "usuModificacion",
+                    "usuarioModificacion",
                     "fechaInactivo",
                     "usuarioInactivo"
                   ],
@@ -33795,7 +32918,7 @@
                   "usuarioCreacion": {
                     "type": "boolean"
                   },
-                  "usuModificacion": {
+                  "usuarioModificacion": {
                     "type": "boolean"
                   },
                   "fechaInactivo": {
@@ -33821,7 +32944,7 @@
                     "fechaCreacion",
                     "fechaModificacion",
                     "usuarioCreacion",
-                    "usuModificacion",
+                    "usuarioModificacion",
                     "fechaInactivo",
                     "usuarioInactivo"
                   ],
@@ -33903,7 +33026,7 @@
                   "usuarioCreacion": {
                     "type": "boolean"
                   },
-                  "usuModificacion": {
+                  "usuarioModificacion": {
                     "type": "boolean"
                   },
                   "fechaInactivo": {
@@ -33929,7 +33052,7 @@
                     "fechaCreacion",
                     "fechaModificacion",
                     "usuarioCreacion",
-                    "usuModificacion",
+                    "usuarioModificacion",
                     "fechaInactivo",
                     "usuarioInactivo"
                   ],
@@ -34601,308 +33724,6 @@
         "additionalProperties": false,
         "x-typescript-type": "@loopback/repository#Filter<TipoArchivo>"
       },
-      "TipoUsuarioUsuario.Filter": {
-        "type": "object",
-        "title": "TipoUsuarioUsuario.Filter",
-        "properties": {
-          "offset": {
-            "type": "integer",
-            "minimum": 0
-          },
-          "limit": {
-            "type": "integer",
-            "minimum": 1,
-            "example": 100
-          },
-          "skip": {
-            "type": "integer",
-            "minimum": 0
-          },
-          "order": {
-            "oneOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              }
-            ]
-          },
-          "fields": {
-            "oneOf": [
-              {
-                "type": "object",
-                "properties": {
-                  "id": {
-                    "type": "boolean"
-                  },
-                  "usuarioId": {
-                    "type": "boolean"
-                  },
-                  "tipoUsuarioId": {
-                    "type": "boolean"
-                  }
-                },
-                "additionalProperties": false
-              },
-              {
-                "type": "array",
-                "items": {
-                  "type": "string",
-                  "enum": [
-                    "id",
-                    "usuarioId",
-                    "tipoUsuarioId"
-                  ],
-                  "example": "id"
-                },
-                "uniqueItems": true
-              }
-            ],
-            "title": "TipoUsuarioUsuario.Fields"
-          }
-        },
-        "additionalProperties": false,
-        "x-typescript-type": "@loopback/repository#Filter<TipoUsuarioUsuario>"
-      },
-      "TipoUsuarioUsuario.Filter1": {
-        "type": "object",
-        "title": "TipoUsuarioUsuario.Filter",
-        "properties": {
-          "offset": {
-            "type": "integer",
-            "minimum": 0
-          },
-          "limit": {
-            "type": "integer",
-            "minimum": 1,
-            "example": 100
-          },
-          "skip": {
-            "type": "integer",
-            "minimum": 0
-          },
-          "order": {
-            "oneOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              }
-            ]
-          },
-          "where": {
-            "title": "TipoUsuarioUsuario.WhereFilter",
-            "type": "object",
-            "additionalProperties": true
-          },
-          "fields": {
-            "oneOf": [
-              {
-                "type": "object",
-                "properties": {
-                  "id": {
-                    "type": "boolean"
-                  },
-                  "usuarioId": {
-                    "type": "boolean"
-                  },
-                  "tipoUsuarioId": {
-                    "type": "boolean"
-                  }
-                },
-                "additionalProperties": false
-              },
-              {
-                "type": "array",
-                "items": {
-                  "type": "string",
-                  "enum": [
-                    "id",
-                    "usuarioId",
-                    "tipoUsuarioId"
-                  ],
-                  "example": "id"
-                },
-                "uniqueItems": true
-              }
-            ],
-            "title": "TipoUsuarioUsuario.Fields"
-          }
-        },
-        "additionalProperties": false,
-        "x-typescript-type": "@loopback/repository#Filter<TipoUsuarioUsuario>"
-      },
-      "TipoUsuario.Filter": {
-        "type": "object",
-        "title": "TipoUsuario.Filter",
-        "properties": {
-          "offset": {
-            "type": "integer",
-            "minimum": 0
-          },
-          "limit": {
-            "type": "integer",
-            "minimum": 1,
-            "example": 100
-          },
-          "skip": {
-            "type": "integer",
-            "minimum": 0
-          },
-          "order": {
-            "oneOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              }
-            ]
-          },
-          "fields": {
-            "oneOf": [
-              {
-                "type": "object",
-                "properties": {
-                  "id": {
-                    "type": "boolean"
-                  },
-                  "nombre": {
-                    "type": "boolean"
-                  },
-                  "fechaCreacion": {
-                    "type": "boolean"
-                  },
-                  "fechaModificacion": {
-                    "type": "boolean"
-                  },
-                  "usuCreacion": {
-                    "type": "boolean"
-                  },
-                  "usuModificacion": {
-                    "type": "boolean"
-                  }
-                },
-                "additionalProperties": false
-              },
-              {
-                "type": "array",
-                "items": {
-                  "type": "string",
-                  "enum": [
-                    "id",
-                    "nombre",
-                    "fechaCreacion",
-                    "fechaModificacion",
-                    "usuCreacion",
-                    "usuModificacion"
-                  ],
-                  "example": "id"
-                },
-                "uniqueItems": true
-              }
-            ],
-            "title": "TipoUsuario.Fields"
-          }
-        },
-        "additionalProperties": false,
-        "x-typescript-type": "@loopback/repository#Filter<TipoUsuario>"
-      },
-      "TipoUsuario.Filter1": {
-        "type": "object",
-        "title": "TipoUsuario.Filter",
-        "properties": {
-          "offset": {
-            "type": "integer",
-            "minimum": 0
-          },
-          "limit": {
-            "type": "integer",
-            "minimum": 1,
-            "example": 100
-          },
-          "skip": {
-            "type": "integer",
-            "minimum": 0
-          },
-          "order": {
-            "oneOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              }
-            ]
-          },
-          "where": {
-            "title": "TipoUsuario.WhereFilter",
-            "type": "object",
-            "additionalProperties": true
-          },
-          "fields": {
-            "oneOf": [
-              {
-                "type": "object",
-                "properties": {
-                  "id": {
-                    "type": "boolean"
-                  },
-                  "nombre": {
-                    "type": "boolean"
-                  },
-                  "fechaCreacion": {
-                    "type": "boolean"
-                  },
-                  "fechaModificacion": {
-                    "type": "boolean"
-                  },
-                  "usuCreacion": {
-                    "type": "boolean"
-                  },
-                  "usuModificacion": {
-                    "type": "boolean"
-                  }
-                },
-                "additionalProperties": false
-              },
-              {
-                "type": "array",
-                "items": {
-                  "type": "string",
-                  "enum": [
-                    "id",
-                    "nombre",
-                    "fechaCreacion",
-                    "fechaModificacion",
-                    "usuCreacion",
-                    "usuModificacion"
-                  ],
-                  "example": "id"
-                },
-                "uniqueItems": true
-              }
-            ],
-            "title": "TipoUsuario.Fields"
-          }
-        },
-        "additionalProperties": false,
-        "x-typescript-type": "@loopback/repository#Filter<TipoUsuario>"
-      },
       "TraduccionContenido.Filter": {
         "type": "object",
         "title": "TraduccionContenido.Filter",
@@ -35276,185 +34097,6 @@
         },
         "additionalProperties": false,
         "x-typescript-type": "@loopback/repository#Filter<TraduccionLiteral>"
-      },
-      "Traduccion.Filter": {
-        "type": "object",
-        "title": "Traduccion.Filter",
-        "properties": {
-          "offset": {
-            "type": "integer",
-            "minimum": 0
-          },
-          "limit": {
-            "type": "integer",
-            "minimum": 1,
-            "example": 100
-          },
-          "skip": {
-            "type": "integer",
-            "minimum": 0
-          },
-          "order": {
-            "oneOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              }
-            ]
-          },
-          "fields": {
-            "oneOf": [
-              {
-                "type": "object",
-                "properties": {
-                  "id": {
-                    "type": "boolean"
-                  },
-                  "idiomaId": {
-                    "type": "boolean"
-                  },
-                  "clave": {
-                    "type": "boolean"
-                  },
-                  "valor": {
-                    "type": "boolean"
-                  },
-                  "fechaCreacion": {
-                    "type": "boolean"
-                  },
-                  "fechaModificacion": {
-                    "type": "boolean"
-                  },
-                  "usuCreacion": {
-                    "type": "boolean"
-                  },
-                  "usuModificacion": {
-                    "type": "boolean"
-                  }
-                },
-                "additionalProperties": false
-              },
-              {
-                "type": "array",
-                "items": {
-                  "type": "string",
-                  "enum": [
-                    "id",
-                    "idiomaId",
-                    "clave",
-                    "valor",
-                    "fechaCreacion",
-                    "fechaModificacion",
-                    "usuCreacion",
-                    "usuModificacion"
-                  ],
-                  "example": "id"
-                },
-                "uniqueItems": true
-              }
-            ],
-            "title": "Traduccion.Fields"
-          }
-        },
-        "additionalProperties": false,
-        "x-typescript-type": "@loopback/repository#Filter<Traduccion>"
-      },
-      "Traduccion.Filter1": {
-        "type": "object",
-        "title": "Traduccion.Filter",
-        "properties": {
-          "offset": {
-            "type": "integer",
-            "minimum": 0
-          },
-          "limit": {
-            "type": "integer",
-            "minimum": 1,
-            "example": 100
-          },
-          "skip": {
-            "type": "integer",
-            "minimum": 0
-          },
-          "order": {
-            "oneOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              }
-            ]
-          },
-          "where": {
-            "title": "Traduccion.WhereFilter",
-            "type": "object",
-            "additionalProperties": true
-          },
-          "fields": {
-            "oneOf": [
-              {
-                "type": "object",
-                "properties": {
-                  "id": {
-                    "type": "boolean"
-                  },
-                  "idiomaId": {
-                    "type": "boolean"
-                  },
-                  "clave": {
-                    "type": "boolean"
-                  },
-                  "valor": {
-                    "type": "boolean"
-                  },
-                  "fechaCreacion": {
-                    "type": "boolean"
-                  },
-                  "fechaModificacion": {
-                    "type": "boolean"
-                  },
-                  "usuCreacion": {
-                    "type": "boolean"
-                  },
-                  "usuModificacion": {
-                    "type": "boolean"
-                  }
-                },
-                "additionalProperties": false
-              },
-              {
-                "type": "array",
-                "items": {
-                  "type": "string",
-                  "enum": [
-                    "id",
-                    "idiomaId",
-                    "clave",
-                    "valor",
-                    "fechaCreacion",
-                    "fechaModificacion",
-                    "usuCreacion",
-                    "usuModificacion"
-                  ],
-                  "example": "id"
-                },
-                "uniqueItems": true
-              }
-            ],
-            "title": "Traduccion.Fields"
-          }
-        },
-        "additionalProperties": false,
-        "x-typescript-type": "@loopback/repository#Filter<Traduccion>"
       },
       "UsuarioCredenciales.Filter": {
         "type": "object",
@@ -35929,7 +34571,7 @@
                   "usuarioCreacion": {
                     "type": "boolean"
                   },
-                  "usuModificacion": {
+                  "usuarioModificacion": {
                     "type": "boolean"
                   },
                   "fechaInactivo": {
@@ -35958,7 +34600,7 @@
                     "fechaCreacion",
                     "fechaModificacion",
                     "usuarioCreacion",
-                    "usuModificacion",
+                    "usuarioModificacion",
                     "fechaInactivo",
                     "usuarioInactivo"
                   ],
@@ -36063,7 +34705,7 @@
                   "usuarioCreacion": {
                     "type": "boolean"
                   },
-                  "usuModificacion": {
+                  "usuarioModificacion": {
                     "type": "boolean"
                   },
                   "fechaInactivo": {
@@ -36092,7 +34734,7 @@
                     "fechaCreacion",
                     "fechaModificacion",
                     "usuarioCreacion",
-                    "usuModificacion",
+                    "usuarioModificacion",
                     "fechaInactivo",
                     "usuarioInactivo"
                   ],
