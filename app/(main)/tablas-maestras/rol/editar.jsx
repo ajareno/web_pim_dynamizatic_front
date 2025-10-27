@@ -65,7 +65,7 @@ const EditarRol = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegistroR
                 // Elimino y añado los campos que no se necesitan
                 delete objGuardar.id;
                 delete objGuardar.nombreEmpresa;
-                objGuardar['usuCreacion'] = usuarioActual;
+                objGuardar['usuarioCreacion'] = usuarioActual;
                 objGuardar['empresaId'] = getUsuarioSesion()?.empresaId;
                 if(pantallaDashboardSeleccionada){
                     objGuardar['dashboardUrl'] = pantallasDashboard.find(dashboard => dashboard.nombre === pantallaDashboardSeleccionada).url;
@@ -91,7 +91,7 @@ const EditarRol = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegistroR
             } else {
                 //Si se edita un registro existente Hacemos el patch del registro
                 delete objGuardar.nombreEmpresa;
-                objGuardar['usuModificacion'] = usuarioActual;
+                objGuardar['usuarioModificacion'] = usuarioActual;
                 objGuardar['empresaId'] = getUsuarioSesion()?.empresaId;
                 if(pantallaDashboardSeleccionada){
                     objGuardar['dashboardUrl'] = pantallasDashboard.find(dashboard => dashboard.nombre === pantallaDashboardSeleccionada).url;

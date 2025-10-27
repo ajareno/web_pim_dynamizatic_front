@@ -15578,7 +15578,7 @@
             "format": "date-time",
             "nullable": true
           },
-          "usuCreacion": {
+          "usuarioCreacion": {
             "type": "number",
             "nullable": false
           },
@@ -15591,7 +15591,7 @@
             "format": "date-time",
             "nullable": true
           },
-          "usuInactivo": {
+          "usuarioInactivo": {
             "type": "number",
             "nullable": true
           }
@@ -15600,7 +15600,7 @@
           "empresaId",
           "rolId",
           "idiomaId",
-          "usuCreacion"
+          "usuarioCreacion"
         ],
         "additionalProperties": false
       },
@@ -15650,7 +15650,7 @@
             "format": "date-time",
             "nullable": true
           },
-          "usuCreacion": {
+          "usuarioCreacion": {
             "type": "number",
             "nullable": false
           },
@@ -15663,7 +15663,7 @@
             "format": "date-time",
             "nullable": true
           },
-          "usuInactivo": {
+          "usuarioInactivo": {
             "type": "number",
             "nullable": true
           }
@@ -15672,7 +15672,7 @@
           "empresaId",
           "rolId",
           "idiomaId",
-          "usuCreacion"
+          "usuarioCreacion"
         ],
         "additionalProperties": false,
         "x-typescript-type": "Omit<Usuario, 'id'>"
@@ -15750,7 +15750,7 @@
             "format": "date-time",
             "nullable": true
           },
-          "usuCreacion": {
+          "usuarioCreacion": {
             "type": "number",
             "nullable": false
           },
@@ -15763,7 +15763,7 @@
             "format": "date-time",
             "nullable": true
           },
-          "usuInactivo": {
+          "usuarioInactivo": {
             "type": "number",
             "nullable": true
           },
@@ -15775,7 +15775,7 @@
           "empresaId",
           "rolId",
           "idiomaId",
-          "usuCreacion"
+          "usuarioCreacion"
         ],
         "additionalProperties": false,
         "x-typescript-type": "UsuarioWithRelations"
@@ -15829,7 +15829,7 @@
             "format": "date-time",
             "nullable": true
           },
-          "usuCreacion": {
+          "usuarioCreacion": {
             "type": "number",
             "nullable": false
           },
@@ -15842,7 +15842,7 @@
             "format": "date-time",
             "nullable": true
           },
-          "usuInactivo": {
+          "usuarioInactivo": {
             "type": "number",
             "nullable": true
           }
@@ -17747,7 +17747,7 @@
             "format": "date-time",
             "nullable": true
           },
-          "usuCreacion": {
+          "usuarioCreacion": {
             "type": "number",
             "nullable": false
           },
@@ -17760,14 +17760,14 @@
             "format": "date-time",
             "nullable": true
           },
-          "usuInactivo": {
+          "usuarioInactivo": {
             "type": "number",
             "nullable": true
           }
         },
         "required": [
           "empresaId",
-          "usuCreacion"
+          "usuarioCreacion"
         ],
         "additionalProperties": false
       },
@@ -17806,7 +17806,7 @@
             "format": "date-time",
             "nullable": true
           },
-          "usuCreacion": {
+          "usuarioCreacion": {
             "type": "number",
             "nullable": false
           },
@@ -17819,14 +17819,14 @@
             "format": "date-time",
             "nullable": true
           },
-          "usuInactivo": {
+          "usuarioInactivo": {
             "type": "number",
             "nullable": true
           }
         },
         "required": [
           "empresaId",
-          "usuCreacion"
+          "usuarioCreacion"
         ],
         "additionalProperties": false,
         "x-typescript-type": "Omit<Rol, 'id'>"
@@ -17870,7 +17870,7 @@
             "format": "date-time",
             "nullable": true
           },
-          "usuCreacion": {
+          "usuarioCreacion": {
             "type": "number",
             "nullable": false
           },
@@ -17883,14 +17883,14 @@
             "format": "date-time",
             "nullable": true
           },
-          "usuInactivo": {
+          "usuarioInactivo": {
             "type": "number",
             "nullable": true
           }
         },
         "required": [
           "empresaId",
-          "usuCreacion"
+          "usuarioCreacion"
         ],
         "additionalProperties": false,
         "x-typescript-type": "RolWithRelations"
@@ -17934,7 +17934,7 @@
             "format": "date-time",
             "nullable": true
           },
-          "usuCreacion": {
+          "usuarioCreacion": {
             "type": "number",
             "nullable": false
           },
@@ -17947,7 +17947,7 @@
             "format": "date-time",
             "nullable": true
           },
-          "usuInactivo": {
+          "usuarioInactivo": {
             "type": "number",
             "nullable": true
           }
@@ -19590,7 +19590,7 @@
             "format": "date-time",
             "nullable": true
           },
-          "usuCreacion": {
+          "usuarioCreacion": {
             "type": "number",
             "nullable": false
           },
@@ -19603,7 +19603,7 @@
             "format": "date-time",
             "nullable": true
           },
-          "usuInactivo": {
+          "usuarioInactivo": {
             "type": "number",
             "nullable": true
           }
@@ -19612,7 +19612,7 @@
           "idiomaId",
           "empresaId",
           "nombrePlantilla",
-          "usuCreacion"
+          "usuarioCreacion"
         ],
         "additionalProperties": false
       },
@@ -19657,7 +19657,7 @@
             "format": "date-time",
             "nullable": true
           },
-          "usuCreacion": {
+          "usuarioCreacion": {
             "type": "number",
             "nullable": false
           },
@@ -19670,7 +19670,7 @@
             "format": "date-time",
             "nullable": true
           },
-          "usuInactivo": {
+          "usuarioInactivo": {
             "type": "number",
             "nullable": true
           }
@@ -19679,7 +19679,7 @@
           "idiomaId",
           "empresaId",
           "nombrePlantilla",
-          "usuCreacion"
+          "usuarioCreacion"
         ],
         "additionalProperties": false,
         "x-typescript-type": "Omit<PlantillaEmail, 'id'>"
@@ -19729,7 +19729,7 @@
             "format": "date-time",
             "nullable": true
           },
-          "usuCreacion": {
+          "usuarioCreacion": {
             "type": "number",
             "nullable": false
           },
@@ -19742,7 +19742,7 @@
             "format": "date-time",
             "nullable": true
           },
-          "usuInactivo": {
+          "usuarioInactivo": {
             "type": "number",
             "nullable": true
           }
@@ -19751,7 +19751,7 @@
           "idiomaId",
           "empresaId",
           "nombrePlantilla",
-          "usuCreacion"
+          "usuarioCreacion"
         ],
         "additionalProperties": false,
         "x-typescript-type": "PlantillaEmailWithRelations"
@@ -19801,7 +19801,7 @@
             "format": "date-time",
             "nullable": true
           },
-          "usuCreacion": {
+          "usuarioCreacion": {
             "type": "number",
             "nullable": false
           },
@@ -19814,7 +19814,7 @@
             "format": "date-time",
             "nullable": true
           },
-          "usuInactivo": {
+          "usuarioInactivo": {
             "type": "number",
             "nullable": true
           }
@@ -20910,7 +20910,7 @@
             "format": "date-time",
             "nullable": true
           },
-          "usuCreacion": {
+          "usuarioCreacion": {
             "type": "number",
             "nullable": false
           },
@@ -20923,14 +20923,14 @@
             "format": "date-time",
             "nullable": true
           },
-          "usuInactivo": {
+          "usuarioInactivo": {
             "type": "number",
             "nullable": true
           }
         },
         "required": [
           "empresaId",
-          "usuCreacion"
+          "usuarioCreacion"
         ],
         "additionalProperties": false
       },
@@ -20961,7 +20961,7 @@
             "format": "date-time",
             "nullable": true
           },
-          "usuCreacion": {
+          "usuarioCreacion": {
             "type": "number",
             "nullable": false
           },
@@ -20974,14 +20974,14 @@
             "format": "date-time",
             "nullable": true
           },
-          "usuInactivo": {
+          "usuarioInactivo": {
             "type": "number",
             "nullable": true
           }
         },
         "required": [
           "empresaId",
-          "usuCreacion"
+          "usuarioCreacion"
         ],
         "additionalProperties": false,
         "x-typescript-type": "Omit<MensajeTipo, 'id'>"
@@ -21017,7 +21017,7 @@
             "format": "date-time",
             "nullable": true
           },
-          "usuCreacion": {
+          "usuarioCreacion": {
             "type": "number",
             "nullable": false
           },
@@ -21030,14 +21030,14 @@
             "format": "date-time",
             "nullable": true
           },
-          "usuInactivo": {
+          "usuarioInactivo": {
             "type": "number",
             "nullable": true
           }
         },
         "required": [
           "empresaId",
-          "usuCreacion"
+          "usuarioCreacion"
         ],
         "additionalProperties": false,
         "x-typescript-type": "MensajeTipoWithRelations"
@@ -21073,7 +21073,7 @@
             "format": "date-time",
             "nullable": true
           },
-          "usuCreacion": {
+          "usuarioCreacion": {
             "type": "number",
             "nullable": false
           },
@@ -21086,7 +21086,7 @@
             "format": "date-time",
             "nullable": true
           },
-          "usuInactivo": {
+          "usuarioInactivo": {
             "type": "number",
             "nullable": true
           }
@@ -23090,7 +23090,7 @@
             "format": "date-time",
             "nullable": true
           },
-          "usuCreacion": {
+          "usuarioCreacion": {
             "type": "number",
             "nullable": false
           },
@@ -23103,13 +23103,13 @@
             "format": "date-time",
             "nullable": true
           },
-          "usuInactivo": {
+          "usuarioInactivo": {
             "type": "number",
             "nullable": true
           }
         },
         "required": [
-          "usuCreacion"
+          "usuarioCreacion"
         ],
         "additionalProperties": false
       },
@@ -23140,7 +23140,7 @@
             "format": "date-time",
             "nullable": true
           },
-          "usuCreacion": {
+          "usuarioCreacion": {
             "type": "number",
             "nullable": false
           },
@@ -23153,13 +23153,13 @@
             "format": "date-time",
             "nullable": true
           },
-          "usuInactivo": {
+          "usuarioInactivo": {
             "type": "number",
             "nullable": true
           }
         },
         "required": [
-          "usuCreacion"
+          "usuarioCreacion"
         ],
         "additionalProperties": false,
         "x-typescript-type": "Omit<Idioma, 'id'>"
@@ -23195,7 +23195,7 @@
             "format": "date-time",
             "nullable": true
           },
-          "usuCreacion": {
+          "usuarioCreacion": {
             "type": "number",
             "nullable": false
           },
@@ -23208,13 +23208,13 @@
             "format": "date-time",
             "nullable": true
           },
-          "usuInactivo": {
+          "usuarioInactivo": {
             "type": "number",
             "nullable": true
           }
         },
         "required": [
-          "usuCreacion"
+          "usuarioCreacion"
         ],
         "additionalProperties": false,
         "x-typescript-type": "IdiomaWithRelations"
@@ -23250,7 +23250,7 @@
             "format": "date-time",
             "nullable": true
           },
-          "usuCreacion": {
+          "usuarioCreacion": {
             "type": "number",
             "nullable": false
           },
@@ -23263,7 +23263,7 @@
             "format": "date-time",
             "nullable": true
           },
-          "usuInactivo": {
+          "usuarioInactivo": {
             "type": "number",
             "nullable": true
           }
@@ -26178,7 +26178,7 @@
             "format": "date-time",
             "nullable": true
           },
-          "usuCreacion": {
+          "usuarioCreacion": {
             "type": "number",
             "nullable": false
           },
@@ -26189,7 +26189,7 @@
         },
         "required": [
           "empresaId",
-          "usuCreacion"
+          "usuarioCreacion"
         ],
         "additionalProperties": false
       },
@@ -26240,7 +26240,7 @@
             "format": "date-time",
             "nullable": true
           },
-          "usuCreacion": {
+          "usuarioCreacion": {
             "type": "number",
             "nullable": false
           },
@@ -26251,7 +26251,7 @@
         },
         "required": [
           "empresaId",
-          "usuCreacion"
+          "usuarioCreacion"
         ],
         "additionalProperties": false,
         "x-typescript-type": "Omit<Archivo, 'id'>"
@@ -26307,7 +26307,7 @@
             "format": "date-time",
             "nullable": true
           },
-          "usuCreacion": {
+          "usuarioCreacion": {
             "type": "number",
             "nullable": false
           },
@@ -26318,7 +26318,7 @@
         },
         "required": [
           "empresaId",
-          "usuCreacion"
+          "usuarioCreacion"
         ],
         "additionalProperties": false,
         "x-typescript-type": "ArchivoWithRelations"
@@ -26374,7 +26374,7 @@
             "format": "date-time",
             "nullable": true
           },
-          "usuCreacion": {
+          "usuarioCreacion": {
             "type": "number",
             "nullable": false
           },
@@ -26464,7 +26464,7 @@
                   "fechaModificacion": {
                     "type": "boolean"
                   },
-                  "usuCreacion": {
+                  "usuarioCreacion": {
                     "type": "boolean"
                   },
                   "usuModificacion": {
@@ -26489,7 +26489,7 @@
                     "pantalla",
                     "fechaCreacion",
                     "fechaModificacion",
-                    "usuCreacion",
+                    "usuarioCreacion",
                     "usuModificacion"
                   ],
                   "example": "id"
@@ -26576,7 +26576,7 @@
                   "fechaModificacion": {
                     "type": "boolean"
                   },
-                  "usuCreacion": {
+                  "usuarioCreacion": {
                     "type": "boolean"
                   },
                   "usuModificacion": {
@@ -26601,7 +26601,7 @@
                     "pantalla",
                     "fechaCreacion",
                     "fechaModificacion",
-                    "usuCreacion",
+                    "usuarioCreacion",
                     "usuModificacion"
                   ],
                   "example": "id"
@@ -29160,7 +29160,7 @@
                   "fechaModificacion": {
                     "type": "boolean"
                   },
-                  "usuCreacion": {
+                  "usuarioCreacion": {
                     "type": "boolean"
                   },
                   "usuModificacion": {
@@ -29169,7 +29169,7 @@
                   "fechaInactivo": {
                     "type": "boolean"
                   },
-                  "usuInactivo": {
+                  "usuarioInactivo": {
                     "type": "boolean"
                   }
                 },
@@ -29186,10 +29186,10 @@
                     "activoSn",
                     "fechaCreacion",
                     "fechaModificacion",
-                    "usuCreacion",
+                    "usuarioCreacion",
                     "usuModificacion",
                     "fechaInactivo",
-                    "usuInactivo"
+                    "usuarioInactivo"
                   ],
                   "example": "id"
                 },
@@ -29260,7 +29260,7 @@
                   "fechaModificacion": {
                     "type": "boolean"
                   },
-                  "usuCreacion": {
+                  "usuarioCreacion": {
                     "type": "boolean"
                   },
                   "usuModificacion": {
@@ -29269,7 +29269,7 @@
                   "fechaInactivo": {
                     "type": "boolean"
                   },
-                  "usuInactivo": {
+                  "usuarioInactivo": {
                     "type": "boolean"
                   }
                 },
@@ -29286,10 +29286,10 @@
                     "activoSn",
                     "fechaCreacion",
                     "fechaModificacion",
-                    "usuCreacion",
+                    "usuarioCreacion",
                     "usuModificacion",
                     "fechaInactivo",
-                    "usuInactivo"
+                    "usuarioInactivo"
                   ],
                   "example": "id"
                 },
@@ -31043,7 +31043,7 @@
                   "fechaModificacion": {
                     "type": "boolean"
                   },
-                  "usuCreacion": {
+                  "usuarioCreacion": {
                     "type": "boolean"
                   },
                   "usuModificacion": {
@@ -31052,7 +31052,7 @@
                   "fechaInactivo": {
                     "type": "boolean"
                   },
-                  "usuInactivo": {
+                  "usuarioInactivo": {
                     "type": "boolean"
                   }
                 },
@@ -31069,10 +31069,10 @@
                     "activoSn",
                     "fechaCreacion",
                     "fechaModificacion",
-                    "usuCreacion",
+                    "usuarioCreacion",
                     "usuModificacion",
                     "fechaInactivo",
-                    "usuInactivo"
+                    "usuarioInactivo"
                   ],
                   "example": "id"
                 },
@@ -31143,7 +31143,7 @@
                   "fechaModificacion": {
                     "type": "boolean"
                   },
-                  "usuCreacion": {
+                  "usuarioCreacion": {
                     "type": "boolean"
                   },
                   "usuModificacion": {
@@ -31152,7 +31152,7 @@
                   "fechaInactivo": {
                     "type": "boolean"
                   },
-                  "usuInactivo": {
+                  "usuarioInactivo": {
                     "type": "boolean"
                   }
                 },
@@ -31169,10 +31169,10 @@
                     "activoSn",
                     "fechaCreacion",
                     "fechaModificacion",
-                    "usuCreacion",
+                    "usuarioCreacion",
                     "usuModificacion",
                     "fechaInactivo",
-                    "usuInactivo"
+                    "usuarioInactivo"
                   ],
                   "example": "id"
                 },
@@ -32147,7 +32147,7 @@
                   "fechaModificacion": {
                     "type": "boolean"
                   },
-                  "usuCreacion": {
+                  "usuarioCreacion": {
                     "type": "boolean"
                   },
                   "usuModificacion": {
@@ -32156,7 +32156,7 @@
                   "fechaInactivo": {
                     "type": "boolean"
                   },
-                  "usuInactivo": {
+                  "usuarioInactivo": {
                     "type": "boolean"
                   }
                 },
@@ -32176,10 +32176,10 @@
                     "cuerpo",
                     "fechaCreacion",
                     "fechaModificacion",
-                    "usuCreacion",
+                    "usuarioCreacion",
                     "usuModificacion",
                     "fechaInactivo",
-                    "usuInactivo"
+                    "usuarioInactivo"
                   ],
                   "example": "id"
                 },
@@ -32259,7 +32259,7 @@
                   "fechaModificacion": {
                     "type": "boolean"
                   },
-                  "usuCreacion": {
+                  "usuarioCreacion": {
                     "type": "boolean"
                   },
                   "usuModificacion": {
@@ -32268,7 +32268,7 @@
                   "fechaInactivo": {
                     "type": "boolean"
                   },
-                  "usuInactivo": {
+                  "usuarioInactivo": {
                     "type": "boolean"
                   }
                 },
@@ -32288,10 +32288,10 @@
                     "cuerpo",
                     "fechaCreacion",
                     "fechaModificacion",
-                    "usuCreacion",
+                    "usuarioCreacion",
                     "usuModificacion",
                     "fechaInactivo",
-                    "usuInactivo"
+                    "usuarioInactivo"
                   ],
                   "example": "id"
                 },
@@ -33792,7 +33792,7 @@
                   "fechaModificacion": {
                     "type": "boolean"
                   },
-                  "usuCreacion": {
+                  "usuarioCreacion": {
                     "type": "boolean"
                   },
                   "usuModificacion": {
@@ -33801,7 +33801,7 @@
                   "fechaInactivo": {
                     "type": "boolean"
                   },
-                  "usuInactivo": {
+                  "usuarioInactivo": {
                     "type": "boolean"
                   }
                 },
@@ -33820,10 +33820,10 @@
                     "dashboardUrl",
                     "fechaCreacion",
                     "fechaModificacion",
-                    "usuCreacion",
+                    "usuarioCreacion",
                     "usuModificacion",
                     "fechaInactivo",
-                    "usuInactivo"
+                    "usuarioInactivo"
                   ],
                   "example": "id"
                 },
@@ -33900,7 +33900,7 @@
                   "fechaModificacion": {
                     "type": "boolean"
                   },
-                  "usuCreacion": {
+                  "usuarioCreacion": {
                     "type": "boolean"
                   },
                   "usuModificacion": {
@@ -33909,7 +33909,7 @@
                   "fechaInactivo": {
                     "type": "boolean"
                   },
-                  "usuInactivo": {
+                  "usuarioInactivo": {
                     "type": "boolean"
                   }
                 },
@@ -33928,10 +33928,10 @@
                     "dashboardUrl",
                     "fechaCreacion",
                     "fechaModificacion",
-                    "usuCreacion",
+                    "usuarioCreacion",
                     "usuModificacion",
                     "fechaInactivo",
-                    "usuInactivo"
+                    "usuarioInactivo"
                   ],
                   "example": "id"
                 },
@@ -35926,7 +35926,7 @@
                   "fechaModificacion": {
                     "type": "boolean"
                   },
-                  "usuCreacion": {
+                  "usuarioCreacion": {
                     "type": "boolean"
                   },
                   "usuModificacion": {
@@ -35935,7 +35935,7 @@
                   "fechaInactivo": {
                     "type": "boolean"
                   },
-                  "usuInactivo": {
+                  "usuarioInactivo": {
                     "type": "boolean"
                   }
                 },
@@ -35957,10 +35957,10 @@
                     "avatar",
                     "fechaCreacion",
                     "fechaModificacion",
-                    "usuCreacion",
+                    "usuarioCreacion",
                     "usuModificacion",
                     "fechaInactivo",
-                    "usuInactivo"
+                    "usuarioInactivo"
                   ],
                   "example": "id"
                 },
@@ -36060,7 +36060,7 @@
                   "fechaModificacion": {
                     "type": "boolean"
                   },
-                  "usuCreacion": {
+                  "usuarioCreacion": {
                     "type": "boolean"
                   },
                   "usuModificacion": {
@@ -36069,7 +36069,7 @@
                   "fechaInactivo": {
                     "type": "boolean"
                   },
-                  "usuInactivo": {
+                  "usuarioInactivo": {
                     "type": "boolean"
                   }
                 },
@@ -36091,10 +36091,10 @@
                     "avatar",
                     "fechaCreacion",
                     "fechaModificacion",
-                    "usuCreacion",
+                    "usuarioCreacion",
                     "usuModificacion",
                     "fechaInactivo",
-                    "usuInactivo"
+                    "usuarioInactivo"
                   ],
                   "example": "id"
                 },

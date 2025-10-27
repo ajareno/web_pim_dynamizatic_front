@@ -3,7 +3,7 @@ import { getVistaArchivoEmpresa, getVistaArchivoEmpresaCount, deleteArchivo } fr
 import Crud from "../../components/shared/crud";
 import { useIntl } from 'react-intl'
 
-const ArchivosUsuario = ({usuCreacion}) => {
+const ArchivosUsuario = ({usuarioCreacion}) => {
     const intl = useIntl()
     const columnas = [
         { campo: 'tabla', header: intl.formatMessage({ id: 'Tabla' }), tipo: 'string' },
@@ -30,7 +30,7 @@ const ArchivosUsuario = ({usuCreacion}) => {
                 getRegistros={getVistaArchivoEmpresa}
                 getRegistrosCount={getVistaArchivoEmpresaCount}
                 botones={['descargarCSV']}
-                filtradoBase={{ usuCreacion:  usuCreacion}}
+                filtradoBase={{ usuarioCreacion:  usuarioCreacion}}
                 columnas={columnas}
                 deleteRegistro={deleteArchivo}
                 procesarDatosParaCSV={procesarDatosParaCSV}

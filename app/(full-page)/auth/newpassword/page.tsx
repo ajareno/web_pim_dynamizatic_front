@@ -83,7 +83,7 @@ const NewPassword: Page = () => {
         }
 
         // Si no hay registros previos con la misma contraseña, se guarda la nueva contraseña
-        await postUsuarioPasswordHistorico({ usuarioId: usuarioId, password: hashedPassword, usuCreacion: usuarioId });
+        await postUsuarioPasswordHistorico({ usuarioId: usuarioId, password: hashedPassword, usuarioCreacion: usuarioId });
         await patchUsuarioCredenciales(usuarioId, JSON.stringify({ password: hashedPassword }));
 
         localStorage.setItem('toastMensaje', 'Contraseña actualizada correctamente');

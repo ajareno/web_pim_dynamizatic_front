@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Fieldset } from 'primereact/fieldset';
 import { InputText } from 'primereact/inputtext';
 import { Dropdown } from 'primereact/dropdown';
@@ -8,6 +8,13 @@ import { useIntl } from 'react-intl';
 const EditarDatosIdioma = ({ idioma, setIdioma, estadoGuardando, isoIdiomas, setIsoSeleccionado, isoSeleccionado }) => {
     const intl = useIntl();
     const [filtradoIso, setFiltradoIso] = useState([]);
+
+    // Inicializar filtradoIso con todos los idiomas cuando el componente se monta
+    useEffect(() => {
+        if (isoIdiomas && isoIdiomas.length > 0) {
+            setFiltradoIso(isoIdiomas);
+        }
+    }, [isoIdiomas]);
     const manejarCambioInputSwitch = (e, nombreInputSwitch) => {
         const valor = (e.target && e.target.value) || "";
         let _idioma = { ...idioma };
@@ -16,7 +23,7 @@ const EditarDatosIdioma = ({ idioma, setIdioma, estadoGuardando, isoIdiomas, set
         setIdioma(_idioma);
     };
 
-    const busquedaIsoIdiomas = (event) => {
+    const busquedaIsoIdiomas = (event) => {        
         let _isoIdiomasFiltrados;
         if (!event.query.trim().length) {
             _isoIdiomasFiltrados = [...isoIdiomas];
@@ -24,7 +31,7 @@ const EditarDatosIdioma = ({ idioma, setIdioma, estadoGuardando, isoIdiomas, set
             _isoIdiomasFiltrados = isoIdiomas.filter(item =>
                 item.idioma.toLowerCase().includes(event.query.toLowerCase())
             );
-        }
+        }        
         setFiltradoIso(_isoIdiomasFiltrados);
     };
 
@@ -48,6 +55,13 @@ const EditarDatosIdioma = ({ idioma, setIdioma, estadoGuardando, isoIdiomas, set
                             field="idioma"
                             completeMethod={busquedaIsoIdiomas}
                             onChange={(e) => setIsoSeleccionado(e.value)}
+                            onDropdownClick={() => {
+                                // Cuando se hace click en el dropdown, mostrar todos los idiomas
+                                if (filtradoIso.length === 0 && isoIdiomas && isoIdiomas.length > 0) {
+                                    setFiltradoIso(isoIdiomas);
+                                }
+                            }}
+                            placeholder={intl.formatMessage({ id: 'Seleccione un idioma' })}
                             //className={`${(estadoGuardando && idioma.iso === "") ? "p-invalid" : ""}`}
                             style={{ width: '350px' }} // Ajusta este valor según sea necesario
                         />

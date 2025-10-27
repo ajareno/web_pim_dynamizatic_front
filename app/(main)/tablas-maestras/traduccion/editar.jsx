@@ -4,7 +4,7 @@ import { Toast } from "primereact/toast";
 import { Divider } from "primereact/divider";
 import { Button } from "primereact/button";
 import { getIdiomas } from "@/app/api-endpoints/idioma";
-import { postTraduccion, patchTraduccion } from "@/app/api-endpoints/traduccion";
+import { postTraduccionLiteral, patchTraduccionLiteral } from "@/app/api-endpoints/traduccion";
 import EditarDatosTraduccion from "./EditarDatosTraduccion";
 import 'primeicons/primeicons.css';
 import { getUsuarioSesion } from "@/app/utility/Utils";
@@ -56,7 +56,7 @@ const EditarTraduccion = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRe
         return !validaClave // (!validaClave && !validaValor && !validaIdioma)
     }
 
-    const guardarCodigoPostal = async () => {
+    const guardar = async () => {
         setEstadoGuardando(true);
         setEstadoGuardandoBoton(true);
         if (await validaciones()) {
@@ -69,7 +69,7 @@ const EditarTraduccion = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRe
                 try {
                     for (const idioma of listaIdiomas) {
                         const objTraduccion = {
-                            usuCreacion: usuarioActual,
+                            usuarioCreacion: usuarioActual,
                             idiomaId: idioma.id,
                             clave: objGuardar.clave,
                             valor: objGuardar[idioma.nombre.toLowerCase()],
@@ -93,21 +93,21 @@ const EditarTraduccion = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRe
                         //Si la traduccion ya existe, hacemos el patch
                         if (objGuardar[idioma.nombre.toLowerCase() + 'Id']) {
                             const objTraduccion = {
-                                usuModificacion: usuarioActual,
+                                usuarioModificacion: usuarioActual,
                                 clave: objGuardar.clave,
                                 valor: objGuardar[idioma.nombre.toLowerCase()],
                             }
-                            await patchTraduccion(objGuardar[idioma.nombre.toLowerCase() + 'Id'], objTraduccion);
+                            await patchTraduccionLiteral(objGuardar[idioma.nombre.toLowerCase() + 'Id'], objTraduccion);
                         }
                         //Si la traduccion no existe, hacemos el post
                         else if (objGuardar[idioma.nombre.toLowerCase()]) {
                             const objTraduccion = {
-                                usuCreacion: usuarioActual,
+                                usuarioCreacion: usuarioActual,
                                 idiomaId: idioma.id,
                                 clave: objGuardar.clave,
                                 valor: objGuardar[idioma.nombre.toLowerCase()],
                             }
-                            await postTraduccion(objTraduccion);
+                            await postTraduccionLiteral(objTraduccion);
                         }
                     }
 
@@ -162,7 +162,7 @@ const EditarTraduccion = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRe
                                 <Button
                                     label={estadoGuardandoBoton ? `${intl.formatMessage({ id: 'Guardando' })}...` : intl.formatMessage({ id: 'Guardar' })}
                                     icon={estadoGuardandoBoton ? "pi pi-spin pi-spinner" : null}
-                                    onClick={guardarCodigoPostal}
+                                    onClick={guardar}
                                     className="mr-2"
                                     disabled={estadoGuardandoBoton}
                                 />

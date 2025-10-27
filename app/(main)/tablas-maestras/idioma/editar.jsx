@@ -108,7 +108,7 @@ const EditarIdioma = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegist
         return (/*!validaIso && */!validaNombre)
     }
 
-    const guardarEmpresaTransporte = async () => {
+    const guardar = async () => {
         setEstadoGuardando(true);
         setEstadoGuardandoBoton(true);
         if (await validaciones()) {
@@ -120,7 +120,7 @@ const EditarIdioma = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegist
             if (idEditar === 0) {
                 // Elimino y añado los campos que no se necesitan
                 delete objGuardar.id;
-                objGuardar['usuCreacion'] = usuarioActual;
+                objGuardar['usuarioCreacion'] = usuarioActual;
                 if(isoSeleccionado){
                     objGuardar['iso'] = isoSeleccionado.iso;
                 }
@@ -146,7 +146,7 @@ const EditarIdioma = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegist
                 }
             } else {
                 //Si se edita un registro existente Hacemos el patch del registro
-                objGuardar['usuModificacion'] = usuarioActual;
+                objGuardar['usuarioModificacion'] = usuarioActual;
                 if(isoSeleccionado){
                     objGuardar['iso'] = isoSeleccionado.iso;
                 }
@@ -174,9 +174,7 @@ const EditarIdioma = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegist
 
     const cancelarEdicion = () => {
         setIdEditar(null)
-    };
-
-    
+    };    
 
     const header = idEditar > 0 ? (editable ? intl.formatMessage({ id: 'Editar' }) : intl.formatMessage({ id: 'Ver' })) : intl.formatMessage({ id: 'Nuevo' });
 
@@ -201,7 +199,7 @@ const EditarIdioma = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegist
                                 <Button
                                     label={estadoGuardandoBoton ? `${intl.formatMessage({ id: 'Guardando' })}...` : intl.formatMessage({ id: 'Guardar' })} 
                                     icon={estadoGuardandoBoton ? "pi pi-spin pi-spinner" : null}
-                                onClick={guardarEmpresaTransporte}
+                                    onClick={guardar}
                                     className="mr-2"
                                     disabled={estadoGuardandoBoton}
                                 />

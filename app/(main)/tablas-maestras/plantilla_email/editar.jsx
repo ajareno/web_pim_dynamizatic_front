@@ -113,7 +113,7 @@ const EditarCorreoPlantilla = ({ idEditar, setIdEditar, rowData, emptyRegistro, 
                 delete objGuardar.nombreIdioma;
                 delete objGuardar.archivos;
                 objGuardar['cuerpo'] = contenidoWysiwyg;
-                objGuardar['usuCreacion'] = usuarioActual;
+                objGuardar['usuarioCreacion'] = usuarioActual;
                 objGuardar['accion'] = accionSeleccionada.nombre;
                 objGuardar['empresaId'] = Number(localStorage.getItem('empresa'));
                 const registroSeleccionado = listaIdiomas.find(idioma => idioma.nombre === idiomaSeleccionado)
@@ -173,7 +173,7 @@ const EditarCorreoPlantilla = ({ idEditar, setIdEditar, rowData, emptyRegistro, 
                 if (registroSeleccionado) {
                     objGuardar['idiomaId'] = registroSeleccionado.id;
                 }
-                objGuardar['usuModificacion'] = getUsuarioSesion()?.id
+                objGuardar['usuarioModificacion'] = getUsuarioSesion()?.id
                 objGuardar['cuerpo'] = contenidoWysiwyg;
                 objGuardar['accion'] = accionSeleccionada.nombre;
                 objGuardar['empresaId'] = Number(localStorage.getItem('empresa'));
@@ -260,7 +260,7 @@ const EditarCorreoPlantilla = ({ idEditar, setIdEditar, rowData, emptyRegistro, 
             }
             //Hace el insert en la tabla de archivos
             const objArchivo = {}
-            objArchivo['usuCreacion'] = usuario;
+            objArchivo['usuarioCreacion'] = usuario;
             objArchivo['empresaId'] = Number(localStorage.getItem('empresa'));
             objArchivo['tipoArchivoId'] = listaTipoArchivos[0].id;
             objArchivo['url'] = response.originalUrl;

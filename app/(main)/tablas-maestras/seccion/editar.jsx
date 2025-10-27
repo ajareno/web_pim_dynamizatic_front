@@ -53,7 +53,7 @@ const EditarSeccion = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegis
             if (idEditar === 0) {
                 // Elimino y añado los campos que no se necesitan
                 delete objGuardar.id;
-                objGuardar['usuCreacion'] = usuarioActual;
+                objGuardar['usuarioCreacion'] = usuarioActual;
                 // Hacemos el insert del registro
                 const nuevoRegistro = await postSeccion(objGuardar);
 

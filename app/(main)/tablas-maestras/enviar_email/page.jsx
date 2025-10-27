@@ -144,7 +144,7 @@ const EnviarCorreoPlantilla = ({ }) => {
             delete objGuardar.nombreIdioma;
             delete objGuardar.archivos;
             objGuardar['cuerpo'] = contenidoWysiwyg;
-            objGuardar['usuCreacion'] = usuarioActual;
+            objGuardar['usuarioCreacion'] = usuarioActual;
             //objGuardar['accion'] = 'Enviar un email a usuarios';
             objGuardar['nombrePlantilla'] = correoPlantilla.nombrePlantilla + '-Temp';
             objGuardar['empresaId'] = Number(localStorage.getItem('empresa'));
@@ -278,7 +278,7 @@ const EnviarCorreoPlantilla = ({ }) => {
             }
             //Hace el insert en la tabla de archivos
             const objArchivo = {}
-            objArchivo['usuCreacion'] = usuario;
+            objArchivo['usuarioCreacion'] = usuario;
             objArchivo['empresaId'] = Number(localStorage.getItem('empresa'));
             objArchivo['tipoArchivoId'] = listaTipoArchivos[0].id;
             objArchivo['url'] = response.originalUrl;

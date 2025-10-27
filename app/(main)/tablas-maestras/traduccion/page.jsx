@@ -1,5 +1,5 @@
 "use client";
-import { getVistaTraduccionIdioma, getVistaTraduccionIdiomaCount, deleteTraduccion } from "@/app/api-endpoints/traduccion";
+import { getTraduccionLiterales, getTraduccionLiteralesCount, deleteTraduccionLiteral } from "@/app/api-endpoints/traduccion";
 import { getIdiomas } from "@/app/api-endpoints/idioma";
 import EditarTraduccion from "./editar";
 import Crud from "../../../components/shared/crud";
@@ -37,14 +37,13 @@ const Traduccion = () => {
         <div>
             <Crud
                 headerCrud={intl.formatMessage({ id: 'Traducciones' })}
-                getRegistros={getVistaTraduccionIdioma}
-                getRegistrosCount={getVistaTraduccionIdiomaCount}
+                getRegistros={getTraduccionLiterales}
+                getRegistrosCount={getTraduccionLiteralesCount}
                 botones={['nuevo','ver', 'editar', 'eliminar', 'descargarCSV']}
                 controlador={"Traducciones"}
-                //parametrosEliminar={['id', 'inglesId']}
                 editarComponente={<EditarTraduccion />}
                 columnas={columnas}
-                deleteRegistro={deleteTraduccion}
+                deleteRegistro={deleteTraduccionLiteral}
             />
         </div>
     );

@@ -1,44 +1,49 @@
-import { TraduccionControllerApi, IdiomaControllerApi, settings } from "@/app/api-nathalie";
+import { TraduccionLiteralControllerApi, IdiomaControllerApi, settings } from "@/app/api-nathalie";
 
-const apiTraduccion = new TraduccionControllerApi(settings)
+const apiTraduccion = new TraduccionLiteralControllerApi(settings)
 const apiIdioma = new IdiomaControllerApi(settings)
 
-export const getTraducciones = async () => {
-    const { data: dataTraducciones } = await apiTraduccion.traduccionControllerFind()
-    return dataTraducciones
+export const getTraduccionLiterales = async () => {
+    const { data: dataTraduccionLiterales } = await apiTraduccion.traduccionLiteralControllerFind()
+    return dataTraduccionLiterales
 }
 
-export const postTraduccion = async (objTraduccion) => {
-    const { data: dataTraduccion } = await apiTraduccion.traduccionControllerCreate(objTraduccion)
-    return dataTraduccion
+export const getTraduccionLiteralesCount = async () => {
+    const { data: dataTraduccionLiteralesCount } = await apiTraduccion.traduccionLiteralControllerCount()
+    return dataTraduccionLiteralesCount
 }
 
-export const patchTraduccion = async (idTraduccion, objTraduccion) => {
-    const { data: dataTraduccion } = await apiTraduccion.traduccionControllerUpdateById(idTraduccion, objTraduccion)
-    return dataTraduccion
+export const postTraduccionLiteral = async (objTraduccion) => {
+    const { data: dataTraduccionLiterales } = await apiTraduccion.traduccionLiteralControllerCreate(objTraduccion)
+    return dataTraduccionLiterales
 }
 
-export const deleteTraduccion = async (idTraduccion) => {
-    const { data: dataTraduccion } = await apiTraduccion.traduccionControllerDeleteById(idTraduccion)
-    return dataTraduccion
+export const patchTraduccionLiteral = async (idTraduccion, objTraduccion) => {
+    const { data: dataTraduccionLiterales } = await apiTraduccion.traduccionLiteralControllerUpdateById(idTraduccion, objTraduccion)
+    return dataTraduccionLiterales
 }
 
-export const getVistaTraduccionIdioma = async (filtrar) => {
-    const { data: dataTraducciones } = await apiTraduccion.traduccionControllerVistaTraduccionIdioma(filtrar)
-    return dataTraducciones
+export const deleteTraduccionLiteral = async (idTraduccion) => {
+    const { data: dataTraduccionLiterales } = await apiTraduccion.traduccionLiteralControllerDeleteById(idTraduccion)
+    return dataTraduccionLiterales
 }
 
-export const getVistaTraduccionIdiomaCount = async (filtrar) => {
-    const { data: dataTraducciones } = await apiTraduccion.traduccionControllerVistaTraduccionIdiomaCount(filtrar)
-    return dataTraducciones
+export const getVistaTraduccionLiteralIdioma = async (filtrar) => {
+    const { data: dataTraduccionLiterales } = await apiTraduccion.traduccionLiteralControllerVistaTraduccionIdioma(filtrar)
+    return dataTraduccionLiterales
 }
 
-export const buscaTraduccion = async (iso) => {
+export const getVistaTraduccionLiteralIdiomaCount = async (filtrar) => {
+    const { data: dataTraduccionLiterales } = await apiTraduccion.traduccionLiteralControllerVistaTraduccionIdiomaCount(filtrar)
+    return dataTraduccionLiterales
+}
+
+export const buscaTraduccionLiteral = async (iso) => {
     try {
-        const { data: dataTraduccion } = await apiTraduccion.traduccionControllerBuscarTraduccion(iso);
+        const { data: dataTraduccionLiterales } = await apiTraduccion.traduccionControllerBuscarTraduccionLiteral(iso);
         const newLanguageObj = {}; // {"Announcements": "Comunicados"}
-        
-        dataTraduccion?.forEach(traduccion => {
+
+        dataTraduccionLiterales?.forEach(traduccion => {
             if (traduccion?.valor?.length) {
                 newLanguageObj[`${traduccion.clave}`] = traduccion.valor;
             }

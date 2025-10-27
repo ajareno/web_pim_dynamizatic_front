@@ -1,4 +1,4 @@
-import { RolControllerApi, settings, PermisoControllerApi, EmpresaControllerApi, PruebaControllerApi } from "@/app/api-nathalie";
+import { RolControllerApi, settings, PermisoControllerApi, EmpresaControllerApi } from "@/app/api-nathalie";
 import { getUsuarioSesion } from "@/app/utility/Utils";
 const apiRol = new RolControllerApi(settings)
 const apiPermisos = new PermisoControllerApi(settings)
@@ -6,6 +6,11 @@ const apiEmpresa = new EmpresaControllerApi(settings)
 
 export const getRol= async (filtro) => {
     const { data: dataRoles } = await apiRol.rolControllerFind(filtro)
+    return dataRoles
+}
+
+export const getRolCount= async (filtro) => {
+    const { data: dataRoles } = await apiRol.rolControllerCount(filtro)
     return dataRoles
 }
 

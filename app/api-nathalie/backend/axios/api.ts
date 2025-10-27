@@ -98,7 +98,7 @@ export interface Archivo {
      * @type {number}
      * @memberof Archivo
      */
-    'usuCreacion': number;
+    'usuarioCreacion': number;
     /**
      * 
      * @type {number}
@@ -263,7 +263,7 @@ export interface ArchivoPartial {
      * @type {number}
      * @memberof ArchivoPartial
      */
-    'usuCreacion'?: number;
+    'usuarioCreacion'?: number;
     /**
      * 
      * @type {number}
@@ -348,7 +348,7 @@ export interface ArchivoWithRelations {
      * @type {number}
      * @memberof ArchivoWithRelations
      */
-    'usuCreacion': number;
+    'usuarioCreacion': number;
     /**
      * 
      * @type {number}
@@ -4117,7 +4117,7 @@ export interface Idioma {
      * @type {number}
      * @memberof Idioma
      */
-    'usuCreacion': number;
+    'usuarioCreacion': number;
     /**
      * 
      * @type {number}
@@ -4135,7 +4135,7 @@ export interface Idioma {
      * @type {number}
      * @memberof Idioma
      */
-    'usuInactivo'?: number | null;
+    'usuarioInactivo'?: number | null;
 }
 /**
  * 
@@ -4264,7 +4264,7 @@ export interface IdiomaPartial {
      * @type {number}
      * @memberof IdiomaPartial
      */
-    'usuCreacion'?: number;
+    'usuarioCreacion'?: number;
     /**
      * 
      * @type {number}
@@ -4282,7 +4282,7 @@ export interface IdiomaPartial {
      * @type {number}
      * @memberof IdiomaPartial
      */
-    'usuInactivo'?: number | null;
+    'usuarioInactivo'?: number | null;
 }
 /**
  * (tsType: IdiomaWithRelations, schemaOptions: { includeRelations: true })
@@ -4331,7 +4331,7 @@ export interface IdiomaWithRelations {
      * @type {number}
      * @memberof IdiomaWithRelations
      */
-    'usuCreacion': number;
+    'usuarioCreacion': number;
     /**
      * 
      * @type {number}
@@ -4349,7 +4349,7 @@ export interface IdiomaWithRelations {
      * @type {number}
      * @memberof IdiomaWithRelations
      */
-    'usuInactivo'?: number | null;
+    'usuarioInactivo'?: number | null;
 }
 /**
  * 
@@ -7104,7 +7104,7 @@ export interface MensajeTipo {
      * @type {number}
      * @memberof MensajeTipo
      */
-    'usuCreacion': number;
+    'usuarioCreacion': number;
     /**
      * 
      * @type {number}
@@ -7122,7 +7122,7 @@ export interface MensajeTipo {
      * @type {number}
      * @memberof MensajeTipo
      */
-    'usuInactivo'?: number | null;
+    'usuarioInactivo'?: number | null;
 }
 /**
  * 
@@ -7251,7 +7251,7 @@ export interface MensajeTipoPartial {
      * @type {number}
      * @memberof MensajeTipoPartial
      */
-    'usuCreacion'?: number;
+    'usuarioCreacion'?: number;
     /**
      * 
      * @type {number}
@@ -7269,7 +7269,7 @@ export interface MensajeTipoPartial {
      * @type {number}
      * @memberof MensajeTipoPartial
      */
-    'usuInactivo'?: number | null;
+    'usuarioInactivo'?: number | null;
 }
 /**
  * (tsType: MensajeTipoWithRelations, schemaOptions: { includeRelations: true })
@@ -7318,7 +7318,7 @@ export interface MensajeTipoWithRelations {
      * @type {number}
      * @memberof MensajeTipoWithRelations
      */
-    'usuCreacion': number;
+    'usuarioCreacion': number;
     /**
      * 
      * @type {number}
@@ -7336,7 +7336,7 @@ export interface MensajeTipoWithRelations {
      * @type {number}
      * @memberof MensajeTipoWithRelations
      */
-    'usuInactivo'?: number | null;
+    'usuarioInactivo'?: number | null;
 }
 /**
  * 
@@ -7798,7 +7798,7 @@ export interface NewArchivo {
      * @type {number}
      * @memberof NewArchivo
      */
-    'usuCreacion': number;
+    'usuarioCreacion': number;
     /**
      * 
      * @type {number}
@@ -8693,7 +8693,7 @@ export interface NewIdioma {
      * @type {number}
      * @memberof NewIdioma
      */
-    'usuCreacion': number;
+    'usuarioCreacion': number;
     /**
      * 
      * @type {number}
@@ -8711,7 +8711,7 @@ export interface NewIdioma {
      * @type {number}
      * @memberof NewIdioma
      */
-    'usuInactivo'?: number | null;
+    'usuarioInactivo'?: number | null;
 }
 /**
  * (tsType: Omit<LogAcceso, \'id\'>, schemaOptions: { title: \'NewLogAcceso\', exclude: [ \'id\' ] })
@@ -9338,7 +9338,7 @@ export interface NewMensajeTipo {
      * @type {number}
      * @memberof NewMensajeTipo
      */
-    'usuCreacion': number;
+    'usuarioCreacion': number;
     /**
      * 
      * @type {number}
@@ -9356,7 +9356,7 @@ export interface NewMensajeTipo {
      * @type {number}
      * @memberof NewMensajeTipo
      */
-    'usuInactivo'?: number | null;
+    'usuarioInactivo'?: number | null;
 }
 /**
  * (tsType: Omit<Multimedia, \'id\'>, schemaOptions: { title: \'NewMultimedia\', exclude: [ \'id\' ] })
@@ -9733,7 +9733,7 @@ export interface NewPlantillaEmail {
      * @type {number}
      * @memberof NewPlantillaEmail
      */
-    'usuCreacion': number;
+    'usuarioCreacion': number;
     /**
      * 
      * @type {number}
@@ -9751,7 +9751,7 @@ export interface NewPlantillaEmail {
      * @type {number}
      * @memberof NewPlantillaEmail
      */
-    'usuInactivo'?: number | null;
+    'usuarioInactivo'?: number | null;
 }
 /**
  * (tsType: Omit<Producto, \'id\'>, schemaOptions: { title: \'NewProducto\', exclude: [ \'id\' ] })
@@ -10281,7 +10281,7 @@ export interface NewRol {
      * @type {number}
      * @memberof NewRol
      */
-    'usuCreacion': number;
+    'usuarioCreacion': number;
     /**
      * 
      * @type {number}
@@ -10299,7 +10299,7 @@ export interface NewRol {
      * @type {number}
      * @memberof NewRol
      */
-    'usuInactivo'?: number | null;
+    'usuarioInactivo'?: number | null;
 }
 /**
  * (tsType: Omit<Seccion, \'id\'>, schemaOptions: { title: \'NewSeccion\', exclude: [ \'id\' ] })
@@ -10824,7 +10824,7 @@ export interface NewUsuario {
      * @type {number}
      * @memberof NewUsuario
      */
-    'usuCreacion': number;
+    'usuarioCreacion': number;
     /**
      * 
      * @type {number}
@@ -10842,7 +10842,7 @@ export interface NewUsuario {
      * @type {number}
      * @memberof NewUsuario
      */
-    'usuInactivo'?: number | null;
+    'usuarioInactivo'?: number | null;
 }
 /**
  * (tsType: Omit<UsuarioCredenciales, \'id\'>, schemaOptions: { title: \'NewUsuarioCredenciales\', exclude: [ \'id\' ] })
@@ -11965,7 +11965,7 @@ export interface PlantillaEmail {
      * @type {number}
      * @memberof PlantillaEmail
      */
-    'usuCreacion': number;
+    'usuarioCreacion': number;
     /**
      * 
      * @type {number}
@@ -11983,7 +11983,7 @@ export interface PlantillaEmail {
      * @type {number}
      * @memberof PlantillaEmail
      */
-    'usuInactivo'?: number | null;
+    'usuarioInactivo'?: number | null;
 }
 /**
  * 
@@ -12130,7 +12130,7 @@ export interface PlantillaEmailPartial {
      * @type {number}
      * @memberof PlantillaEmailPartial
      */
-    'usuCreacion'?: number;
+    'usuarioCreacion'?: number;
     /**
      * 
      * @type {number}
@@ -12148,7 +12148,7 @@ export interface PlantillaEmailPartial {
      * @type {number}
      * @memberof PlantillaEmailPartial
      */
-    'usuInactivo'?: number | null;
+    'usuarioInactivo'?: number | null;
 }
 /**
  * (tsType: PlantillaEmailWithRelations, schemaOptions: { includeRelations: true })
@@ -12215,7 +12215,7 @@ export interface PlantillaEmailWithRelations {
      * @type {number}
      * @memberof PlantillaEmailWithRelations
      */
-    'usuCreacion': number;
+    'usuarioCreacion': number;
     /**
      * 
      * @type {number}
@@ -12233,7 +12233,7 @@ export interface PlantillaEmailWithRelations {
      * @type {number}
      * @memberof PlantillaEmailWithRelations
      */
-    'usuInactivo'?: number | null;
+    'usuarioInactivo'?: number | null;
 }
 /**
  * 
@@ -14405,7 +14405,7 @@ export interface Rol {
      * @type {number}
      * @memberof Rol
      */
-    'usuCreacion': number;
+    'usuarioCreacion': number;
     /**
      * 
      * @type {number}
@@ -14423,7 +14423,7 @@ export interface Rol {
      * @type {number}
      * @memberof Rol
      */
-    'usuInactivo'?: number | null;
+    'usuarioInactivo'?: number | null;
 }
 /**
  * 
@@ -14564,7 +14564,7 @@ export interface RolPartial {
      * @type {number}
      * @memberof RolPartial
      */
-    'usuCreacion'?: number;
+    'usuarioCreacion'?: number;
     /**
      * 
      * @type {number}
@@ -14582,7 +14582,7 @@ export interface RolPartial {
      * @type {number}
      * @memberof RolPartial
      */
-    'usuInactivo'?: number | null;
+    'usuarioInactivo'?: number | null;
 }
 /**
  * (tsType: RolWithRelations, schemaOptions: { includeRelations: true })
@@ -14643,7 +14643,7 @@ export interface RolWithRelations {
      * @type {number}
      * @memberof RolWithRelations
      */
-    'usuCreacion': number;
+    'usuarioCreacion': number;
     /**
      * 
      * @type {number}
@@ -14661,7 +14661,7 @@ export interface RolWithRelations {
      * @type {number}
      * @memberof RolWithRelations
      */
-    'usuInactivo'?: number | null;
+    'usuarioInactivo'?: number | null;
 }
 /**
  * 
@@ -16880,7 +16880,7 @@ export interface Usuario {
      * @type {number}
      * @memberof Usuario
      */
-    'usuCreacion': number;
+    'usuarioCreacion': number;
     /**
      * 
      * @type {number}
@@ -16898,7 +16898,7 @@ export interface Usuario {
      * @type {number}
      * @memberof Usuario
      */
-    'usuInactivo'?: number | null;
+    'usuarioInactivo'?: number | null;
 }
 /**
  * 
@@ -17252,7 +17252,7 @@ export interface UsuarioPartial {
      * @type {number}
      * @memberof UsuarioPartial
      */
-    'usuCreacion'?: number;
+    'usuarioCreacion'?: number;
     /**
      * 
      * @type {number}
@@ -17270,7 +17270,7 @@ export interface UsuarioPartial {
      * @type {number}
      * @memberof UsuarioPartial
      */
-    'usuInactivo'?: number | null;
+    'usuarioInactivo'?: number | null;
 }
 /**
  * 
@@ -17661,7 +17661,7 @@ export interface UsuarioWithRelations {
      * @type {number}
      * @memberof UsuarioWithRelations
      */
-    'usuCreacion': number;
+    'usuarioCreacion': number;
     /**
      * 
      * @type {number}
@@ -17679,7 +17679,7 @@ export interface UsuarioWithRelations {
      * @type {number}
      * @memberof UsuarioWithRelations
      */
-    'usuInactivo'?: number | null;
+    'usuarioInactivo'?: number | null;
     /**
      * 
      * @type {UsuarioCredencialesWithRelations}

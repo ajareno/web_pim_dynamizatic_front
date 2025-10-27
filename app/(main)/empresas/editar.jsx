@@ -62,7 +62,7 @@ const EditarEmpresa = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegis
             if (idEditar === 0) {
                 // Elimino y añado los campos que no se necesitan
                 delete objGuardar.id;
-                objGuardar['usuCreacion'] = usuarioActual;
+                objGuardar['usuarioCreacion'] = usuarioActual;
                 objGuardar['tiempoInactividad'] = objGuardar.tiempoInactividad === null || objGuardar.tiempoInactividad === undefined || objGuardar.tiempoInactividad === "" ? 100 : objGuardar.tiempoInactividad;
                 
                 if (objGuardar.activoSn === '') {
@@ -87,7 +87,7 @@ const EditarEmpresa = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegis
                 }
             } else {
                 // Si se edita un registro existente, hacemos el patch del registro
-                objGuardar['usuModificacion'] = usuarioActual;
+                objGuardar['usuarioModificacion'] = usuarioActual;
                                 
                 if (objGuardar.activoSn === '') {
                     objGuardar.activoSn = 'S';

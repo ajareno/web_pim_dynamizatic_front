@@ -43,7 +43,7 @@ const EditarDatosRol = ({ rol, setRol, estadoGuardando, pantallasDashboard, pant
                         placeholder={intl.formatMessage({ id: 'Selecciona una pantalla de inicio' })} />
                 </div>
                 <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
-                    <label htmlFor="muestraEmpresa" className="font-bold block">{intl.formatMessage({ id: 'Muestra el nombre de la empresa' })}</label>
+                    <label htmlFor="muestraEmpresa" className="block">{intl.formatMessage({ id: 'Muestra el nombre de la empresa' })}</label>
                     <InputSwitch
                         checked={rol.muestraEmpresa === 'S'}
                         onChange={(e) => manejarCambioInputSwitch(e, "muestraEmpresa")}

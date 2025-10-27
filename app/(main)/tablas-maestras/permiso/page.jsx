@@ -243,7 +243,7 @@ const Permiso = () => {
                     modulo: "Nathalie",
                     controlador: partesPermiso[0],
                     accion: partesPermiso[1],
-                    usuCreacion: datosUsuario.id,
+                    usuarioCreacion: datosUsuario.id,
                 };
                 await postPermiso(emptyPermiso);
                 newSet.add(permiso);

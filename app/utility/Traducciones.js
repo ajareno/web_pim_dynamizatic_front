@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { IntlProvider } from 'react-intl';
-import { buscaTraduccion } from "@/app/api-endpoints/traduccion";
+import { buscaTraduccionLiteral } from "@/app/api-endpoints/traduccion";
 import { getIdiomaDefecto } from '../components/shared/componentes';
 
 const IntlProviderWrapper = ({ children }) => {
@@ -10,7 +10,7 @@ const IntlProviderWrapper = ({ children }) => {
 
     useEffect(() => {
         const fetchTranslations = async () => {
-            const traducciones = await buscaTraduccion(locale);
+            const traducciones = await buscaTraduccionLiteral(locale);
             setMessages(traducciones);
         };
 
