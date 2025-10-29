@@ -183,7 +183,7 @@ const Permiso = () => {
             setPermisos(registros);
 
             //Obtener los datos del usuario
-            const storedData = localStorage.getItem('userDataNathalie');
+            const storedData = localStorage.getItem('userData');
             const parsedData = JSON.parse(storedData);
             setDatosUsuario(parsedData);
 

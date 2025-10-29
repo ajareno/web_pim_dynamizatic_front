@@ -42,12 +42,12 @@ export function formatearFechaHoraDate(fecha) {
 
 // Retorna el token del usuario que esta logueado
 export function getAccessToken() {
-  return JSON.parse(localStorage.getItem('userDataNathalie'))?.accessToken
+  return JSON.parse(localStorage.getItem('userData'))?.accessToken
 }
 //Retorna un array de los datos del usuario que está logueado
 export function getUsuarioSesion() {
   if (typeof localStorage !== 'undefined') {
-    return JSON.parse(localStorage.getItem('userDataNathalie'));
+    return JSON.parse(localStorage.getItem('userData'));
   }
   return null;
 }

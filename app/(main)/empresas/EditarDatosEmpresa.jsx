@@ -11,12 +11,6 @@ import { useIntl } from 'react-intl';
 const EditarDatosEmpresa = ({ empresa, setEmpresa, estadoGuardando, isEdit }) => {
     const intl = useIntl();
 
-    // Opciones para el dropdown de activo
-    const opcionesActivo = [
-        { label: "Sí", value: "S" },
-        { label: "No", value: "N" }
-    ];
-
     const manejarCambioInputSwitch = (e, nombreInputSwitch) => {
         const valor = (e.target && e.target.value) || "";
         let _empresa = { ...empresa };

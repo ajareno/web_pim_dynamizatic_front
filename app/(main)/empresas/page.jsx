@@ -3,16 +3,9 @@ import { deleteEmpresa, getEmpresas, getEmpresasCount } from "@/app/api-endpoint
 import Crud from "../../components/shared/crud";
 import EditarEmpresa from "./editar";
 import { useIntl } from 'react-intl'
-import { useSearchParams } from "next/navigation";
-import { useRouter } from "next/navigation";
-import { getUsuarioSesion } from "@/app/utility/Utils";
-import { useState, useEffect, useRef } from "react";
 
 const Empresa = () => {
     const intl = useIntl();
-    const router = useRouter();
-    const searchParams = useSearchParams();
-    const [idEmpresa, setIdEmpresa] = useState(parseInt(searchParams.get("empresa") || "0"));
 
     const columnas = [
         { campo: 'codigo', header: intl.formatMessage({ id: 'Código' }), tipo: 'string' },
@@ -28,7 +21,7 @@ const Empresa = () => {
                 getRegistrosCount={getEmpresasCount}
                 botones={['nuevo', 'editar', 'eliminar', 'descargarCSV']}
                 controlador={"Empresas"}
-                registroEditar={idEmpresa}
+                empresaId={null}
                 editarComponente={<EditarEmpresa />}
                 seccion={"Empresa"}
                 columnas={columnas}

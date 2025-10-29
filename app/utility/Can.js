@@ -16,7 +16,7 @@ export const AbilityProvider = ({ children }) => {
             // Devuelve una promesa que resuelve a true o false dependiendo de si el usuario tiene permisos, hasta que no acabe no sigue el codigo
             return new Promise((resolve, reject) => {
                 // Obtener los datos del usuario
-                const storedData = localStorage.getItem('userDataNathalie');
+                const storedData = localStorage.getItem('userData');
                 const parsedData = JSON.parse(storedData);
     
                 // Llama a una funcion en la que se comprueba si el usuario tiene permisos

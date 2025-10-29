@@ -3,6 +3,7 @@ import { getIdiomas, getIdiomasCount, deleteIdioma } from "@/app/api-endpoints/i
 import EditarIdioma from "./editar";
 import Crud from "../../../components/shared/crud";
 import { useIntl } from 'react-intl'
+
 const Idioma = () => {
     const intl = useIntl();
 

@@ -22727,11 +22727,11 @@
             "format": "date-time",
             "nullable": true
           },
-          "usuCreacion": {
+          "usuarioCreacion": {
             "type": "number",
             "nullable": false
           },
-          "usuModificacion": {
+          "usuarioModificacion": {
             "type": "number",
             "nullable": true
           },
@@ -22741,7 +22741,7 @@
           }
         },
         "required": [
-          "usuCreacion"
+          "usuarioCreacion"
         ],
         "additionalProperties": false
       },
@@ -22776,11 +22776,11 @@
             "format": "date-time",
             "nullable": true
           },
-          "usuCreacion": {
+          "usuarioCreacion": {
             "type": "number",
             "nullable": false
           },
-          "usuModificacion": {
+          "usuarioModificacion": {
             "type": "number",
             "nullable": true
           },
@@ -22790,7 +22790,7 @@
           }
         },
         "required": [
-          "usuCreacion"
+          "usuarioCreacion"
         ],
         "additionalProperties": false,
         "x-typescript-type": "Omit<Empresa, 'id'>"
@@ -22830,11 +22830,11 @@
             "format": "date-time",
             "nullable": true
           },
-          "usuCreacion": {
+          "usuarioCreacion": {
             "type": "number",
             "nullable": false
           },
-          "usuModificacion": {
+          "usuarioModificacion": {
             "type": "number",
             "nullable": true
           },
@@ -22844,7 +22844,7 @@
           }
         },
         "required": [
-          "usuCreacion"
+          "usuarioCreacion"
         ],
         "additionalProperties": false,
         "x-typescript-type": "EmpresaWithRelations"
@@ -22884,11 +22884,11 @@
             "format": "date-time",
             "nullable": true
           },
-          "usuCreacion": {
+          "usuarioCreacion": {
             "type": "number",
             "nullable": false
           },
-          "usuModificacion": {
+          "usuarioModificacion": {
             "type": "number",
             "nullable": true
           },
@@ -27693,10 +27693,10 @@
                   "fechaModificacion": {
                     "type": "boolean"
                   },
-                  "usuCreacion": {
+                  "usuarioCreacion": {
                     "type": "boolean"
                   },
-                  "usuModificacion": {
+                  "usuarioModificacion": {
                     "type": "boolean"
                   },
                   "tiempoInactividad": {
@@ -27717,8 +27717,8 @@
                     "activoSn",
                     "fechaCreacion",
                     "fechaModificacion",
-                    "usuCreacion",
-                    "usuModificacion",
+                    "usuarioCreacion",
+                    "usuarioModificacion",
                     "tiempoInactividad"
                   ],
                   "example": "id"
@@ -27793,10 +27793,10 @@
                   "fechaModificacion": {
                     "type": "boolean"
                   },
-                  "usuCreacion": {
+                  "usuarioCreacion": {
                     "type": "boolean"
                   },
-                  "usuModificacion": {
+                  "usuarioModificacion": {
                     "type": "boolean"
                   },
                   "tiempoInactividad": {
@@ -27817,8 +27817,8 @@
                     "activoSn",
                     "fechaCreacion",
                     "fechaModificacion",
-                    "usuCreacion",
-                    "usuModificacion",
+                    "usuarioCreacion",
+                    "usuarioModificacion",
                     "tiempoInactividad"
                   ],
                   "example": "id"

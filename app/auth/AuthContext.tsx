@@ -133,7 +133,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   const almacenarLogin = async (data: any) => {
     localStorage.setItem(config.storageTokenKeyName, JSON.stringify(data.accessToken));
-    localStorage.setItem('userDataNathalie', JSON.stringify({ ...data }));
+    localStorage.setItem('userData', JSON.stringify({ ...data }));
     localStorage.setItem('empresa', data.empresaId);
 
     //Obtiene el idioma del usuario
@@ -143,14 +143,14 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     }
 
     //Obtiene el timer de la empresa del usuario
-    // const empresa = await getEmpresa(data.empresaId);
-    // if (empresa?.tiempoInactividad && empresa?.tiempoInactividad > 0) {
-    //   localStorage.setItem('tiempoDeEsperaInactividad', '' + empresa?.tiempoInactividad);
-    // }
-    // if (await compruebaRolUsuario({ ...data })) {
-    //   //Si tiene que mostrar la empresa, obtenemos el logo
-    //   // localStorage.setItem('logoEmpresaUrl', await obtenerLogoEmpresa());
-    // }
+    const empresa = await getEmpresa(data.empresaId);
+    if (empresa?.tiempoInactividad && empresa?.tiempoInactividad > 0) {
+      localStorage.setItem('tiempoDeEsperaInactividad', '' + empresa?.tiempoInactividad);
+    }
+    //if (await compruebaRolUsuario({ ...data })) {
+      //Si tiene que mostrar la empresa, obtenemos el logo
+      //localStorage.setItem('logoEmpresaUrl', await obtenerLogoEmpresa());
+    //}
 
     //Obtiene la ip del usuario usando la API de ipify, es de codigo abierto y tiene usos infinitos
     const response = await fetch('https://api.ipify.org?format=json');
@@ -211,7 +211,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   const logout = (mensaje?: string) => {
     // Registrar el logout antes de limpiar los datos
-    const userData = localStorage.getItem('userDataNathalie');
+    const userData = localStorage.getItem('userData');
     if (userData) {
       try {
         const user = JSON.parse(userData);

@@ -3451,13 +3451,13 @@ export interface Empresa {
      * @type {number}
      * @memberof Empresa
      */
-    'usuCreacion': number;
+    'usuarioCreacion': number;
     /**
      * 
      * @type {number}
      * @memberof Empresa
      */
-    'usuModificacion'?: number | null;
+    'usuarioModificacion'?: number | null;
     /**
      * 
      * @type {number}
@@ -3598,13 +3598,13 @@ export interface EmpresaPartial {
      * @type {number}
      * @memberof EmpresaPartial
      */
-    'usuCreacion'?: number;
+    'usuarioCreacion'?: number;
     /**
      * 
      * @type {number}
      * @memberof EmpresaPartial
      */
-    'usuModificacion'?: number | null;
+    'usuarioModificacion'?: number | null;
     /**
      * 
      * @type {number}
@@ -3665,13 +3665,13 @@ export interface EmpresaWithRelations {
      * @type {number}
      * @memberof EmpresaWithRelations
      */
-    'usuCreacion': number;
+    'usuarioCreacion': number;
     /**
      * 
      * @type {number}
      * @memberof EmpresaWithRelations
      */
-    'usuModificacion'?: number | null;
+    'usuarioModificacion'?: number | null;
     /**
      * 
      * @type {number}
@@ -9008,13 +9008,13 @@ export interface NewEmpresa {
      * @type {number}
      * @memberof NewEmpresa
      */
-    'usuCreacion': number;
+    'usuarioCreacion': number;
     /**
      * 
      * @type {number}
      * @memberof NewEmpresa
      */
-    'usuModificacion'?: number | null;
+    'usuarioModificacion'?: number | null;
     /**
      * 
      * @type {number}
@@ -11284,11 +11284,17 @@ export interface NewTraduccionContenido {
     'usuarioModificacion'?: number | null;
 }
 /**
- * (tsType: Omit<TraduccionLiteral, \'id\'>, schemaOptions: { title: \'NewTraduccionLiteral\', exclude: [ \'id\' ] })
+ * (tsType: TraduccionLiteral, schemaOptions: { title: \'NewTraduccionLiteral\' })
  * @export
  * @interface NewTraduccionLiteral
  */
 export interface NewTraduccionLiteral {
+    /**
+     * 
+     * @type {number}
+     * @memberof NewTraduccionLiteral
+     */
+    'id'?: number;
     /**
      * 
      * @type {string}
