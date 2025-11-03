@@ -2,15 +2,46 @@ import React from "react";
 import { Fieldset } from 'primereact/fieldset';
 import { InputText } from 'primereact/inputtext';
 import { InputTextarea } from 'primereact/inputtextarea';
-import { Dropdown } from 'primereact/dropdown';
+import ArchivoMultipleInput from "../../components/shared/archivo_multiple_input";
+import ArchivoInput from "../../components/shared/archivo_input";
 import { InputNumber } from 'primereact/inputnumber';
 import { Password } from 'primereact/password';
 import { InputSwitch } from 'primereact/inputswitch';
 import { useIntl } from 'react-intl';
 
-const EditarDatosEmpresa = ({ empresa, setEmpresa, estadoGuardando, isEdit }) => {
+const EditarDatosEmpresa = ({ empresa, setEmpresa, estadoGuardando, isEdit, listaTipoArchivos }) => {
     const intl = useIntl();
-
+    //Crear inputs de archivos
+    const inputsDinamicos = [];
+    for (const tipoArchivo of listaTipoArchivos) {
+        //Depende del tipo del input se genera multiple o no
+        if (tipoArchivo.multiple === 'S') {
+            inputsDinamicos.push(
+                <div className="flex flex-column field gap-2 mt-2 col-12">
+                    <label>{tipoArchivo.nombre}</label>
+                    <ArchivoMultipleInput
+                        registro={empresa}
+                        setRegistro={setEmpresa}
+                        archivoTipo={tipoArchivo.tipo}
+                        campoNombre={(tipoArchivo.nombre).toLowerCase()}
+                    />
+                </div>
+            );
+        }
+        else {
+            inputsDinamicos.push(
+                <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
+                    <ArchivoInput
+                        registro={empresa}
+                        setRegistro={setEmpresa}
+                        archivoTipo={tipoArchivo.tipo}
+                        archivoHeader={tipoArchivo.nombre}
+                        campoNombre={(tipoArchivo.nombre).toLowerCase()}
+                    />
+                </div>
+            );
+        }
+    }
     const manejarCambioInputSwitch = (e, nombreInputSwitch) => {
         const valor = (e.target && e.target.value) || "";
         let _empresa = { ...empresa };
@@ -71,7 +102,9 @@ const EditarDatosEmpresa = ({ empresa, setEmpresa, estadoGuardando, isEdit }) =>
                         disabled={estadoGuardando}
                     />
                 </div>
-                
+                {
+                    ...inputsDinamicos //Muestra las inputs generados
+                }
                 <div className="flex flex-column field gap-2 mt-2 col-12">
                     <label htmlFor="descripcion">{intl.formatMessage({ id: 'Descripción' })}</label>
                     <InputTextarea 

@@ -4,6 +4,8 @@ import { Toast } from "primereact/toast";
 import { Divider } from "primereact/divider";
 import { Button } from "primereact/button";
 import { getEmpresa, postEmpresa, patchEmpresa } from "@/app/api-endpoints/empresa";
+import { borrarFichero, postSubirImagen, postSubirFichero } from "@/app/api-endpoints/ficheros"
+import { postArchivo, deleteArchivo } from "@/app/api-endpoints/archivo"
 import EditarDatosEmpresa from "./EditarDatosEmpresa";
 import 'primeicons/primeicons.css';
 import { getUsuarioSesion } from "@/app/utility/Utils";
@@ -22,6 +24,7 @@ const EditarEmpresa = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegis
     const [estadoGuardando, setEstadoGuardando] = useState(false);
     const [estadoGuardandoBoton, setEstadoGuardandoBoton] = useState(false);
     const [isEdit, setIsEdit] = useState(false);
+    const [listaTipoArchivosAntiguos, setListaTipoArchivosAntiguos] = useState([]);
 
     useEffect(() => {
          //
@@ -34,16 +37,49 @@ const EditarEmpresa = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegis
                 // Obtenemos el registro a editar
                 const registro = rowData.find((element) => element.id === idEditar);
                 setEmpresa(registro);
+                
+                //Guardamos los archivos para luego poder compararlos
+                const _listaArchivosAntiguos = {}
+                for (const tipoArchivo of listaTipoArchivos) {
+                    _listaArchivosAntiguos[tipoArchivo['nombre']] = registro[(tipoArchivo.nombre).toLowerCase()]
+                }
+                setListaTipoArchivosAntiguos(_listaArchivosAntiguos)
             }
         };
         fetchData();
     }, [idEditar, rowData]);  
 
+    const validacionesImagenes = () => {
+        for (const tipoArchivo of listaTipoArchivos) {
+            //Comprueba si el tipo de archivo es una imagen para validar su extension
+            if ((tipoArchivo.tipo).toLowerCase() === 'imagen') {
+                //Comprueba que el input haya sido modificado
+                if (empresa[(tipoArchivo.nombre).toLowerCase()]?.type !== undefined) {
+                    //Comprueba que la imagen es del tipo valido
+                    const allowedTypes = ["image/jpeg", "image/png", "image/webp", "image/tiff", "image/avif"];
+                    if (!(allowedTypes.includes(empresa[(tipoArchivo.nombre).toLowerCase()].type))) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
     const validaciones = async () => {
         // Valida que los campos obligatorios no estén vacíos
         const validaCodigo = empresa.codigo === undefined || empresa.codigo === "";
         const validaNombre = empresa.nombre === undefined || empresa.nombre === "";
-        
+        const validaImagenes = validacionesImagenes();
+
+        if (validaImagenes) {
+            toast.current?.show({
+                severity: 'error',
+                summary: 'ERROR',
+                detail: intl.formatMessage({ id: 'Las imagenes deben de tener el formato correcto' }),
+                life: 3000,
+            });
+        }
         
         // Si existe algún campo obligatorio vacío, no se puede guardar
         return (!validaCodigo && !validaNombre);
@@ -62,6 +98,11 @@ const EditarEmpresa = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegis
             if (idEditar === 0) {
                 // Elimino y añado los campos que no se necesitan
                 delete objGuardar.id;
+                delete objGuardar.imagen
+                delete objGuardar.imagenId
+                delete objGuardar.logo
+                delete objGuardar.logoId
+
                 objGuardar['usuarioCreacion'] = usuarioActual;
                 objGuardar['tiempoInactividad'] = objGuardar.tiempoInactividad === null || objGuardar.tiempoInactividad === undefined || objGuardar.tiempoInactividad === "" ? 100 : objGuardar.tiempoInactividad;
                 
@@ -74,6 +115,13 @@ const EditarEmpresa = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegis
 
                 // Si se crea el registro mostramos el toast
                 if (nuevoRegistro?.id) {
+                    //Sube las imagenes al servidor
+                    for (const tipoArchivo of listaTipoArchivos) {
+                        //Comprueba que el input haya sido modificado
+                        if (empresa[(tipoArchivo.nombre).toLowerCase()]?.type !== undefined) {
+                            await insertarArchivo(empresa, nuevoRegistro.id, tipoArchivo, seccion, usuarioActual)
+                        }
+                    }
                     // Usamos una variable que luego se cargará en el useEffect de la página principal para mostrar el toast
                     setRegistroResult("insertado");
                     setIdEditar(null);
@@ -87,13 +135,19 @@ const EditarEmpresa = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegis
                 }
             } else {
                 // Si se edita un registro existente, hacemos el patch del registro
-                objGuardar['usuarioModificacion'] = usuarioActual;
-                                
-                if (objGuardar.activoSn === '') {
-                    objGuardar.activoSn = 'S';
-                }
+
+                const empresaAeditar = {
+                    id: objGuardar.id,
+                    codigo: objGuardar.codigo,
+                    nombre: objGuardar.nombre,
+                    descripcion: objGuardar.descripcion,
+                    tiempoInactividad: objGuardar.tiempoInactividad || 0,
+                    activoSn: objGuardar.activoSn || 'N',
+                    usuarioModificacion: usuarioActual,
+                };
                 
-                await patchEmpresa(objGuardar.id, objGuardar);
+                await patchEmpresa(objGuardar.id, empresaAeditar);
+                await editarArchivos(empresa, objGuardar.id, seccion, usuarioActual)
                 setIdEditar(null);
                 setRegistroResult("editado");
             }
@@ -111,6 +165,64 @@ const EditarEmpresa = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegis
         setEstadoGuardando(false);
     };
 
+    //Compara los archivos del registro antes de ser editado para actualizar los archivos
+    const editarArchivos = async (registro, id, seccion, usuario) => {
+        for (const tipoArchivo of listaTipoArchivos) {
+            //Comprueba que si ha añadido una imagen
+            if (registro[(tipoArchivo.nombre).toLowerCase()]?.type !== undefined) {
+                //Si ya existia antes una imagen, hay que eliminarla junto a su version redimensionada
+                if (listaTipoArchivosAntiguos[tipoArchivo['nombre']] !== null) {
+                    await borrarFichero(listaTipoArchivosAntiguos[tipoArchivo['nombre']]);
+                    await deleteArchivo(registro[`${(tipoArchivo.nombre).toLowerCase()}Id`]);
+                    //Tambien borra la version sin redimensionar
+                    if ((tipoArchivo.tipo).toLowerCase() === 'imagen') {
+                        const url = (listaTipoArchivosAntiguos[tipoArchivo['nombre']]).replace(/(\/[^\/]+\/)1250x850_([^\/]+\.\w+)$/, '$1$2');
+                        await borrarFichero(url);
+                    }
+
+                }
+                //Se inserta la imagen modificada
+                await insertarArchivo(registro, id, tipoArchivo, seccion, usuario)
+            }
+            else {
+                //Si ya existia antes una imagen, hay que eliminarla junto a su version redimensionada
+                if (listaTipoArchivosAntiguos[tipoArchivo['nombre']] !== null && registro[(tipoArchivo.nombre).toLowerCase()] === null) {
+                    await borrarFichero(listaTipoArchivosAntiguos[tipoArchivo['nombre']]);
+                    await deleteArchivo(registro[`${(tipoArchivo.nombre).toLowerCase()}Id`]);
+                    //Tambien borra la version sin redimensionar
+                    if ((tipoArchivo.tipo).toLowerCase() === 'imagen') {
+                        const url = (listaTipoArchivosAntiguos[tipoArchivo['nombre']]).replace(/(\/[^\/]+\/)1250x850_([^\/]+\.\w+)$/, '$1$2');
+                        await borrarFichero(url);
+                    }
+                }
+            }
+        }
+    };
+
+    const insertarArchivo = async (registro, id, tipoArchivo, seccion, usuario) => {
+        await postSubirImagen(seccion, registro[(tipoArchivo.nombre).toLowerCase()].name, registro[(tipoArchivo.nombre).toLowerCase()]);
+        //Comprueba que el input haya sido modificado
+        if (registro[(tipoArchivo.nombre).toLowerCase()]?.type !== undefined) {
+            //Comprueba si el tipo de archivo es una imagen para la subida
+            let response = null;
+            if ((tipoArchivo.tipo).toLowerCase() === 'imagen') {
+                response = await postSubirImagen(seccion, empresa[(tipoArchivo.nombre).toLowerCase()].name, registro[(tipoArchivo.nombre).toLowerCase()]);
+            }
+            else {
+                response = await postSubirFichero(seccion, registro[(tipoArchivo.nombre).toLowerCase()].name, registro[(tipoArchivo.nombre).toLowerCase()]);
+            }
+            //Hace el insert en la tabla de archivos
+            const objArchivo = {}
+            objArchivo['usuarioCreacion'] = usuario;
+            objArchivo['empresaId'] = id;
+            objArchivo['tipoArchivoId'] = tipoArchivo.id;
+            objArchivo['url'] = response.originalUrl;
+            objArchivo['idTabla'] = id;
+            objArchivo['tabla'] = seccion.toLowerCase();
+            await postArchivo(objArchivo);
+        }
+    }
+
     const cancelarEdicion = () => {
         setIdEditar(null);
     };
@@ -127,6 +239,7 @@ const EditarEmpresa = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegis
                         <EditarDatosEmpresa
                             empresa={empresa}
                             setEmpresa={setEmpresa}
+                            listaTipoArchivos={listaTipoArchivos}
                             estadoGuardando={estadoGuardando}
                             isEdit={isEdit}
                         />

@@ -11208,13 +11208,13 @@ export interface NewTipoArchivo {
      * @type {number}
      * @memberof NewTipoArchivo
      */
-    'usuCreacion': number;
+    'usuarioCreacion': number;
     /**
      * 
      * @type {number}
      * @memberof NewTipoArchivo
      */
-    'usuModificacion'?: number | null;
+    'usuarioModificacion'?: number | null;
     /**
      * 
      * @type {string}
@@ -16313,13 +16313,13 @@ export interface TipoArchivo {
      * @type {number}
      * @memberof TipoArchivo
      */
-    'usuCreacion': number;
+    'usuarioCreacion': number;
     /**
      * 
      * @type {number}
      * @memberof TipoArchivo
      */
-    'usuModificacion'?: number | null;
+    'usuarioModificacion'?: number | null;
     /**
      * 
      * @type {string}
@@ -16472,13 +16472,13 @@ export interface TipoArchivoPartial {
      * @type {number}
      * @memberof TipoArchivoPartial
      */
-    'usuCreacion'?: number;
+    'usuarioCreacion'?: number;
     /**
      * 
      * @type {number}
      * @memberof TipoArchivoPartial
      */
-    'usuModificacion'?: number | null;
+    'usuarioModificacion'?: number | null;
     /**
      * 
      * @type {string}
@@ -16551,13 +16551,13 @@ export interface TipoArchivoWithRelations {
      * @type {number}
      * @memberof TipoArchivoWithRelations
      */
-    'usuCreacion': number;
+    'usuarioCreacion': number;
     /**
      * 
      * @type {number}
      * @memberof TipoArchivoWithRelations
      */
-    'usuModificacion'?: number | null;
+    'usuarioModificacion'?: number | null;
     /**
      * 
      * @type {string}

@@ -10,7 +10,10 @@ const Empresa = () => {
     const columnas = [
         { campo: 'codigo', header: intl.formatMessage({ id: 'Código' }), tipo: 'string' },
         { campo: 'nombre', header: intl.formatMessage({ id: 'Nombre' }), tipo: 'string' },
-        { campo: 'activoSn', header: intl.formatMessage({ id: 'Activo' }), tipo: 'booleano' },
+        { campo: 'activoSn', header: intl.formatMessage({ id: 'Activo' }), tipo: 'booleano' },      
+        { campo: 'logo', header: intl.formatMessage({ id: 'Logo' }), tipo: 'imagen' },
+        { campo: 'imagen', header: intl.formatMessage({ id: 'Imagen' }), tipo: 'imagen' },
+
     ]
     
     return (

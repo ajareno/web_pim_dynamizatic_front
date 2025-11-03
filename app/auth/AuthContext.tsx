@@ -84,43 +84,58 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
           label: "Archivos",
           icon: "pi pi-fw pi-user-edit",
           to: "/tablas-maestras/archivo"
-          },{
+          },
+        {
           label: "Enviar email",
           icon: "pi pi-fw pi-user-edit",
           to: "/tablas-maestras/enviar-email"
-        },{
+        },
+        {
           label: "Idiomas",
           icon: "pi pi-fw pi-user-edit",
           to: "/tablas-maestras/idioma"
-        },{
+        },
+        {
           label: "Logs de acceso",
           icon: "pi pi-fw pi-user-edit",
           to: "/tablas-maestras/log-acceso"
-        },{
+        },
+        {
           label: "Permisos",
           icon: "pi pi-fw pi-user-edit",
           to: "/tablas-maestras/permiso"
-        },{
+        },
+        {
           label: "Planificador de categorias",
           icon: "pi pi-fw pi-user-edit",
           to: "/tablas-maestras/planificador-categorias"
-        },{
+        },
+        {
           label: "Planificador de estados",
           icon: "pi pi-fw pi-user-edit",
           to: "/tablas-maestras/planificador-estados"
-        },{
+        },
+        {
           label: "Plantillas de email",
           icon: "pi pi-fw pi-user-edit",
           to: "/tablas-maestras/plantillas-email"
-        },{
+        },
+        {
           label: "Roles",
           icon: "pi pi-fw pi-user-edit",
           to: "/tablas-maestras/rol"
-        },{
+        },
+        {
           label: "Sección",
           icon: "pi pi-fw pi-user-edit",
           to: "/tablas-maestras/seccion"
-        },{
+        },
+        {
+          label: "Tipos de archivo",
+          icon: "pi pi-fw pi-file",
+          to: "/tablas-maestras/tipo_archivo"
+        },
+        {
           label: "Traducción",
           icon: "pi pi-fw pi-user-edit",
           to: "/tablas-maestras/traduccion"

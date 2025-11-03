@@ -169,6 +169,14 @@ const Permiso = () => {
                 { header: intl.formatMessage({ id: 'Actualizar' }), seccion: 'Calendario-Actualizar' },
                 { header: intl.formatMessage({ id: 'Borrar' }), seccion: 'Calendario-Borrar' },
 
+                // Tipos de archivo
+                { header: intl.formatMessage({ id: 'Tipos de archivo' }), seccion: 'Tipos de archivo' },
+                { header: intl.formatMessage({ id: 'Acceder' }), seccion: 'Tipos de archivo-Acceder' },
+                { header: intl.formatMessage({ id: 'Ver' }), seccion: 'Tipos de archivo-Ver' },
+                { header: intl.formatMessage({ id: 'Nuevo' }), seccion: 'Tipos de archivo-Nuevo' },
+                { header: intl.formatMessage({ id: 'Actualizar' }), seccion: 'Tipos de archivo-Actualizar' },
+                { header: intl.formatMessage({ id: 'Borrar' }), seccion: 'Tipos de archivo-Borrar' },
+
             ];
 
 

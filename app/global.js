@@ -77,13 +77,20 @@ const AutoLogout = () => {
         return; // Sale si la sesión no es válida
       }
       //
-      // Tiempo de inactividad permitido en milisegundos. Como mínimo 5 minutos
+      // Calcular la fecha futura de logout por inactividad
       //
-      let inactivityTimeout = 5 * 60 * 1000; 
+      let minutosInactividad = 5; // Por defecto 5 minutos
       const tiempoEsperaMinutos = localStorage.getItem('tiempoDeEsperaInactividad')
       if (localStorage.getItem('tiempoDeEsperaInactividad')) {
-        inactivityTimeout = tiempoEsperaMinutos * 60 * 1000; // -> minutos * 60 segundos * 1000 milisegundos
+        minutosInactividad = parseInt(tiempoEsperaMinutos); // Convertir a número
       }
+      
+      // Calcular fecha futura de logout (fecha actual + minutos de inactividad)
+      const fechaLogout = new Date();
+      fechaLogout.setMinutes(fechaLogout.getMinutes() + minutosInactividad);
+      
+      // Calcular cuántos milisegundos faltan hasta esa fecha
+      const milisegundosHastaLogout = fechaLogout.getTime() - Date.now();
       //
       // Limpia el temporizador existente
       //
@@ -91,7 +98,7 @@ const AutoLogout = () => {
         clearTimeout(timeoutId.current);
       }
       //
-      // Inicia un nuevo temporizador
+      // Inicia un nuevo temporizador basado en fecha futura
       //
       timeoutId.current = setTimeout(() => {
         //
@@ -108,7 +115,7 @@ const AutoLogout = () => {
         }).then(() => {
           logout()
         });
-      }, inactivityTimeout);
+      }, milisegundosHastaLogout);
 
     };
     //

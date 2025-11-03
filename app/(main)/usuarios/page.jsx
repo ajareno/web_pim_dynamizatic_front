@@ -14,8 +14,7 @@ const Usuario = () => {
     const searchParams = useSearchParams();
     const [idUsuario, setIdUsuario] = useState(parseInt(searchParams.get("usuario") || localStorage.getItem("usuarioId")));
 
-    const columnas = [
-        
+    const columnas = [        
         { campo: 'rol_id', header: intl.formatMessage({ id: 'Rol' }), tipo: 'string' },
         { campo: 'nombre', header: intl.formatMessage({ id: 'Nombre' }), tipo: 'string' },
         { campo: 'mail', header: intl.formatMessage({ id: 'Email' }), tipo: 'string' },
@@ -23,21 +22,39 @@ const Usuario = () => {
     ]
     return (
         <div>
-            <Crud
-                headerCrud={intl.formatMessage({ id: 'Usuarios' })}
-                getRegistros={getUsuarios}
-                getRegistrosCount={getUsuariosCount}
-                botones={['nuevo', 'editar', 'eliminar', 'descargarCSV']}
-                filtradoBase={{
-                    empresa_id: Number(localStorage.getItem('empresa'))
-                }}
-                controlador={"Usuarios"}
-                registroEditar={idUsuario}
-                editarComponente={<EditarUsuario />}
-                seccion={"Usuario"}
-                columnas={columnas}
-                deleteRegistro={deleteUsuario}
-            />
+            {(!isNaN(idUsuario) && idUsuario > 0) && (
+                <Crud
+                    headerCrud={intl.formatMessage({ id: 'Usuarios' })}
+                    getRegistros={getUsuarios}
+                    getRegistrosCount={getUsuariosCount}
+                    botones={['nuevo', 'editar', 'eliminar', 'descargarCSV']}
+                    filtradoBase={{
+                        empresa_Id: Number(localStorage.getItem('empresa'))
+                    }}
+                    controlador={"Usuarios"}
+                    registroEditar={idUsuario}
+                    editarComponente={<EditarUsuario />}
+                    seccion={"Usuario"}
+                    columnas={columnas}
+                    deleteRegistro={deleteUsuario}
+                />
+            )}
+            {(isNaN(idUsuario) && searchParams.get("usuario") == null && localStorage.getItem("usuarioId") == null) &&
+                <Crud
+                    headerCrud={intl.formatMessage({ id: 'Usuarios' })}
+                    getRegistros={getUsuarios}
+                    getRegistrosCount={getUsuariosCount}
+                    botones={['nuevo', 'ver', 'editar', 'eliminar', 'descargarCSV', 'enviarCorreo']}
+                    filtradoBase={{
+                        empresa_Id: Number(localStorage.getItem('empresa'))
+                    }}
+                    controlador={"Usuarios"}
+                    editarComponente={<EditarUsuario />}
+                    seccion={"Usuario"}
+                    columnas={columnas}
+                    deleteRegistro={deleteUsuario}
+                />
+            }
         </div>
     );
 };
