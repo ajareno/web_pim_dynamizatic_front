@@ -15,10 +15,13 @@ const Usuario = () => {
     const [idUsuario, setIdUsuario] = useState(parseInt(searchParams.get("usuario") || localStorage.getItem("usuarioId")));
 
     const columnas = [        
-        { campo: 'rol_id', header: intl.formatMessage({ id: 'Rol' }), tipo: 'string' },
+        {campo: 'avatar', header:  intl.formatMessage({ id: 'Avatar' }), tipo: 'imagen'},
         { campo: 'nombre', header: intl.formatMessage({ id: 'Nombre' }), tipo: 'string' },
+        { campo: 'nombreRol', header: intl.formatMessage({ id: 'Rol' }), tipo: 'string' },
+        { campo: 'nombreIdioma', header: intl.formatMessage({ id: 'Idioma' }), tipo: 'string' },
         { campo: 'mail', header: intl.formatMessage({ id: 'Email' }), tipo: 'string' },
         { campo: 'telefono', header: intl.formatMessage({ id: 'Telefono' }), tipo: 'string' },
+        { campo: 'activoSn', header: intl.formatMessage({ id: 'Activo' }), tipo: 'booleano' },
     ]
     return (
         <div>
@@ -29,7 +32,7 @@ const Usuario = () => {
                     getRegistrosCount={getUsuariosCount}
                     botones={['nuevo', 'editar', 'eliminar', 'descargarCSV']}
                     filtradoBase={{
-                        empresa_Id: Number(localStorage.getItem('empresa'))
+                        empresaId: Number(localStorage.getItem('empresa'))
                     }}
                     controlador={"Usuarios"}
                     registroEditar={idUsuario}
@@ -44,9 +47,9 @@ const Usuario = () => {
                     headerCrud={intl.formatMessage({ id: 'Usuarios' })}
                     getRegistros={getUsuarios}
                     getRegistrosCount={getUsuariosCount}
-                    botones={['nuevo', 'ver', 'editar', 'eliminar', 'descargarCSV', 'enviarCorreo']}
+                    botones={['nuevo', 'ver', 'editar', 'eliminar', 'descargarCSV']}
                     filtradoBase={{
-                        empresa_Id: Number(localStorage.getItem('empresa'))
+                        empresaId: Number(localStorage.getItem('empresa'))
                     }}
                     controlador={"Usuarios"}
                     editarComponente={<EditarUsuario />}

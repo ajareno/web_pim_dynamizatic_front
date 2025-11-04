@@ -93,7 +93,7 @@ export const obtenerRolDashboard = async () => {
             },
         };
         const rol = await getVistaEmpresaRol(JSON.stringify(queryParamsRol));
-        return rol[0].dashboardUrl || '/';
+        return (rol && rol.length > 0) ? (rol[0].dashboardUrl || '/') : '/';
     }
     return '/';
 

@@ -574,13 +574,6 @@ const Crud = ({ getRegistros, getRegistrosCount, botones, columnas, deleteRegist
 
     const botonesDeAccionTemplate = (rowData) => {
 
-        // Un examen se considera "realizado" si ya existe intento o nota/fecha
-        const realizado =
-            (rowData.puntuacion_final && String(rowData.puntuacion_final).length > 0) ||
-            (rowData.puntuacionFinal && String(rowData.puntuacionFinal).length > 0) ||
-            !!rowData.fecha_realizacion ||
-            !!rowData.fechaRealizacion;
-
         return (
             <>
                 {((botones.includes('ver') && puedeVer)) && (
@@ -611,19 +604,7 @@ const Crud = ({ getRegistros, getRegistrosCount, botones, columnas, deleteRegist
                         severity="warning"
                         onClick={() => confirmarEliminarRegistro(rowData)}
                     />
-                )}
-                {(botones.includes('realizar') && puedeRealizar) && (
-                    <Button
-                        icon={realizado ? "pi pi-eye" : "pi pi-pencil"}
-                        rounded
-                        title={intl.formatMessage({ id: realizado ? 'Revisar Examen' : 'Realizar Examen' })}
-                        severity={realizado ? 'info' : 'success'}
-                        onClick={() => realizarRegistro(rowData)}
-                    />
-                )}
-
-
-
+                )}                
             </>
         );
     };

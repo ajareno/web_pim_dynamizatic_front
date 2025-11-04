@@ -158,8 +158,8 @@ const obtenerTodosLosPermisos = async () => {
     // const permisos = await getVistaEmpresaRolPermiso(JSON.stringify({
     //     where: {
     //         and: {
-    //             rol_id: usuario.rolId,
-    //             permiso_accion: accion
+    //             rolId: usuario.rolId,
+    //             permisoAccion: accion
     //         }
     //     }
     // }));

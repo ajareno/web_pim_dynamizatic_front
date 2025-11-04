@@ -38,7 +38,7 @@ const Permiso = () => {
     }, []);
 
     let emptyPermiso = {
-        rol_id: "",
+        rolId: "",
         modulo: "Nathalie",
         controlador: "",
         accion: "",
@@ -199,7 +199,7 @@ const Permiso = () => {
             const permisosMarcados = await getVistaEmpresaRolPermiso();
             // Crear un nuevo conjunto con el formato especificado
             const permisosSet = new Set(permisosMarcados.map(permisoMarcado =>
-                `${permisoMarcado.permiso_controlador}-${permisoMarcado.permiso_accion}-${permisoMarcado.rol_nombre}-${permisoMarcado.permiso_id}`
+                `${permisoMarcado.permisoControlador}-${permisoMarcado.permisoAccion}-${permisoMarcado.rolNombre}-${permisoMarcado.permisoId}`
             ));
             //setListaPermisosMarcados(new Set([ ...permisosSet]));
             setListaPermisosMarcados(permisosSet);

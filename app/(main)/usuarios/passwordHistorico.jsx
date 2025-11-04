@@ -7,7 +7,7 @@ const PasswordHistorico = ({usuarioId}) => {
     const intl = useIntl()
     const columnas = [
         { campo: 'password', header: intl.formatMessage({ id: 'Contraseña' }), tipo: 'string' },
-        { campo: 'fecha_creacion', header: intl.formatMessage({ id: 'Fecha' }), tipo: 'fechaHora' },
+        { campo: 'fechaCreacion', header: intl.formatMessage({ id: 'Fecha' }), tipo: 'fechaHora' },
     ]
 
 
@@ -19,7 +19,7 @@ const PasswordHistorico = ({usuarioId}) => {
                 getRegistros={getUsuarioPasswordHistoricos}
                 getRegistrosCount={getUsuarioPasswordHistoricosCount}
                 botones={['descargarCSV']}
-                filtradoBase={{ usuario_id:  usuarioId}}
+                filtradoBase={{ usuarioId:  usuarioId}}
                 columnas={columnas}
                 //deleteRegistro={deleteArchivo}
             />
