@@ -2,12 +2,8 @@ import React, { useContext, useRef, useImperativeHandle, useState, useEffect } f
 import { LayoutContext } from './context/layoutcontext';
 import { getIdiomas } from '@/app/api-endpoints/idioma';
 import { Dropdown } from 'primereact/dropdown';
-import { getVistaEmpresaMoneda } from "@/app/api-endpoints/empresa";
-import { getVistaEmpresaRol } from "@/app/api-endpoints/rol";
 import { Button } from 'primereact/button';
 import { InputText } from 'primereact/inputtext';
-import { getUsuarioAvatar } from "@/app/api-endpoints/usuario";
-import { devuelveBasePath, getUsuarioSesion } from "@/app/utility/Utils";
 
 const AppTopbar = React.forwardRef((props, ref) => {
     const { onMenuToggle, showProfileSidebar, showConfigSidebar } = useContext(LayoutContext);
@@ -159,7 +155,7 @@ const AppTopbar = React.forwardRef((props, ref) => {
                     <li className="ml-3">
 
                         
-                        <h5 class="m-0 mr-2">{empresaNombre}</h5>
+                        <h5 className="m-0 mr-2">{empresaNombre}</h5>
                     </li>
                     <li className="ml-3">
                         <Dropdown

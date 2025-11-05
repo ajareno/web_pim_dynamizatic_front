@@ -2,21 +2,12 @@
 
 import React, { useEffect, useRef, useState } from "react";
 
-import { FilterMatchMode, FilterOperator } from 'primereact/api';
-import { InputSwitch } from "primereact/inputswitch";
 import { DataTable } from "primereact/datatable";
-import { InputText } from "primereact/inputtext";
-import { Dropdown } from 'primereact/dropdown';
-import { classNames } from "primereact/utils";
-import { Button } from "primereact/button";
 import { Column } from "primereact/column";
-import { Dialog } from "primereact/dialog";
-import { Badge } from 'primereact/badge';
 import { Toast } from "primereact/toast";
 import { getPermiso, postPermiso, patchPermiso, deletePermiso, getVistaEmpresaRolPermiso, getListaPermisos } from "@/app/api-endpoints/permisos";
 import { getRol, getNombreRol } from "@/app/api-endpoints/rol";
 import { formatearFechaLocal_a_toISOString, getUsuarioSesion } from "@/app/utility/Utils";
-import { AutoComplete } from "primereact/autocomplete";
 import { Checkbox } from "primereact/checkbox";
 import { bloquearPantalla } from "@/app/utility/Utils"
 import { useIntl } from 'react-intl';
@@ -32,22 +23,12 @@ const Permiso = () => {
     const [listaPermisosMarcados, setListaPermisosMarcados] = useState(new Set());
     const [datosUsuario, setDatosUsuario] = useState(null);
 
-
     useEffect(() => {
         obtenerDatos();
     }, []);
 
-    let emptyPermiso = {
-        rolId: "",
-        modulo: "Nathalie",
-        controlador: "",
-        accion: "",
-    };
-
     //Lista donde se iran añadiendo los nuevos permisos
-
-
-
+    //
     const obtenerDatos = async () => {
         try {
             //Obtenemos las tablas maestras
@@ -178,16 +159,14 @@ const Permiso = () => {
                 { header: intl.formatMessage({ id: 'Borrar' }), seccion: 'Tipos de archivo-Borrar' },
 
             ];
-
-
             // Obtenemos los roles
-            const filtroRol = { where: { empresaId: getUsuarioSesion().empresaId } };
-            const registrosRoles = await getRol(JSON.stringify(filtroRol));
+            const filtroRol = JSON.stringify({ where: { and: { empresaId: getUsuarioSesion().empresaId } } });
+            const registrosRoles = await getRol(filtroRol);
             const nombresColumnas = Array.from(new Set(registrosRoles.map(registro => registro.nombre)));
             // Crear un objeto para almacenar las acciones por controlador
             setColumnaPrincipal(listaPermisos);
             setColumnasRoles(nombresColumnas);
-            const registros = await getPermiso();
+            const registros = await getPermiso(filtroRol);
             setPermisos(registros);
 
             //Obtener los datos del usuario
@@ -196,7 +175,7 @@ const Permiso = () => {
             setDatosUsuario(parsedData);
 
             //Marcar los que esten dentro de la vista.
-            const permisosMarcados = await getVistaEmpresaRolPermiso();
+            const permisosMarcados = await getVistaEmpresaRolPermiso(filtroRol);
             // Crear un nuevo conjunto con el formato especificado
             const permisosSet = new Set(permisosMarcados.map(permisoMarcado =>
                 `${permisoMarcado.permisoControlador}-${permisoMarcado.permisoAccion}-${permisoMarcado.rolNombre}-${permisoMarcado.permisoId}`
@@ -237,35 +216,35 @@ const Permiso = () => {
     };
 
     //Evento para marcar o desmarcar los checkbox aparte de añadirlo a la BBDD
-    const handlePermisoMarcado = (permiso, evento) => {
-        setListaPermisosMarcados(async (prevSet) => {
-            const newSet = new Set(prevSet);
-            bloquearPantalla(true)
+    const handlePermisoMarcado = async (permiso, evento) => {
+        try {
+            bloquearPantalla(true);
             document.body.style.cursor = 'wait';
+            
             if (evento.checked) {
                 //añadir a la BBDD y al set
                 const partesPermiso = permiso.split('-');
                 const rolId = await getNombreRol(partesPermiso[2]);
-                emptyPermiso = {
+                const nuevoPermiso = {
                     rolId: rolId[0].id,
                     modulo: "Nathalie",
                     controlador: partesPermiso[0],
                     accion: partesPermiso[1],
                     usuarioCreacion: datosUsuario.id,
                 };
-                await postPermiso(emptyPermiso);
-                newSet.add(permiso);
-                // if (partesPermiso[1] === 'Ver') {
-                //     window.location.reload();
-                // } else {
-                //     obtenerDatos();
-                // }
-                await obtenerDatos();
+                await postPermiso(nuevoPermiso);
+                
+                // Actualizar el estado local
+                setListaPermisosMarcados(prevSet => {
+                    const newSet = new Set(prevSet);
+                    newSet.add(permiso);
+                    return newSet;
+                });
             } else {
                 const partesPermiso = permiso.split('-');
                 if (partesPermiso[2] !== 'Sistemas') {
                     // Eliminar de la BBDD y del set
-                    const listadoPermisos = Array.from(newSet);
+                    const listadoPermisos = Array.from(listaPermisosMarcados);
                     // Eliminar el sufijo '-id' de los roles y crear un mapa de roles a sus IDs
                     const listaSinId = listadoPermisos.reduce((map, permisos) => {
                         const [key, id] = permisos.split(/-(?=[^-]+$)/); // Divide en el último '-'
@@ -275,23 +254,30 @@ const Permiso = () => {
                     // Buscar coincidencias y extraer sus IDs
                     if (listaSinId.hasOwnProperty(permiso)) {
                         await deletePermiso(parseInt(listaSinId[permiso]));
-                        newSet.delete(permiso + listaSinId[permiso]);
-                        // if (partesPermiso[1] === 'Ver') {
-                        //     window.location.reload();
-                        // } else {
-                        //     obtenerDatos();
-                        // }
-                        await obtenerDatos();
+                        
+                        // Actualizar el estado local
+                        setListaPermisosMarcados(prevSet => {
+                            const newSet = new Set(prevSet);
+                            newSet.delete(permiso + '-' + listaSinId[permiso]);
+                            return newSet;
+                        });
                     }
                 } else {
                     toast.current.show({ severity: 'error', summary: 'Error', detail: 'No se puede eliminar permisos del rol de Sistemas' });
-                    await obtenerDatos();
                 }
             }
+            
+            // Recargar datos para sincronizar
+            await obtenerDatos();
+            
+        } catch (error) {
+            console.error('Error al manejar permiso:', error);
+            toast.current.show({ severity: 'error', summary: 'Error', detail: 'Error al procesar el permiso' });
+        } finally {
+            // Asegurar que siempre se resetee el cursor y se desbloquee la pantalla
             document.body.style.cursor = 'default';
-            bloquearPantalla(false)
-            return newSet;
-        });
+            bloquearPantalla(false);
+        }
     };
 
     //LLamada al componente que generar checkbox
@@ -319,7 +305,7 @@ const Permiso = () => {
                 id={`checkbox-${rowData.seccion}-${columna}`} // Id único
                 checked={estaMarcado(`${rowData.seccion}-${columna}`, listaPermisosMarcados)} // Verificar si está en listaPermisosMarcados
                 onChange={(evento) =>
-                    handlePermisoMarcado(`${rowData.seccion}-${columna}`, evento, setListaPermisosMarcados)
+                    handlePermisoMarcado(`${rowData.seccion}-${columna}`, evento)
                 }
                 className="mr-2"
             />

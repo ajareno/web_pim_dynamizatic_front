@@ -154,17 +154,16 @@ const tieneUsuarioPermiso = async (modulo, controlador, permiso) => {
 }
 
 const obtenerTodosLosPermisos = async () => {
-    // const usuario = getUsuarioSesion();
-    // const permisos = await getVistaEmpresaRolPermiso(JSON.stringify({
-    //     where: {
-    //         and: {
-    //             rolId: usuario.rolId,
-    //             permisoAccion: accion
-    //         }
-    //     }
-    // }));
-    // return permisos
-    return [];
+    const usuario = getUsuarioSesion();
+    const permisos = await getVistaEmpresaRolPermiso(JSON.stringify({
+        where: {
+            and: {
+                rolId: usuario.rolId,
+                permisoAccion: accion
+            }
+        }
+    }));
+    return permisos
 };
 
 const ErrorDetail = () => {

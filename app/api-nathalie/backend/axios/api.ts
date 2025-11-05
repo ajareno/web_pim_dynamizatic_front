@@ -10281,13 +10281,13 @@ export interface NewPermiso {
      * @type {number}
      * @memberof NewPermiso
      */
-    'usuCreacion': number;
+    'usuarioCreacion': number;
     /**
      * 
      * @type {number}
      * @memberof NewPermiso
      */
-    'usuModificacion'?: number | null;
+    'usuarioModificacion'?: number | null;
 }
 /**
  * (tsType: Omit<PlantillaEmail, \'id\'>, schemaOptions: { title: \'NewPlantillaEmail\', exclude: [ \'id\' ] })
@@ -10982,13 +10982,13 @@ export interface NewSeccion {
      * @type {number}
      * @memberof NewSeccion
      */
-    'usuCreacion': number;
+    'usuarioCreacion': number;
     /**
      * 
      * @type {number}
      * @memberof NewSeccion
      */
-    'usuModificacion'?: number | null;
+    'usuarioModificacion'?: number | null;
 }
 /**
  * (tsType: Omit<Tarea, \'id\'>, schemaOptions: { title: \'NewTarea\', exclude: [ \'id\' ] })
@@ -11495,13 +11495,13 @@ export interface NewUsuarioPasswordHistorico {
      * @type {number}
      * @memberof NewUsuarioPasswordHistorico
      */
-    'usuCreacion': number;
+    'usuarioCreacion': number;
     /**
      * 
      * @type {number}
      * @memberof NewUsuarioPasswordHistorico
      */
-    'usuModificacion'?: number | null;
+    'usuarioModificacion'?: number | null;
 }
 /**
  * 
@@ -12349,13 +12349,13 @@ export interface Permiso {
      * @type {number}
      * @memberof Permiso
      */
-    'usuCreacion': number;
+    'usuarioCreacion': number;
     /**
      * 
      * @type {number}
      * @memberof Permiso
      */
-    'usuModificacion'?: number | null;
+    'usuarioModificacion'?: number | null;
 }
 /**
  * 
@@ -12490,13 +12490,13 @@ export interface PermisoPartial {
      * @type {number}
      * @memberof PermisoPartial
      */
-    'usuCreacion'?: number;
+    'usuarioCreacion'?: number;
     /**
      * 
      * @type {number}
      * @memberof PermisoPartial
      */
-    'usuModificacion'?: number | null;
+    'usuarioModificacion'?: number | null;
 }
 /**
  * (tsType: PermisoWithRelations, schemaOptions: { includeRelations: true })
@@ -12551,13 +12551,13 @@ export interface PermisoWithRelations {
      * @type {number}
      * @memberof PermisoWithRelations
      */
-    'usuCreacion': number;
+    'usuarioCreacion': number;
     /**
      * 
      * @type {number}
      * @memberof PermisoWithRelations
      */
-    'usuModificacion'?: number | null;
+    'usuarioModificacion'?: number | null;
 }
 /**
  * 
@@ -15499,13 +15499,13 @@ export interface Seccion {
      * @type {number}
      * @memberof Seccion
      */
-    'usuCreacion': number;
+    'usuarioCreacion': number;
     /**
      * 
      * @type {number}
      * @memberof Seccion
      */
-    'usuModificacion'?: number | null;
+    'usuarioModificacion'?: number | null;
 }
 /**
  * 
@@ -15622,13 +15622,13 @@ export interface SeccionPartial {
      * @type {number}
      * @memberof SeccionPartial
      */
-    'usuCreacion'?: number;
+    'usuarioCreacion'?: number;
     /**
      * 
      * @type {number}
      * @memberof SeccionPartial
      */
-    'usuModificacion'?: number | null;
+    'usuarioModificacion'?: number | null;
 }
 /**
  * (tsType: SeccionWithRelations, schemaOptions: { includeRelations: true })
@@ -15665,13 +15665,13 @@ export interface SeccionWithRelations {
      * @type {number}
      * @memberof SeccionWithRelations
      */
-    'usuCreacion': number;
+    'usuarioCreacion': number;
     /**
      * 
      * @type {number}
      * @memberof SeccionWithRelations
      */
-    'usuModificacion'?: number | null;
+    'usuarioModificacion'?: number | null;
 }
 /**
  * 
@@ -17613,13 +17613,13 @@ export interface UsuarioPasswordHistorico {
      * @type {number}
      * @memberof UsuarioPasswordHistorico
      */
-    'usuCreacion': number;
+    'usuarioCreacion': number;
     /**
      * 
      * @type {number}
      * @memberof UsuarioPasswordHistorico
      */
-    'usuModificacion'?: number | null;
+    'usuarioModificacion'?: number | null;
 }
 /**
  * 
@@ -17754,13 +17754,13 @@ export interface UsuarioPasswordHistoricoPartial {
      * @type {number}
      * @memberof UsuarioPasswordHistoricoPartial
      */
-    'usuCreacion'?: number;
+    'usuarioCreacion'?: number;
     /**
      * 
      * @type {number}
      * @memberof UsuarioPasswordHistoricoPartial
      */
-    'usuModificacion'?: number | null;
+    'usuarioModificacion'?: number | null;
 }
 /**
  * (tsType: UsuarioPasswordHistoricoWithRelations, schemaOptions: { includeRelations: true })
@@ -17815,13 +17815,13 @@ export interface UsuarioPasswordHistoricoWithRelations {
      * @type {number}
      * @memberof UsuarioPasswordHistoricoWithRelations
      */
-    'usuCreacion': number;
+    'usuarioCreacion': number;
     /**
      * 
      * @type {number}
      * @memberof UsuarioPasswordHistoricoWithRelations
      */
-    'usuModificacion'?: number | null;
+    'usuarioModificacion'?: number | null;
 }
 /**
  * 
@@ -34849,10 +34849,11 @@ export const PermisoControllerApiAxiosParamCreator = function (configuration?: C
         },
         /**
          * 
+         * @param {PermisoFilter1} [filter] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        permisoControllerVistaEmpresaRolPermiso: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        permisoControllerVistaEmpresaRolPermiso: async (filter?: PermisoFilter1, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/vistaEmpresaRolPermiso`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -34868,6 +34869,10 @@ export const PermisoControllerApiAxiosParamCreator = function (configuration?: C
             // authentication jwt required
             // http bearer authentication required
             await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (filter !== undefined) {
+                localVarQueryParameter['filter'] = filter;
+            }
 
 
     
@@ -34989,11 +34994,12 @@ export const PermisoControllerApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
+         * @param {PermisoFilter1} [filter] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async permisoControllerVistaEmpresaRolPermiso(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.permisoControllerVistaEmpresaRolPermiso(options);
+        async permisoControllerVistaEmpresaRolPermiso(filter?: PermisoFilter1, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PermisoWithRelations>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.permisoControllerVistaEmpresaRolPermiso(filter, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
     }
@@ -35096,11 +35102,12 @@ export const PermisoControllerApiFactory = function (configuration?: Configurati
         },
         /**
          * 
+         * @param {PermisoFilter1} [filter] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        permisoControllerVistaEmpresaRolPermiso(options?: any): AxiosPromise<object> {
-            return localVarFp.permisoControllerVistaEmpresaRolPermiso(options).then((request) => request(axios, basePath));
+        permisoControllerVistaEmpresaRolPermiso(filter?: PermisoFilter1, options?: any): AxiosPromise<PermisoWithRelations> {
+            return localVarFp.permisoControllerVistaEmpresaRolPermiso(filter, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -35220,12 +35227,13 @@ export class PermisoControllerApi extends BaseAPI {
 
     /**
      * 
+     * @param {PermisoFilter1} [filter] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof PermisoControllerApi
      */
-    public permisoControllerVistaEmpresaRolPermiso(options?: AxiosRequestConfig) {
-        return PermisoControllerApiFp(this.configuration).permisoControllerVistaEmpresaRolPermiso(options).then((request) => request(this.axios, this.basePath));
+    public permisoControllerVistaEmpresaRolPermiso(filter?: PermisoFilter1, options?: AxiosRequestConfig) {
+        return PermisoControllerApiFp(this.configuration).permisoControllerVistaEmpresaRolPermiso(filter, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
