@@ -10,7 +10,8 @@ import { getEmpresa } from "@/app/api-endpoints/empresa";
 import { getIdioma } from "@/app/api-endpoints/idioma";
 import { getVistaEmpresaRol } from "@/app/api-endpoints/rol";
 import { registrarLoginExitoso, registrarLoginFallido, registrarAccesoBloqueado, registrarLogout } from "@/app/utility/LogAccesoUtils";
-// import { getVistaArchivoEmpresa } from "@/app/api-endpoints/archivo";
+ import { getVistaArchivoEmpresa } from "@/app/api-endpoints/archivo";
+import { getVistaTipoArchivoEmpresaSeccion } from "@/app/api-endpoints/tipo_archivo";
 import { obtenerTodosLosPermisos } from "@/app/components/shared/componentes";
 
 interface AuthContextProps {
@@ -56,94 +57,118 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     //router.push(await obtenerRolDashboard());
   };
 
-  //Obtenemos el menu lateral simplificado solo con Usuarios
   const getMenuLateral = async () => {
-    // Menú simplificado solo con usuarios
-    const menuSimple = [{
+    // Este objeto contiene las rutas y los iconos asociados a cada permiso
+    const jsonRutas: Record<string, Record<string, { path: string; icon: string }>> = {
+      "Gestión": {
+        "Usuarios": {
+          "path": "/usuarios",
+          "icon": "pi pi-fw pi-user-edit"
+        },
+        "Empresas": {
+          "path": "/empresas",
+          "icon": "pi pi-fw pi-user-edit"
+        }
+      },
+      "Tablas maestras": {
+        "Archivos": {
+          "path": "/tablas-maestras/archivo",
+          "icon": "pi pi-fw pi-user-edit"
+        },
+        "Enviar email": {
+          "path": "/tablas-maestras/enviar-email",
+          "icon": "pi pi-fw pi-user-edit"
+        },
+        "Idiomas": {
+          "path": "/tablas-maestras/idioma",
+          "icon": "pi pi-fw pi-user-edit"
+        },
+        "Logs de acceso": {
+          "path": "/tablas-maestras/log-acceso",
+          "icon": "pi pi-fw pi-user-edit"
+        },
+        "Permisos": {
+          "path": "/tablas-maestras/permiso",
+          "icon": "pi pi-fw pi-user-edit"
+        },
+        "Planificador de categorias": {
+          "path": "/tablas-maestras/planificador-categorias",
+          "icon": "pi pi-fw pi-user-edit"
+        },
+        "Planificador de estados": {
+          "path": "/tablas-maestras/planificador-estados",
+          "icon": "pi pi-fw pi-user-edit"
+        },
+        "Plantillas de email": {
+          "path": "/tablas-maestras/plantillas-email",
+          "icon": "pi pi-fw pi-user-edit"
+        },
+        "Roles": {
+          "path": "/tablas-maestras/rol",
+          "icon": "pi pi-fw pi-user-edit"
+        },
+        "Sección": {
+          "path": "/tablas-maestras/seccion",
+          "icon": "pi pi-fw pi-user-edit"
+        },
+        "Tipos de archivo": {
+          "path": "/tablas-maestras/tipo_archivo",
+          "icon": "pi pi-fw pi-file"
+        },
+        "Traducción": {
+          "path": "/tablas-maestras/traduccion",
+          "icon": "pi pi-fw pi-user-edit"
+        }
+      }
+    }
+ 
+    // Obtener los permisos del usuario actual de "Acceder" a las rutas
+    const permisos = await obtenerTodosLosPermisos();
+    // Filtrar solo los permisos de tipo "Acceder"
+    const permisosAcceder = Array.isArray(permisos) ? permisos.filter((permiso) => permiso.permisoAccion === 'Acceder') : [];
+    // Declaramos el objeto que sera el menu final y le ponemos un titulo de menu
+    const jsonPermisos: {
+      label: string;
+      icon: string;
+      items: { label: string; icon: string; items: { label: string; icon: string; to: string; }[] }[];
+    } = {
       label: "Menu",
       icon: "pi pi-fw pi-minus",
-      items: [{
-        label: "Gestión",
-        icon: "pi pi-fw pi-cog",
-        items: [{
-          label: "Usuarios",
-          icon: "pi pi-fw pi-user-edit",
-          to: "/usuarios"
-        },
-        {
-          label: "Empresas",
-          icon: "pi pi-fw pi-user-edit",
-          to: "/empresas"
-        }
-      ]
-      },
-      {
-        label: "Tablas maestras",
-        icon: "pi pi-fw pi-cog",
-        items: [{
-          label: "Archivos",
-          icon: "pi pi-fw pi-user-edit",
-          to: "/tablas-maestras/archivo"
-          },
-        {
-          label: "Enviar email",
-          icon: "pi pi-fw pi-user-edit",
-          to: "/tablas-maestras/enviar-email"
-        },
-        {
-          label: "Idiomas",
-          icon: "pi pi-fw pi-user-edit",
-          to: "/tablas-maestras/idioma"
-        },
-        {
-          label: "Logs de acceso",
-          icon: "pi pi-fw pi-user-edit",
-          to: "/tablas-maestras/log-acceso"
-        },
-        {
-          label: "Permisos",
-          icon: "pi pi-fw pi-user-edit",
-          to: "/tablas-maestras/permiso"
-        },
-        {
-          label: "Planificador de categorias",
-          icon: "pi pi-fw pi-user-edit",
-          to: "/tablas-maestras/planificador-categorias"
-        },
-        {
-          label: "Planificador de estados",
-          icon: "pi pi-fw pi-user-edit",
-          to: "/tablas-maestras/planificador-estados"
-        },
-        {
-          label: "Plantillas de email",
-          icon: "pi pi-fw pi-user-edit",
-          to: "/tablas-maestras/plantillas-email"
-        },
-        {
-          label: "Roles",
-          icon: "pi pi-fw pi-user-edit",
-          to: "/tablas-maestras/rol"
-        },
-        {
-          label: "Sección",
-          icon: "pi pi-fw pi-user-edit",
-          to: "/tablas-maestras/seccion"
-        },
-        {
-          label: "Tipos de archivo",
-          icon: "pi pi-fw pi-file",
-          to: "/tablas-maestras/tipo_archivo"
-        },
-        {
-          label: "Traducción",
-          icon: "pi pi-fw pi-user-edit",
-          to: "/tablas-maestras/traduccion"
-        }]
-      }]
-    }];
+      items: []
+    };
 
-    localStorage.setItem('menuLateral', JSON.stringify(menuSimple));
+ 
+    // Recorremos las categorias y subcategorias del objeto jsonRutas
+    for (const categoria in jsonRutas) {
+      const categoriaItems = [];
+      for (const subCategoria in jsonRutas[categoria] as Record<string, { path: string; icon: string }>) {
+        if (Array.isArray(permisosAcceder)) {
+          // Si existe un permiso en el array que tenga de nombre de controlador el nombre de la subcategoria,
+          // Significa que el usuario tiene acceso a esa pantalla y por lo tanto la añadimos al menu
+          if (permisosAcceder.some((permiso) => permiso.permisoControlador === subCategoria)) {
+            categoriaItems.push({
+              label: `${subCategoria}`,
+              icon: jsonRutas[categoria][subCategoria].icon,
+              // command: () => {
+              //     router.push(jsonRutas[categoria][subCategoria].path, { shallow: true });
+              // },
+              to: jsonRutas[categoria][subCategoria].path,
+            });
+          }
+        }
+      }
+      //Construimos las categorias que tendran sus items
+      const categoriaJson = {
+        label: `${categoria}`,
+        icon: "pi pi-fw pi-minus",
+        items: categoriaItems
+      }
+      // Si la categoria no tiene items, no la añadimos al menu
+      if (categoriaItems.length > 0) {
+        jsonPermisos['items'].push(categoriaJson);
+      }
+    }
+    localStorage.setItem('menuLateral', JSON.stringify([jsonPermisos]));
   }
 
   const almacenarLogin = async (data: any) => {
@@ -162,10 +187,10 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     if (empresa?.tiempoInactividad && empresa?.tiempoInactividad > 0) {
       localStorage.setItem('tiempoDeEsperaInactividad', '' + empresa?.tiempoInactividad);
     }
-    //if (await compruebaRolUsuario({ ...data })) {
+    if (await compruebaRolUsuario({ ...data })) {
       //Si tiene que mostrar la empresa, obtenemos el logo
-      //localStorage.setItem('logoEmpresaUrl', await obtenerLogoEmpresa());
-    //}
+      localStorage.setItem('logoEmpresaUrl', await obtenerLogoEmpresa());
+    }
 
     //Obtiene la ip del usuario usando la API de ipify, es de codigo abierto y tiene usos infinitos
     const response = await fetch('https://api.ipify.org?format=json');
@@ -195,34 +220,33 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     return Array.isArray(rol) && rol[0]?.muestraEmpresa === 'S';
   }
 
-  // const obtenerLogoEmpresa = async () => {
-  //   //Obtiene los tipos de archivo de la seccion
-  //   const queryParamsTiposArchivo = {
-  //     where: {
-  //       and: {
-  //         nombreSeccion: 'Empresa',
-  //         nombre: 'Logo'
-  //       }
+  const obtenerLogoEmpresa = async () => {
+    //Obtiene los tipos de archivo de la seccion
+    const queryParamsTiposArchivo = {
+      where: {
+        and: {
+          nombreSeccion: 'Empresa',
+          nombre: 'Logo'
+        }
+    },
+      order: "orden ASC"
+    };
+    const registrosTipoArchivos = await getVistaTipoArchivoEmpresaSeccion(JSON.stringify(queryParamsTiposArchivo));
 
-  //     },
-  //     order: "orden ASC"
-  //   };
-  //   const registrosTipoArchivos = await getVistaTipoArchivoEmpresaSeccion(JSON.stringify(queryParamsTiposArchivo));
-
-  //   const queryParamsArchivo = {
-  //     where: {
-  //       and: {
-  //         tipoArchivoId: Array.isArray(registrosTipoArchivos) && registrosTipoArchivos.length > 0 ? registrosTipoArchivos[0].id : undefined,
-  //         tablaId: Number(localStorage.getItem('empresa'))
-  //       }
-  //     }
-  //   };
-  //   const archivoLogo = await getVistaArchivoEmpresa(JSON.stringify(queryParamsArchivo))
-  //   if (Array.isArray(archivoLogo) && archivoLogo.length > 0) {
-  //     return archivoLogo[0].url.replace(/(\/[^\/]+\/)([^\/]+\.\w+)$/, '$11250x850_$2');
-  //   }
-  //   return null;
-  // }
+    const queryParamsArchivo = {
+      where: {
+        and: {
+         tipoArchivoId: Array.isArray(registrosTipoArchivos) && registrosTipoArchivos.length > 0 ? registrosTipoArchivos[0].id : undefined,
+          tablaId: Number(localStorage.getItem('empresa'))
+        }
+      }
+    };
+    const archivoLogo = await getVistaArchivoEmpresa(JSON.stringify(queryParamsArchivo))
+    if (Array.isArray(archivoLogo) && archivoLogo.length > 0) {
+      return archivoLogo[0].url.replace(/(\/[^\/]+\/)([^\/]+\.\w+)$/, '$11250x850_$2');
+    }
+    return null;
+  }
 
   const logout = (mensaje?: string) => {
     // Registrar el logout antes de limpiar los datos

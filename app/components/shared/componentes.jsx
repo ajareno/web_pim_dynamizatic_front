@@ -8,7 +8,7 @@ import React from "react";
 import { parse } from 'json2csv';
 import { devuelveBasePath, getUsuarioSesion } from "../../utility/Utils";
 import { useIntl } from 'react-intl'
-import { compruebaPermiso } from "../../api-endpoints/permisos";
+import { compruebaPermiso, getVistaEmpresaRolPermiso } from "../../api-endpoints/permisos";
 import { Tooltip } from 'primereact/tooltip';
 // import { getVistaEmpresaRolPermiso } from "@/app/api-endpoints/permisos";
 
@@ -147,23 +147,24 @@ const manejarCambioImagen = (event) => {
     return event.target.files[0];
 };
 
-const tieneUsuarioPermiso = async (modulo, controlador, permiso) => {
-    return true;// Agus borrar
+const tieneUsuarioPermiso = async (modulo, controlador, permiso) => {    
     const usuario = getUsuarioSesion();
     return await compruebaPermiso(usuario.rolId, modulo, controlador, permiso);
 }
 
-const obtenerTodosLosPermisos = async () => {
-    const usuario = getUsuarioSesion();
-    const permisos = await getVistaEmpresaRolPermiso(JSON.stringify({
-        where: {
-            and: {
-                rolId: usuario.rolId,
-                permisoAccion: accion
-            }
-        }
-    }));
-    return permisos
+const obtenerTodosLosPermisos = async accion => {
+ const usuario = getUsuarioSesion();
+ const permisos = await getVistaEmpresaRolPermiso(
+  JSON.stringify({
+   where: {
+    and: {
+     rolId: usuario.rolId,
+     permisoAccion: accion
+    }
+   }
+  })
+ );
+ return permisos;
 };
 
 const ErrorDetail = () => {

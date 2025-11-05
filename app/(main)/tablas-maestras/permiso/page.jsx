@@ -136,6 +136,7 @@ const Permiso = () => {
 
                 // Usuarios
                 { header: intl.formatMessage({ id: 'Usuarios' }), seccion: 'Usuarios' },
+                { header: intl.formatMessage({ id: 'VerPerfil' }), seccion: 'Usuarios-VerPerfil' },
                 { header: intl.formatMessage({ id: 'Acceder' }), seccion: 'Usuarios-Acceder' },
                 { header: intl.formatMessage({ id: 'Ver' }), seccion: 'Usuarios-Ver' },
                 { header: intl.formatMessage({ id: 'Nuevo' }), seccion: 'Usuarios-Nuevo' },
