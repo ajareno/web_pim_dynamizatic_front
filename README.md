@@ -6,7 +6,7 @@ Este es un proyecto de [Next.js](https://nextjs.org/) creado con [`create-next-a
 - [@AlejandroCaicedo](https://www.linkedin.com/in/alejandrocaicedopalacios/)
 
 
-# Proyecto WEB Nathalie
+# Proyecto WEB 
 
 A continuación se describe todo lo necesario para configurar e instalar este proyecto web en local y en el servidor.
 
@@ -175,7 +175,7 @@ const [layoutConfig, setLayoutConfig] = useState<LayoutConfig>({
 Ya con esta configuración tendriamos un tema personalizado en nuestra aplicación.
 
 ## GENERAR CLIENTE API AXIOS
-- Para generar nuevamente el cliente de la API debemos ir a la carpeta: \app\api-nathalie\backend
+- Para generar nuevamente el cliente de la API debemos ir a la carpeta: \app\api-programa\backend
 - Copiamos el JSON generado por el Backend API en el archivo: openapi.json
 - Ejecutamos el .bat para generar la carpeta "axios": .\update.bat
 - Esto nos generará una carpeta llamada "axios-2", debemos eliminar la carpeta "axios" antigua y renombrar la carpeta "axios-2" por "axios" 

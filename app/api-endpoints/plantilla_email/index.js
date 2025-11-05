@@ -1,4 +1,4 @@
-import { PlantillaEmailControllerApi, settings } from "@/app/api-nathalie";
+import { PlantillaEmailControllerApi, settings } from "@/app/api-programa";
 
 const apiPlantillaEmail = new PlantillaEmailControllerApi(settings)
 

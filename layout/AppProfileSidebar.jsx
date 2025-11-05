@@ -24,7 +24,7 @@ const AppProfileSidebar = () => {
         const fetchData = async () => {
             try {
                 //Obtenemos permisos del usuario
-                setPermisoVerPerfil(await tieneUsuarioPermiso('Nathalie', 'Usuarios', 'VerPerfil'))
+                setPermisoVerPerfil(await tieneUsuarioPermiso('Usuarios', 'VerPerfil'))
 
             } catch (error) {
                 console.error("Error obteniendo los permisos del rol:", error);

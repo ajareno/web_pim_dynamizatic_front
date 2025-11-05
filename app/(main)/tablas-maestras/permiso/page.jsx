@@ -54,22 +54,6 @@ const Permiso = () => {
                 { header: intl.formatMessage({ id: 'Acceder' }), seccion: 'Logs de acceso-Acceder' },
                 { header: intl.formatMessage({ id: 'Ver' }), seccion: 'Logs de acceso-Ver' },
 
-                // Categorias del planificador
-                { header: intl.formatMessage({ id: 'Categorias del planificador' }), seccion: 'Categorias del planificador' },
-                { header: intl.formatMessage({ id: 'Acceder' }), seccion: 'Categorias del planificador-Acceder' },
-                { header: intl.formatMessage({ id: 'Ver' }), seccion: 'Categorias del planificador-Ver' },
-                { header: intl.formatMessage({ id: 'Nuevo' }), seccion: 'Categorias del planificador-Nuevo' },
-                { header: intl.formatMessage({ id: 'Actualizar' }), seccion: 'Categorias del planificador-Actualizar' },
-                { header: intl.formatMessage({ id: 'Borrar' }), seccion: 'Categorias del planificador-Borrar' },
-
-                // Estados del planificador
-                { header: intl.formatMessage({ id: 'Estados del planificador' }), seccion: 'Estados del planificador' },
-                { header: intl.formatMessage({ id: 'Acceder' }), seccion: 'Estados del planificador-Acceder' },
-                { header: intl.formatMessage({ id: 'Ver' }), seccion: 'Estados del planificador-Ver' },
-                { header: intl.formatMessage({ id: 'Nuevo' }), seccion: 'Estados del planificador-Nuevo' },
-                { header: intl.formatMessage({ id: 'Actualizar' }), seccion: 'Estados del planificador-Actualizar' },
-                { header: intl.formatMessage({ id: 'Borrar' }), seccion: 'Estados del planificador-Borrar' },
-
                 // Tipos de archivo
                 { header: intl.formatMessage({ id: 'Tipos de archivo' }), seccion: 'Tipos de archivo' },
                 { header: intl.formatMessage({ id: 'Acceder' }), seccion: 'Tipos de archivo-Acceder' },
@@ -110,14 +94,6 @@ const Permiso = () => {
                 { header: intl.formatMessage({ id: 'Actualizar' }), seccion: 'Traducciones-Actualizar' },
                 { header: intl.formatMessage({ id: 'Borrar' }), seccion: 'Traducciones-Borrar' },
 
-                // Tipos de documento
-                { header: intl.formatMessage({ id: 'Tipos de documento' }), seccion: 'Tipos de documento' },
-                { header: intl.formatMessage({ id: 'Acceder' }), seccion: 'Tipos de documento-Acceder' },
-                { header: intl.formatMessage({ id: 'Ver' }), seccion: 'Tipos de documento-Ver' },
-                { header: intl.formatMessage({ id: 'Nuevo' }), seccion: 'Tipos de documento-Nuevo' },
-                { header: intl.formatMessage({ id: 'Actualizar' }), seccion: 'Tipos de documento-Actualizar' },
-                { header: intl.formatMessage({ id: 'Borrar' }), seccion: 'Tipos de documento-Borrar' },
-
                 // Roles
                 { header: intl.formatMessage({ id: 'Roles' }), seccion: 'Roles' },
                 { header: intl.formatMessage({ id: 'Acceder' }), seccion: 'Roles-Acceder' },
@@ -142,22 +118,6 @@ const Permiso = () => {
                 { header: intl.formatMessage({ id: 'Nuevo' }), seccion: 'Usuarios-Nuevo' },
                 { header: intl.formatMessage({ id: 'Actualizar' }), seccion: 'Usuarios-Actualizar' },
                 { header: intl.formatMessage({ id: 'Borrar' }), seccion: 'Usuarios-Borrar' },
-
-                // Calendario
-                { header: intl.formatMessage({ id: 'Calendario' }), seccion: 'Calendario' },
-                { header: intl.formatMessage({ id: 'Acceder' }), seccion: 'Calendario-Acceder' },
-                { header: intl.formatMessage({ id: 'Ver' }), seccion: 'Calendario-Ver' },
-                { header: intl.formatMessage({ id: 'Nuevo' }), seccion: 'Calendario-Nuevo' },
-                { header: intl.formatMessage({ id: 'Actualizar' }), seccion: 'Calendario-Actualizar' },
-                { header: intl.formatMessage({ id: 'Borrar' }), seccion: 'Calendario-Borrar' },
-
-                // Tipos de archivo
-                { header: intl.formatMessage({ id: 'Tipos de archivo' }), seccion: 'Tipos de archivo' },
-                { header: intl.formatMessage({ id: 'Acceder' }), seccion: 'Tipos de archivo-Acceder' },
-                { header: intl.formatMessage({ id: 'Ver' }), seccion: 'Tipos de archivo-Ver' },
-                { header: intl.formatMessage({ id: 'Nuevo' }), seccion: 'Tipos de archivo-Nuevo' },
-                { header: intl.formatMessage({ id: 'Actualizar' }), seccion: 'Tipos de archivo-Actualizar' },
-                { header: intl.formatMessage({ id: 'Borrar' }), seccion: 'Tipos de archivo-Borrar' },
 
             ];
             // Obtenemos los roles
@@ -228,7 +188,6 @@ const Permiso = () => {
                 const rolId = await getNombreRol(partesPermiso[2]);
                 const nuevoPermiso = {
                     rolId: rolId[0].id,
-                    modulo: "Nathalie",
                     controlador: partesPermiso[0],
                     accion: partesPermiso[1],
                     usuarioCreacion: datosUsuario.id,

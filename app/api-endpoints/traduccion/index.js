@@ -1,4 +1,4 @@
-import { TraduccionLiteralControllerApi, IdiomaControllerApi, settings } from "@/app/api-nathalie";
+import { TraduccionLiteralControllerApi, IdiomaControllerApi, settings } from "@/app/api-programa";
 
 const apiTraduccion = new TraduccionLiteralControllerApi(settings)
 const apiIdioma = new IdiomaControllerApi(settings)

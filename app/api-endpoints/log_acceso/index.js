@@ -1,4 +1,4 @@
-import { LogAccesoControllerApi, EmpresaControllerApi, UsuariosControllerApi, settings } from "@/app/api-nathalie";
+import { LogAccesoControllerApi, EmpresaControllerApi, UsuariosControllerApi, settings } from "@/app/api-programa";
 
 const apiLogAcceso = new LogAccesoControllerApi(settings)
 const apiEmpresa = new EmpresaControllerApi(settings)

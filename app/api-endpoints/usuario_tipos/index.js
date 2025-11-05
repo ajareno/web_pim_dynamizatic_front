@@ -1,4 +1,4 @@
-import { TipoUsuarioUsuarioControllerApi, settings } from "@/app/api-nathalie";
+import { TipoUsuarioUsuarioControllerApi, settings } from "@/app/api-programa";
 
 const apiTipoUsuarioUsuario = new TipoUsuarioUsuarioControllerApi(settings)
 

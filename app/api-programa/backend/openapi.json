@@ -1042,13 +1042,6 @@
             }
           },
           {
-            "name": "modulo",
-            "in": "query",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
             "name": "controlador",
             "in": "query",
             "schema": {
@@ -18586,10 +18579,6 @@
             "type": "number",
             "nullable": false
           },
-          "modulo": {
-            "type": "string",
-            "nullable": true
-          },
           "controlador": {
             "type": "string",
             "nullable": true
@@ -18631,10 +18620,6 @@
           "rolId": {
             "type": "number",
             "nullable": false
-          },
-          "modulo": {
-            "type": "string",
-            "nullable": true
           },
           "controlador": {
             "type": "string",
@@ -18683,10 +18668,6 @@
             "type": "number",
             "nullable": false
           },
-          "modulo": {
-            "type": "string",
-            "nullable": true
-          },
           "controlador": {
             "type": "string",
             "nullable": true
@@ -18733,10 +18714,6 @@
           "rolId": {
             "type": "number",
             "nullable": false
-          },
-          "modulo": {
-            "type": "string",
-            "nullable": true
           },
           "controlador": {
             "type": "string",
@@ -31051,9 +31028,6 @@
                   "rolId": {
                     "type": "boolean"
                   },
-                  "modulo": {
-                    "type": "boolean"
-                  },
                   "controlador": {
                     "type": "boolean"
                   },
@@ -31082,7 +31056,6 @@
                   "enum": [
                     "id",
                     "rolId",
-                    "modulo",
                     "controlador",
                     "accion",
                     "fechaCreacion",
@@ -31147,9 +31120,6 @@
                   "rolId": {
                     "type": "boolean"
                   },
-                  "modulo": {
-                    "type": "boolean"
-                  },
                   "controlador": {
                     "type": "boolean"
                   },
@@ -31178,7 +31148,6 @@
                   "enum": [
                     "id",
                     "rolId",
-                    "modulo",
                     "controlador",
                     "accion",
                     "fechaCreacion",

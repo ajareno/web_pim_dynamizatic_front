@@ -6,7 +6,7 @@
  ***/
 import axios from 'axios'
 import jwtDefaultConfig from './jwtDefaultConfig'
-import { UsuariosControllerApi, settings } from '@/app/api-nathalie'
+import { UsuariosControllerApi, settings } from '@/app/api-programa'
 import { getAccessToken } from '@/app/utility/Utils'
 
 const api = new UsuariosControllerApi(settings)

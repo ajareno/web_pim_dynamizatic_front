@@ -133,17 +133,17 @@ const CrudIconos = ({ getRegistros, editarComponente, editarComponenteParametros
     const obtenerPermisos = async () => {
         //Obtiene los permisos del usuario
         if (!registroEditar) {
-            const sePuedeAcceder = await tieneUsuarioPermiso('Nathalie', controlador, 'acceder')
+            const sePuedeAcceder = await tieneUsuarioPermiso(controlador, 'acceder')
             if (!sePuedeAcceder) {
                 //Si no puede acceder, redirige a la pantalla de error
                 window.location.href = '/error';
             }
         }
 
-        setPuedeCrear(await tieneUsuarioPermiso('Nathalie', controlador, 'nuevo'))
-        setPuedeVer(await tieneUsuarioPermiso('Nathalie', controlador, 'ver'))
-        setPuedeEditar(await tieneUsuarioPermiso('Nathalie', controlador, 'actualizar'))
-        setPuedeBorrar(await tieneUsuarioPermiso('Nathalie', controlador, 'borrar'))
+        setPuedeCrear(await tieneUsuarioPermiso(controlador, 'nuevo'))
+        setPuedeVer(await tieneUsuarioPermiso(controlador, 'ver'))
+        setPuedeEditar(await tieneUsuarioPermiso(controlador, 'actualizar'))
+        setPuedeBorrar(await tieneUsuarioPermiso(controlador, 'borrar'))
     }
 
     useEffect(() => {

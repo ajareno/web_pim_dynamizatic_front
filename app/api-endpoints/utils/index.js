@@ -1,4 +1,4 @@
-import { UtilsControllerApi, settings } from "@/app/api-nathalie";
+import { UtilsControllerApi, settings } from "@/app/api-programa";
 
 const apiUtils = new UtilsControllerApi(settings)
 

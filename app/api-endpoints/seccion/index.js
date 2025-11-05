@@ -1,4 +1,4 @@
-import { SeccionControllerApi, settings } from "@/app/api-nathalie";
+import { SeccionControllerApi, settings } from "@/app/api-programa";
 
 const apiSeccion = new SeccionControllerApi(settings)
 

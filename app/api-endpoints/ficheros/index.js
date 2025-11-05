@@ -1,4 +1,4 @@
-import { FileUploadControllerApi, settings } from "@/app/api-nathalie";
+import { FileUploadControllerApi, settings } from "@/app/api-programa";
 
 const apiFileUpload = new FileUploadControllerApi(settings)
 

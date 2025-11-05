@@ -12,7 +12,7 @@ export const AbilityProvider = ({ children }) => {
     // Define la lógica de permisos
     const ability = {
         // can sirve para comprobar si un usuario tiene permisos para realizar una acción, se ejecuta cuando se llama a .can() en un componente
-        can: (modulo, controlador, accion) => {
+        can: (controlador, accion) => {
             // Devuelve una promesa que resuelve a true o false dependiendo de si el usuario tiene permisos, hasta que no acabe no sigue el codigo
             return new Promise((resolve, reject) => {
                 // Obtener los datos del usuario
@@ -20,7 +20,7 @@ export const AbilityProvider = ({ children }) => {
                 const parsedData = JSON.parse(storedData);
     
                 // Llama a una funcion en la que se comprueba si el usuario tiene permisos
-                compruebaPermiso(parsedData.rolId, modulo, controlador, accion)
+                compruebaPermiso(parsedData.rolId, controlador, accion)
                     .then(existePermiso => {
                         if (existePermiso) {
                             resolve(true);

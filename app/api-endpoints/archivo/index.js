@@ -1,4 +1,4 @@
-import { ArchivoControllerApi, settings } from "@/app/api-nathalie";
+import { ArchivoControllerApi, settings } from "@/app/api-programa";
 
 const apiArchivo = new ArchivoControllerApi(settings)
 

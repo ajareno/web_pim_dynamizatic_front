@@ -7,7 +7,7 @@ import { useContext, useState, useRef, useEffect } from "react";
 import { LayoutContext } from "../../../../layout/context/layoutcontext";
 import { Password } from "primereact/password";
 import Link from "next/link"; // Importa Link para la navegación
-// import { UsuariosControllerApi, settings } from "@/app/api-nathalie";
+// import { UsuariosControllerApi, settings } from "@/app/api-programa";
 import { useAuth } from "@/app/auth/AuthContext";
 import jwt from "@/app/auth/jwt/useJwt";
 import { useRouter } from 'next/navigation';

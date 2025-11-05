@@ -10251,12 +10251,6 @@ export interface NewPermiso {
      * @type {string}
      * @memberof NewPermiso
      */
-    'modulo'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof NewPermiso
-     */
     'controlador'?: string | null;
     /**
      * 
@@ -12319,12 +12313,6 @@ export interface Permiso {
      * @type {string}
      * @memberof Permiso
      */
-    'modulo'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof Permiso
-     */
     'controlador'?: string | null;
     /**
      * 
@@ -12460,12 +12448,6 @@ export interface PermisoPartial {
      * @type {string}
      * @memberof PermisoPartial
      */
-    'modulo'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof PermisoPartial
-     */
     'controlador'?: string | null;
     /**
      * 
@@ -12516,12 +12498,6 @@ export interface PermisoWithRelations {
      * @memberof PermisoWithRelations
      */
     'rolId': number;
-    /**
-     * 
-     * @type {string}
-     * @memberof PermisoWithRelations
-     */
-    'modulo'?: string | null;
     /**
      * 
      * @type {string}
@@ -34481,13 +34457,12 @@ export const PermisoControllerApiAxiosParamCreator = function (configuration?: C
         /**
          * 
          * @param {string} [rolId] 
-         * @param {string} [modulo] 
          * @param {string} [controlador] 
          * @param {string} [accion] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        permisoControllerBuscarPermiso: async (rolId?: string, modulo?: string, controlador?: string, accion?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        permisoControllerBuscarPermiso: async (rolId?: string, controlador?: string, accion?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/buscarPermiso`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -34506,10 +34481,6 @@ export const PermisoControllerApiAxiosParamCreator = function (configuration?: C
 
             if (rolId !== undefined) {
                 localVarQueryParameter['rolId'] = rolId;
-            }
-
-            if (modulo !== undefined) {
-                localVarQueryParameter['modulo'] = modulo;
             }
 
             if (controlador !== undefined) {
@@ -34898,14 +34869,13 @@ export const PermisoControllerApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @param {string} [rolId] 
-         * @param {string} [modulo] 
          * @param {string} [controlador] 
          * @param {string} [accion] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async permisoControllerBuscarPermiso(rolId?: string, modulo?: string, controlador?: string, accion?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<PermisoWithRelations>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.permisoControllerBuscarPermiso(rolId, modulo, controlador, accion, options);
+        async permisoControllerBuscarPermiso(rolId?: string, controlador?: string, accion?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<PermisoWithRelations>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.permisoControllerBuscarPermiso(rolId, controlador, accion, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -35015,14 +34985,13 @@ export const PermisoControllerApiFactory = function (configuration?: Configurati
         /**
          * 
          * @param {string} [rolId] 
-         * @param {string} [modulo] 
          * @param {string} [controlador] 
          * @param {string} [accion] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        permisoControllerBuscarPermiso(rolId?: string, modulo?: string, controlador?: string, accion?: string, options?: any): AxiosPromise<Array<PermisoWithRelations>> {
-            return localVarFp.permisoControllerBuscarPermiso(rolId, modulo, controlador, accion, options).then((request) => request(axios, basePath));
+        permisoControllerBuscarPermiso(rolId?: string, controlador?: string, accion?: string, options?: any): AxiosPromise<Array<PermisoWithRelations>> {
+            return localVarFp.permisoControllerBuscarPermiso(rolId, controlador, accion, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -35122,15 +35091,14 @@ export class PermisoControllerApi extends BaseAPI {
     /**
      * 
      * @param {string} [rolId] 
-     * @param {string} [modulo] 
      * @param {string} [controlador] 
      * @param {string} [accion] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof PermisoControllerApi
      */
-    public permisoControllerBuscarPermiso(rolId?: string, modulo?: string, controlador?: string, accion?: string, options?: AxiosRequestConfig) {
-        return PermisoControllerApiFp(this.configuration).permisoControllerBuscarPermiso(rolId, modulo, controlador, accion, options).then((request) => request(this.axios, this.basePath));
+    public permisoControllerBuscarPermiso(rolId?: string, controlador?: string, accion?: string, options?: AxiosRequestConfig) {
+        return PermisoControllerApiFp(this.configuration).permisoControllerBuscarPermiso(rolId, controlador, accion, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

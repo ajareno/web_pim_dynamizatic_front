@@ -147,9 +147,9 @@ const manejarCambioImagen = (event) => {
     return event.target.files[0];
 };
 
-const tieneUsuarioPermiso = async (modulo, controlador, permiso) => {    
+const tieneUsuarioPermiso = async (controlador, permiso) => {    
     const usuario = getUsuarioSesion();
-    return await compruebaPermiso(usuario.rolId, modulo, controlador, permiso);
+    return await compruebaPermiso(usuario.rolId, controlador, permiso);
 }
 
 const obtenerTodosLosPermisos = async accion => {

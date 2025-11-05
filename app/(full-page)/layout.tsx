@@ -7,9 +7,9 @@ interface FullPageLayoutProps {
 }
 
 export const metadata: Metadata = {
-    title: "Nathalie",
+    title: "PIM DYNAMIZATIC",
     description:
-        "Language Experiences.",
+        "Catálogo digital de Dynamizatic.",
 };
 
 export default function FullPageLayout({ children }: FullPageLayoutProps) {

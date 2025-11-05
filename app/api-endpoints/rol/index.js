@@ -1,4 +1,4 @@
-import { RolControllerApi, settings, PermisoControllerApi, EmpresaControllerApi } from "@/app/api-nathalie";
+import { RolControllerApi, settings, PermisoControllerApi, EmpresaControllerApi } from "@/app/api-programa";
 import { getUsuarioSesion } from "@/app/utility/Utils";
 const apiRol = new RolControllerApi(settings)
 const apiPermisos = new PermisoControllerApi(settings)

@@ -1,4 +1,4 @@
-import { IdiomaControllerApi, MensajePlantillaControllerApi, settings } from "@/app/api-nathalie";
+import { IdiomaControllerApi, MensajePlantillaControllerApi, settings } from "@/app/api-programa";
 
 const apiIdioma = new IdiomaControllerApi(settings)
 const apiMensajePlantilla = new MensajePlantillaControllerApi(settings)

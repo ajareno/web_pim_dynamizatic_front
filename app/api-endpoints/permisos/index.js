@@ -1,4 +1,4 @@
-import { settings, PermisoControllerApi, ListaPermisosControllerApi } from "@/app/api-nathalie";
+import { settings, PermisoControllerApi, ListaPermisosControllerApi } from "@/app/api-programa";
 
 const apiPermisos = new PermisoControllerApi(settings)
 
@@ -31,9 +31,9 @@ export const getVistaEmpresaRolPermiso = async (filtros) => {
     }
 }
 
-export const compruebaPermiso = async (rolId, modulo, controlador, accion) => {
+export const compruebaPermiso = async (rolId, controlador, accion) => {
     try {
-        const { data: dataPermiso } = await apiPermisos.permisoControllerBuscarPermiso(rolId, modulo, controlador, accion)
+        const { data: dataPermiso } = await apiPermisos.permisoControllerBuscarPermiso(rolId, controlador, accion)
         return dataPermiso   
     } catch (error) {
         console.log(error)
