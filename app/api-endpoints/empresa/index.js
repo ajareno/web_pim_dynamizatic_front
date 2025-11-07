@@ -1,4 +1,5 @@
 import { EmpresaControllerApi, settings } from "@/app/api-programa";
+import { getLayoutConfigFromEmpresa, prepareEmpresaWithLayoutConfig } from "@/app/utility/LayoutConfigService";
 
 const apiEmpresa = new EmpresaControllerApi(settings)
 
@@ -30,4 +31,24 @@ export const deleteEmpresa = async (idEmpresa) => {
 export const patchEmpresa = async (idEmpresa, objEmpresa) => {
     const { data: dataEmpresa } = await apiEmpresa.empresaControllerUpdateById(idEmpresa, objEmpresa)
     return dataEmpresa
+}
+
+// ============================================================================
+// FUNCIONES ESPECÍFICAS PARA CONFIGURACIÓN DE LAYOUT
+// ============================================================================
+
+/**
+ * Obtener configuración de layout de una empresa
+ */
+export const getEmpresaLayoutConfig = async (id) => {
+    const empresa = await getEmpresa(id);
+    return getLayoutConfigFromEmpresa(empresa);
+}
+
+/**
+ * Actualizar empresa con nueva configuración de layout
+ */
+export const updateEmpresaLayoutConfig = async (idEmpresa, empresaData, layoutConfig) => {
+    const empresaWithLayout = prepareEmpresaWithLayoutConfig(empresaData, layoutConfig);
+    return await patchEmpresa(idEmpresa, empresaWithLayout);
 }

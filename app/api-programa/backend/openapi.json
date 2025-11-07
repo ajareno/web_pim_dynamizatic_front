@@ -22728,6 +22728,34 @@
           "tiempoInactividad": {
             "type": "number",
             "nullable": false
+          },
+          "temaRipple": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "estiloInput": {
+            "type": "string",
+            "nullable": true
+          },
+          "modoMenu": {
+            "type": "string",
+            "nullable": true
+          },
+          "temaMenu": {
+            "type": "string",
+            "nullable": true
+          },
+          "esquemaColor": {
+            "type": "string",
+            "nullable": true
+          },
+          "tema": {
+            "type": "string",
+            "nullable": true
+          },
+          "escala": {
+            "type": "number",
+            "nullable": true
           }
         },
         "required": [
@@ -22777,6 +22805,34 @@
           "tiempoInactividad": {
             "type": "number",
             "nullable": false
+          },
+          "temaRipple": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "estiloInput": {
+            "type": "string",
+            "nullable": true
+          },
+          "modoMenu": {
+            "type": "string",
+            "nullable": true
+          },
+          "temaMenu": {
+            "type": "string",
+            "nullable": true
+          },
+          "esquemaColor": {
+            "type": "string",
+            "nullable": true
+          },
+          "tema": {
+            "type": "string",
+            "nullable": true
+          },
+          "escala": {
+            "type": "number",
+            "nullable": true
           }
         },
         "required": [
@@ -22831,6 +22887,34 @@
           "tiempoInactividad": {
             "type": "number",
             "nullable": false
+          },
+          "temaRipple": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "estiloInput": {
+            "type": "string",
+            "nullable": true
+          },
+          "modoMenu": {
+            "type": "string",
+            "nullable": true
+          },
+          "temaMenu": {
+            "type": "string",
+            "nullable": true
+          },
+          "esquemaColor": {
+            "type": "string",
+            "nullable": true
+          },
+          "tema": {
+            "type": "string",
+            "nullable": true
+          },
+          "escala": {
+            "type": "number",
+            "nullable": true
           }
         },
         "required": [
@@ -22885,6 +22969,34 @@
           "tiempoInactividad": {
             "type": "number",
             "nullable": false
+          },
+          "temaRipple": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "estiloInput": {
+            "type": "string",
+            "nullable": true
+          },
+          "modoMenu": {
+            "type": "string",
+            "nullable": true
+          },
+          "temaMenu": {
+            "type": "string",
+            "nullable": true
+          },
+          "esquemaColor": {
+            "type": "string",
+            "nullable": true
+          },
+          "tema": {
+            "type": "string",
+            "nullable": true
+          },
+          "escala": {
+            "type": "number",
+            "nullable": true
           }
         },
         "additionalProperties": false,
@@ -27691,6 +27803,27 @@
                   },
                   "tiempoInactividad": {
                     "type": "boolean"
+                  },
+                  "temaRipple": {
+                    "type": "boolean"
+                  },
+                  "estiloInput": {
+                    "type": "boolean"
+                  },
+                  "modoMenu": {
+                    "type": "boolean"
+                  },
+                  "temaMenu": {
+                    "type": "boolean"
+                  },
+                  "esquemaColor": {
+                    "type": "boolean"
+                  },
+                  "tema": {
+                    "type": "boolean"
+                  },
+                  "escala": {
+                    "type": "boolean"
                   }
                 },
                 "additionalProperties": false
@@ -27709,7 +27842,14 @@
                     "fechaModificacion",
                     "usuarioCreacion",
                     "usuarioModificacion",
-                    "tiempoInactividad"
+                    "tiempoInactividad",
+                    "temaRipple",
+                    "estiloInput",
+                    "modoMenu",
+                    "temaMenu",
+                    "esquemaColor",
+                    "tema",
+                    "escala"
                   ],
                   "example": "id"
                 },
@@ -27791,6 +27931,27 @@
                   },
                   "tiempoInactividad": {
                     "type": "boolean"
+                  },
+                  "temaRipple": {
+                    "type": "boolean"
+                  },
+                  "estiloInput": {
+                    "type": "boolean"
+                  },
+                  "modoMenu": {
+                    "type": "boolean"
+                  },
+                  "temaMenu": {
+                    "type": "boolean"
+                  },
+                  "esquemaColor": {
+                    "type": "boolean"
+                  },
+                  "tema": {
+                    "type": "boolean"
+                  },
+                  "escala": {
+                    "type": "boolean"
                   }
                 },
                 "additionalProperties": false
@@ -27809,7 +27970,14 @@
                     "fechaModificacion",
                     "usuarioCreacion",
                     "usuarioModificacion",
-                    "tiempoInactividad"
+                    "tiempoInactividad",
+                    "temaRipple",
+                    "estiloInput",
+                    "modoMenu",
+                    "temaMenu",
+                    "esquemaColor",
+                    "tema",
+                    "escala"
                   ],
                   "example": "id"
                 },
