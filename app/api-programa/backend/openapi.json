@@ -1,9 +1,9 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "Bbddmysql application",
+    "title": "ApiBackend application",
     "version": "1.0.0",
-    "description": "Proyecto API encargado de ser la parte Backend de la aplicación web Bbddmysql",
+    "description": "Proyecto API encargado de ser la parte Backend de la aplicación WEB",
     "contact": {
       "name": "Agus",
       "email": "ajareno@dynamizatic.com"

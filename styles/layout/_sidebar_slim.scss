@@ -1,3 +1,5 @@
+@use 'variables' as *; // Importo las variables primero
+
 @media screen and (min-width: $breakpoint) {
     .layout-container {
         &.layout-slim {

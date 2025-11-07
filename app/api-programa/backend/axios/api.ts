@@ -1,8 +1,8 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Bbddmysql application
- * Proyecto API encargado de ser la parte Backend de la aplicación web Bbddmysql
+ * ApiBackend application
+ * Proyecto API encargado de ser la parte Backend de la aplicación WEB
  *
  * The version of the OpenAPI document: 1.0.0
  * Contact: ajareno@dynamizatic.com

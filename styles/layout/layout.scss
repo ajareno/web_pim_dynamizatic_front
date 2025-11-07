@@ -1,26 +1,25 @@
-$breakpoint: 992px !default;
-$scale: 14px !default;
+@use 'variables' as *; // Importo las variables primero
 
-@import './_fonts';
-@import './_layout_light';
-@import './_layout_dim';
-@import './_layout_dark';
-@import './_main';
-@import './_sidebar_vertical';
-@import './_sidebar_slim';
-@import './_sidebar_slim_plus';
-@import './_sidebar_horizontal';
-@import './_sidebar_reveal';
-@import './_sidebar_drawer';
-@import './menutheme/_menutheme';
-@import './_responsive';
-@import './_topbar';
-@import './_breadcrumb';
-@import './_profile';
-@import './_config';
-@import './_content';
-@import './_typography';
-@import './_utils';
+@use '_fonts';
+@use '_layout_light';
+@use '_layout_dim';
+@use '_layout_dark';
+@use '_main';
+@use '_sidebar_vertical';
+@use '_sidebar_slim';
+@use '_sidebar_slim_plus';
+@use '_sidebar_horizontal';
+@use '_sidebar_reveal';
+@use '_sidebar_drawer';
+@use 'menutheme/_menutheme';
+@use '_responsive';
+@use '_topbar';
+@use '_breadcrumb';
+@use '_profile';
+@use '_config';
+@use '_content';
+@use '_typography';
+@use '_utils';
 
 //
 //******************************************************************************************************************************
