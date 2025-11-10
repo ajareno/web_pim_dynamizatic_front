@@ -1,7 +1,10 @@
+@use "sass:meta";
+@use 'badges.scss';
+
 @import './flags/flags.css';
-@import './badges.scss';
-@import './code.scss';
-@import './BlockViewer.scss';
-@import './Landing.scss';
-@import './CustomFileUpload.scss';
-@import './Calendar.scss';
+
+@include meta.load-css('code.scss');
+@include meta.load-css('BlockViewer.scss');
+@include meta.load-css('Landing.scss');
+@include meta.load-css('CustomFileUpload.scss');
+@include meta.load-css('Calendar.scss');
