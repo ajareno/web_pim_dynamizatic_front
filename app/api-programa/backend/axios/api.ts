@@ -3464,6 +3464,48 @@ export interface Empresa {
      * @memberof Empresa
      */
     'tiempoInactividad'?: number;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof Empresa
+     */
+    'temaRipple'?: boolean | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof Empresa
+     */
+    'estiloInput'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof Empresa
+     */
+    'modoMenu'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof Empresa
+     */
+    'temaMenu'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof Empresa
+     */
+    'esquemaColor'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof Empresa
+     */
+    'tema'?: string | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof Empresa
+     */
+    'escala'?: number | null;
 }
 /**
  * 
@@ -3611,6 +3653,48 @@ export interface EmpresaPartial {
      * @memberof EmpresaPartial
      */
     'tiempoInactividad'?: number;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof EmpresaPartial
+     */
+    'temaRipple'?: boolean | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof EmpresaPartial
+     */
+    'estiloInput'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof EmpresaPartial
+     */
+    'modoMenu'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof EmpresaPartial
+     */
+    'temaMenu'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof EmpresaPartial
+     */
+    'esquemaColor'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof EmpresaPartial
+     */
+    'tema'?: string | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof EmpresaPartial
+     */
+    'escala'?: number | null;
 }
 /**
  * (tsType: EmpresaWithRelations, schemaOptions: { includeRelations: true })
@@ -3678,6 +3762,48 @@ export interface EmpresaWithRelations {
      * @memberof EmpresaWithRelations
      */
     'tiempoInactividad'?: number;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof EmpresaWithRelations
+     */
+    'temaRipple'?: boolean | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof EmpresaWithRelations
+     */
+    'estiloInput'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof EmpresaWithRelations
+     */
+    'modoMenu'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof EmpresaWithRelations
+     */
+    'temaMenu'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof EmpresaWithRelations
+     */
+    'esquemaColor'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof EmpresaWithRelations
+     */
+    'tema'?: string | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof EmpresaWithRelations
+     */
+    'escala'?: number | null;
 }
 /**
  * 
@@ -9021,6 +9147,48 @@ export interface NewEmpresa {
      * @memberof NewEmpresa
      */
     'tiempoInactividad'?: number;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof NewEmpresa
+     */
+    'temaRipple'?: boolean | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewEmpresa
+     */
+    'estiloInput'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewEmpresa
+     */
+    'modoMenu'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewEmpresa
+     */
+    'temaMenu'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewEmpresa
+     */
+    'esquemaColor'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewEmpresa
+     */
+    'tema'?: string | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof NewEmpresa
+     */
+    'escala'?: number | null;
 }
 /**
  * (tsType: Omit<GrupoAtributo, \'id\'>, schemaOptions: { title: \'NewGrupoAtributo\', exclude: [ \'id\' ] })
