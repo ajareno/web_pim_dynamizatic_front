@@ -5,14 +5,21 @@ import type {
     LayoutConfig,
     LayoutContextProps,
     LayoutState,
+    MenuMode,
+    MenuColorScheme,
+    ColorScheme,
 } from "@/types";
 import Head from "next/head";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useEmpresaTheme } from "@/app/hooks/useEmpresaTheme";
 
 export const LayoutContext = React.createContext({} as LayoutContextProps);
 
 export const LayoutProvider = (props: ChildContainerProps) => {
     const [breadcrumbs, setBreadcrumbs] = useState<Breadcrumb[]>([]);
+    const { themeConfig } = useEmpresaTheme(); // Usar el hook centralizado
+    
+    // Usar la configuración del hook como layoutConfig
     const [layoutConfig, setLayoutConfig] = useState<LayoutConfig>({
         ripple: false,
         inputStyle: "outlined",
@@ -22,6 +29,23 @@ export const LayoutProvider = (props: ChildContainerProps) => {
         theme: "mitema",
         scale: 14,
     });
+
+    // Sincronizar layoutConfig con themeConfig del hook
+    useEffect(() => {
+        if (themeConfig) {
+            setLayoutConfig(prev => ({
+                ...prev,
+                ripple: themeConfig.ripple,
+                inputStyle: themeConfig.inputStyle,
+                menuMode: themeConfig.menuMode as MenuMode,
+                menuTheme: themeConfig.menuTheme as MenuColorScheme,
+                colorScheme: themeConfig.colorScheme as ColorScheme,
+                theme: themeConfig.theme,
+                scale: themeConfig.scale
+            }));
+            console.log('🔧 Layout config sincronizado con empresa:', themeConfig);
+        }
+    }, [themeConfig]);
 
     const [layoutState, setLayoutState] = useState<LayoutState>({
         staticMenuDesktopInactive: false,

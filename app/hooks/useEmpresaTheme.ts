@@ -1,0 +1,208 @@
+// ============================================================================
+// HOOK PARA GESTIÓN DINÁMICA DE TEMAS DE EMPRESA - useEmpresaTheme.ts
+// ============================================================================
+
+import { useState, useEffect, useCallback } from 'react';
+import { getEmpresa, patchEmpresa } from "@/app/api-endpoints/empresa";
+import { getLayoutConfigFromEmpresa, prepareEmpresaWithLayoutConfig } from "@/app/utility/LayoutConfigService";
+import { applyThemeConfig } from "@/app/utility/ThemeService";
+
+interface ThemeConfig {
+    colorScheme: string;
+    theme: string;
+    scale: number;
+    ripple: boolean;
+    inputStyle: string;
+    menuMode: string;
+    menuTheme: string;
+}
+
+interface UseEmpresaThemeReturn {
+    themeConfig: ThemeConfig;
+    loading: boolean;
+    loadEmpresaThemeConfig: () => Promise<ThemeConfig | null>;
+    updateEmpresaThemeConfig: (newConfig: Partial<ThemeConfig>) => Promise<ThemeConfig | null>;
+    changeTheme: (newTheme: string) => Promise<ThemeConfig | null>;
+    changeColorScheme: (newColorScheme: string) => Promise<ThemeConfig | null>;
+    updateMultipleConfigs: (configs: Partial<ThemeConfig>) => Promise<ThemeConfig | null>;
+    empresaData: any;
+}
+
+/**
+ * Hook personalizado para gestionar la configuración de tema de la empresa
+ * @returns {UseEmpresaThemeReturn} Objeto con configuración actual y funciones para actualizar
+ */
+export const useEmpresaTheme = (): UseEmpresaThemeReturn => {
+    const [themeConfig, setThemeConfig] = useState<ThemeConfig>({
+        colorScheme: 'light',
+        theme: 'mitema',
+        scale: 14,
+        ripple: false,
+        inputStyle: 'outlined',
+        menuMode: 'static',
+        menuTheme: 'colorScheme'
+    });
+    
+    const [loading, setLoading] = useState(false);
+    const [empresaData, setEmpresaData] = useState<any>(null);
+
+    // Función para cargar la configuración desde la empresa
+    const loadEmpresaThemeConfig = useCallback(async (): Promise<ThemeConfig | null> => {
+        try {
+            setLoading(true);
+            
+            // Obtener el ID de la empresa desde localStorage
+            const empresaId = localStorage.getItem('empresa');
+            
+            if (empresaId) {
+                // Obtener los datos de la empresa
+                const empresa = await getEmpresa(Number(empresaId));
+                
+                if (empresa) {
+                    setEmpresaData(empresa);
+                    
+                    // Usar el servicio para extraer la configuración
+                    const layoutConfig = getLayoutConfigFromEmpresa(empresa);
+                    
+                    setThemeConfig(layoutConfig);
+                    
+                    console.log('✅ Configuración del tema cargada desde empresa:', layoutConfig);
+                    return layoutConfig;
+                }
+            }
+            
+            return null;
+        } catch (error) {
+            console.error('❌ Error al cargar la configuración del tema:', error);
+            return null;
+        } finally {
+            setLoading(false);
+        }
+    }, []);
+
+    // Función para actualizar la configuración de tema en la empresa
+    const updateEmpresaThemeConfig = useCallback(async (newConfig: Partial<ThemeConfig>): Promise<ThemeConfig | null> => {
+        try {
+            setLoading(true);
+            
+            const empresaId = localStorage.getItem('empresa');
+            if (!empresaId || !empresaData) {
+                throw new Error('No se encontraron datos de empresa');
+            }
+
+            // Preparar los datos actualizados de la empresa
+            const updatedEmpresaData = prepareEmpresaWithLayoutConfig(empresaData, {
+                ...themeConfig,
+                ...newConfig
+            });
+
+            // Actualizar en la base de datos
+            const updatedEmpresa = await patchEmpresa(Number(empresaId), updatedEmpresaData);
+            
+            if (updatedEmpresa) {
+                // Actualizar estado local
+                setEmpresaData(updatedEmpresa);
+                
+                const newThemeConfig = {
+                    ...themeConfig,
+                    ...newConfig
+                };
+                
+                setThemeConfig(newThemeConfig);
+                
+                console.log('✅ Configuración de tema actualizada en empresa:', newConfig);
+                return newThemeConfig;
+            }
+            
+            return null;
+        } catch (error) {
+            console.error('❌ Error al actualizar la configuración del tema:', error);
+            return null;
+        } finally {
+            setLoading(false);
+        }
+    }, [themeConfig, empresaData]);
+
+    // Función para cambiar solo el tema visual
+    const changeTheme = useCallback(async (newTheme: string): Promise<ThemeConfig | null> => {
+        const updatedConfig = await updateEmpresaThemeConfig({ theme: newTheme });
+        
+        if (updatedConfig) {
+            // Aplicar tema inmediatamente
+            applyThemeConfig({
+                colorScheme: updatedConfig.colorScheme,
+                theme: updatedConfig.theme
+            }, () => {
+                console.log('✅ Tema aplicado:', newTheme);
+            });
+        }
+        
+        return updatedConfig;
+    }, [updateEmpresaThemeConfig]);
+
+    // Función para cambiar solo el esquema de color
+    const changeColorScheme = useCallback(async (newColorScheme: string): Promise<ThemeConfig | null> => {
+        const updatedConfig = await updateEmpresaThemeConfig({ colorScheme: newColorScheme });
+        
+        if (updatedConfig) {
+            // Aplicar tema inmediatamente
+            applyThemeConfig({
+                colorScheme: updatedConfig.colorScheme,
+                theme: updatedConfig.theme
+            }, () => {
+                console.log('✅ Esquema de color aplicado:', newColorScheme);
+            });
+        }
+        
+        return updatedConfig;
+    }, [updateEmpresaThemeConfig]);
+
+    // Función para cambiar múltiples configuraciones
+    const updateMultipleConfigs = useCallback(async (configs: Partial<ThemeConfig>): Promise<ThemeConfig | null> => {
+        const updatedConfig = await updateEmpresaThemeConfig(configs);
+        
+        if (updatedConfig && (configs.colorScheme || configs.theme)) {
+            // Aplicar tema si se cambió colorScheme o theme
+            applyThemeConfig({
+                colorScheme: updatedConfig.colorScheme,
+                theme: updatedConfig.theme
+            }, () => {
+                console.log('✅ Configuración múltiple aplicada:', configs);
+            });
+        }
+        
+        return updatedConfig;
+    }, [updateEmpresaThemeConfig]);
+
+    // Cargar configuración inicial
+    useEffect(() => {
+        if (typeof window !== 'undefined') {
+            loadEmpresaThemeConfig();
+        }
+    }, [loadEmpresaThemeConfig]);
+
+    // Escuchar cambios en localStorage
+    useEffect(() => {
+        const handleStorageChange = (e: StorageEvent) => {
+            if (e.key === 'empresa' && e.newValue) {
+                loadEmpresaThemeConfig();
+            }
+        };
+
+        if (typeof window !== 'undefined') {
+            window.addEventListener('storage', handleStorageChange);
+            return () => window.removeEventListener('storage', handleStorageChange);
+        }
+    }, [loadEmpresaThemeConfig]);
+
+    return {
+        themeConfig,
+        loading,
+        loadEmpresaThemeConfig,
+        updateEmpresaThemeConfig,
+        changeTheme,
+        changeColorScheme,
+        updateMultipleConfigs,
+        empresaData
+    };
+};

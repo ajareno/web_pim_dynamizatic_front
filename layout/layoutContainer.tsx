@@ -190,8 +190,7 @@ const LayoutContainer = (props: ChildContainerProps) => {
                     <AppBreadCrumb className="content-breadcrumb"></AppBreadCrumb>
                     <div className="layout-content">{props.children}</div>
                 </div>
-                <AppProfileSidebar />
-                {process.env.NEXT_PUBLIC_ENTORNO === 'LOCAL' && <AppConfig />}
+                <AppProfileSidebar />                
                 <div className="layout-mask"></div>
 
             </div>}
