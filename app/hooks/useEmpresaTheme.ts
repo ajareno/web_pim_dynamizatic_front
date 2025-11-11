@@ -54,27 +54,52 @@ export const useEmpresaTheme = (): UseEmpresaThemeReturn => {
             // Obtener el ID de la empresa desde localStorage
             const empresaId = localStorage.getItem('empresa');
             
-            if (empresaId) {
-                // Obtener los datos de la empresa
-                const empresa = await getEmpresa(Number(empresaId));
+            if (!empresaId) {
+                console.log('ℹ️ useEmpresaTheme: No hay empresa en localStorage, usando configuración por defecto');
+                // Configuración por defecto cuando no hay empresa
+                const defaultConfig: ThemeConfig = {
+                    colorScheme: 'light',
+                    theme: 'mitema',
+                    scale: 14,
+                    ripple: false,
+                    inputStyle: 'outlined',
+                    menuMode: 'static',
+                    menuTheme: 'colorScheme'
+                };
+                setThemeConfig(defaultConfig);
+                return defaultConfig;
+            }
+            
+            // Obtener los datos de la empresa
+            const empresa = await getEmpresa(Number(empresaId));
+            
+            if (empresa) {
+                setEmpresaData(empresa);
                 
-                if (empresa) {
-                    setEmpresaData(empresa);
-                    
-                    // Usar el servicio para extraer la configuración
-                    const layoutConfig = getLayoutConfigFromEmpresa(empresa);
-                    
-                    setThemeConfig(layoutConfig);
-                    
-                    console.log('✅ Configuración del tema cargada desde empresa:', layoutConfig);
-                    return layoutConfig;
-                }
+                // Usar el servicio para extraer la configuración
+                const layoutConfig = getLayoutConfigFromEmpresa(empresa);
+                
+                setThemeConfig(layoutConfig);
+                
+                console.log('✅ Configuración del tema cargada desde empresa:', layoutConfig);
+                return layoutConfig;
             }
             
             return null;
         } catch (error) {
             console.error('❌ Error al cargar la configuración del tema:', error);
-            return null;
+            // En caso de error, usar configuración por defecto
+            const defaultConfig: ThemeConfig = {
+                colorScheme: 'light',
+                theme: 'mitema',
+                scale: 14,
+                ripple: false,
+                inputStyle: 'outlined',
+                menuMode: 'static',
+                menuTheme: 'colorScheme'
+            };
+            setThemeConfig(defaultConfig);
+            return defaultConfig;
         } finally {
             setLoading(false);
         }

@@ -1,11 +1,10 @@
 // ============================================================================
-// PROVIDER DE TEMA DINÁMICO - ThemeProvider.tsx
+// PROVIDER DE TEMA SIMPLIFICADO - ThemeProvider.tsx
 // ============================================================================
 
 "use client";
-import React, { createContext, useContext, useEffect, ReactNode } from 'react';
+import React, { createContext, useContext, ReactNode } from 'react';
 import { useEmpresaTheme } from "@/app/hooks/useEmpresaTheme";
-import { applyThemeConfig } from "@/app/utility/ThemeService";
 
 interface ThemeContextType {
     themeConfig: any;
@@ -29,19 +28,6 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
         changeColorScheme,
         updateMultipleConfigs
     } = useEmpresaTheme();
-
-    // Aplicar tema inicial cuando se carga la configuración
-    useEffect(() => {
-        if (themeConfig && !loading) {
-            // Aplicar tema inmediatamente al cargar
-            applyThemeConfig({
-                colorScheme: themeConfig.colorScheme,
-                theme: themeConfig.theme
-            }, () => {
-                console.log('🎨 Tema inicial aplicado desde ThemeProvider:', themeConfig);
-            });
-        }
-    }, [themeConfig, loading]);
 
     const value: ThemeContextType = {
         themeConfig,

@@ -46,6 +46,16 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     Cookies.set('authToken', token, { expires: rememberMe ? 7 : undefined });
     setUsuarioAutenticado(true);
     await almacenarLogin(data);
+    
+    // Disparar evento personalizado para notificar el login
+    if (typeof window !== 'undefined') {
+      const loginEvent = new CustomEvent('user-logged-in', {
+        detail: { empresaId: data.empresaId, userId: data.id }
+      });
+      window.dispatchEvent(loginEvent);
+      console.log('🔔 Evento de login disparado para tema:', data.empresaId);
+    }
+    
     router.push(await obtenerRolDashboard());
   };
 
@@ -266,6 +276,13 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     //Vaciamos localStorage y cookies
     Cookies.remove('authToken');
     localStorage.clear();
+
+    // Disparar evento personalizado para notificar el logout
+    if (typeof window !== 'undefined') {
+      const logoutEvent = new CustomEvent('user-logged-out');
+      window.dispatchEvent(logoutEvent);
+      console.log('🔔 Evento de logout disparado para restaurar tema por defecto');
+    }
 
     // Limio la caché y espero a que devuelva la respuesta para luego hacer el dispatch
     emptyCache().then(() => {
