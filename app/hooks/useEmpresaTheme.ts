@@ -52,7 +52,20 @@ export const useEmpresaTheme = (): UseEmpresaThemeReturn => {
             setLoading(true);
             
             // Obtener el ID de la empresa desde localStorage
-            const empresaId = localStorage.getItem('empresa');
+            let empresaId = localStorage.getItem('empresa');
+            
+            // Si no existe en localStorage, intentar obtenerlo desde userData
+            if (!empresaId) {
+                const userData = localStorage.getItem('userData');
+                if (userData) {
+                    try {
+                        const user = JSON.parse(userData);
+                        empresaId = user.empresaId?.toString();
+                    } catch (err) {
+                        console.error('Error parsing userData:', err);
+                    }
+                }
+            }
             
             if (!empresaId) {
                 console.log('ℹ️ useEmpresaTheme: No hay empresa en localStorage, usando configuración por defecto');
@@ -202,21 +215,58 @@ export const useEmpresaTheme = (): UseEmpresaThemeReturn => {
     // Cargar configuración inicial
     useEffect(() => {
         if (typeof window !== 'undefined') {
+            console.log('🎨 useEmpresaTheme: Cargando configuración inicial');
             loadEmpresaThemeConfig();
+            
+            // También verificar después de un delay por si hay cambios async
+            const timeoutId = setTimeout(() => {
+                console.log('🎨 useEmpresaTheme: Verificación secundaria');
+                loadEmpresaThemeConfig();
+            }, 1000);
+            
+            return () => clearTimeout(timeoutId);
         }
     }, [loadEmpresaThemeConfig]);
 
-    // Escuchar cambios en localStorage
+    // Escuchar cambios en localStorage y eventos de autenticación
     useEffect(() => {
         const handleStorageChange = (e: StorageEvent) => {
-            if (e.key === 'empresa' && e.newValue) {
+            if ((e.key === 'empresa' || e.key === 'userData') && e.newValue) {
+                console.log('🎨 useEmpresaTheme: Cambio detectado en storage:', e.key);
                 loadEmpresaThemeConfig();
             }
         };
 
+        const handleLoginEvent = () => {
+            console.log('🎨 useEmpresaTheme: Evento de login detectado');
+            setTimeout(() => loadEmpresaThemeConfig(), 100);
+        };
+
+        const handleLogoutEvent = () => {
+            console.log('🎨 useEmpresaTheme: Evento de logout detectado');
+            // Restaurar configuración por defecto
+            const defaultConfig: ThemeConfig = {
+                colorScheme: 'light',
+                theme: 'mitema',
+                scale: 14,
+                ripple: false,
+                inputStyle: 'outlined',
+                menuMode: 'static',
+                menuTheme: 'colorScheme'
+            };
+            setThemeConfig(defaultConfig);
+        };
+
         if (typeof window !== 'undefined') {
             window.addEventListener('storage', handleStorageChange);
-            return () => window.removeEventListener('storage', handleStorageChange);
+            window.addEventListener('user-logged-in', handleLoginEvent);
+            window.addEventListener('user-logged-out', handleLogoutEvent);
+            
+            return () => {
+                window.removeEventListener('storage', handleStorageChange);
+                window.removeEventListener('user-logged-in', handleLoginEvent);
+                window.removeEventListener('user-logged-out', handleLogoutEvent);
+            };
         }
     }, [loadEmpresaThemeConfig]);
 

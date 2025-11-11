@@ -102,20 +102,39 @@ export const applyThemeConfig = (themeConfig, callback) => {
     const { colorScheme, theme } = themeConfig;
     const newHref = buildThemeUrl(colorScheme, theme);
     
+    console.log(`🎨 ThemeService: Aplicando tema ${theme} con esquema ${colorScheme}`);
+    
     const linkElement = document.getElementById('theme-link');
     if (linkElement) {
         const currentHref = linkElement.getAttribute('href');
         
         if (currentHref !== newHref) {
-            console.log(`Aplicando configuración de tema completa: ${newHref}`);
-            linkElement.setAttribute('href', newHref);
+            console.log(`🔄 Cambiando de ${currentHref} a ${newHref}`);
             
-            if (callback && typeof callback === 'function') {
-                setTimeout(callback, 100);
-            }
+            // Forzar la recarga del CSS
+            linkElement.setAttribute('href', newHref + '?t=' + Date.now());
+            
+            // Esperar a que se cargue el nuevo CSS
+            linkElement.onload = () => {
+                console.log('✅ Tema aplicado correctamente');
+                if (callback && typeof callback === 'function') {
+                    callback();
+                }
+            };
+            
+            // Fallback en caso de que onload no se dispare
+            setTimeout(() => {
+                if (callback && typeof callback === 'function') {
+                    callback();
+                }
+            }, 200);
+            
         } else {
-            console.log('La configuración de tema ya está aplicada');
+            console.log('ℹ️ La configuración de tema ya está aplicada');
             if (callback) callback();
         }
+    } else {
+        console.error('❌ No se encontró el elemento theme-link');
+        if (callback) callback();
     }
 };

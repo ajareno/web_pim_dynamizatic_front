@@ -197,6 +197,19 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     if (empresa?.tiempoInactividad && empresa?.tiempoInactividad > 0) {
       localStorage.setItem('tiempoDeEsperaInactividad', '' + empresa?.tiempoInactividad);
     }
+    
+    // Almacenar configuración de tema de la empresa
+    if (empresa) {
+      const themeConfig = {
+        tema: empresa.tema || 'indigo',
+        esquemaColor: empresa.esquemaColor || 'light',
+        escala: empresa.escala || 14,
+        temaRipple: empresa.temaRipple || 'N'
+      };
+      localStorage.setItem('empresaThemeConfig', JSON.stringify(themeConfig));
+      console.log('💾 Configuración de tema almacenada:', themeConfig);
+    }
+    
     if (await compruebaRolUsuario({ ...data })) {
       //Si tiene que mostrar la empresa, obtenemos el logo
       localStorage.setItem('logoEmpresaUrl', await obtenerLogoEmpresa());
