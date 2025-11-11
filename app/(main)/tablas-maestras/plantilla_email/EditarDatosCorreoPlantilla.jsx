@@ -6,16 +6,25 @@ import { Dropdown } from 'primereact/dropdown';
 import ArchivoMultipleInput from "../../../components/shared/archivo_multiple_input";
 import ArchivoInput from "../../../components/shared/archivo_input";
 import { useIntl } from 'react-intl';
-const EditarDatosCorreoPlantilla = ({ correoPlantilla, setCorreoPlantilla, contenidoWysiwyg, setContenidoWysiwyg, 
-    listaIdiomas, idiomaSeleccionado, setIdiomaSeleccionado, listaTipoArchivos, 
-    accionesCorreo, accionSeleccionada, setAccionSeleccionada, estadoGuardando }) => {
+
+const EditarDatosCorreoPlantilla = ({ 
+    correoPlantilla, 
+    setCorreoPlantilla, 
+    contenidoWysiwyg, 
+    setContenidoWysiwyg, 
+    listaIdiomas, 
+    idiomaSeleccionado, 
+    setIdiomaSeleccionado, 
+    listaTipoArchivos, 
+    estadoGuardando 
+}) => {
     const intl = useIntl();
     // Referencia para el editor
     const editorRef = useRef(null);
     const [dropdownAbierto, setDropdownAbierto] = useState(false);
+    
     //Para que el dropdown muestre el registro seleccionado aunque no este en la lista
     const options = dropdownAbierto ? listaIdiomas.map(registro => registro.nombre) : [idiomaSeleccionado || '', ...listaIdiomas.map(registro => registro.nombre)];
-
 
     //Crear inputs de archivos
     const inputsDinamicos = [];
@@ -24,15 +33,15 @@ const EditarDatosCorreoPlantilla = ({ correoPlantilla, setCorreoPlantilla, conte
         if (tipoArchivo.multiple === 'S') {
             inputsDinamicos.push(
                 <div className="flex flex-column field gap-2 mt-2 col-12">
-                <label>{tipoArchivo.nombre}</label>
-                <ArchivoMultipleInput
-                    registro={correoPlantilla}
-                    setRegistro={setCorreoPlantilla}
-                    archivoTipo={tipoArchivo.tipo}
-                    campoNombre={(tipoArchivo.nombre).toLowerCase()}
-                    espacioMaximo={1000000}
-                />
-            </div>
+                    <label>{tipoArchivo.nombre}</label>
+                    <ArchivoMultipleInput
+                        registro={correoPlantilla}
+                        setRegistro={setCorreoPlantilla}
+                        archivoTipo={tipoArchivo.tipo}
+                        campoNombre={(tipoArchivo.nombre).toLowerCase()}
+                        espacioMaximo={1000000}
+                    />
+                </div>
             );
         }
         else {
@@ -85,7 +94,7 @@ const EditarDatosCorreoPlantilla = ({ correoPlantilla, setCorreoPlantilla, conte
                     <label htmlFor="nombre"> <b>{intl.formatMessage({ id: 'Nombre de la plantilla' })}*</b></label>
                     <InputText
                         disabled={correoPlantilla.id}
-                        value={correoPlantilla.nombrePlantilla}
+                        value={correoPlantilla.nombrePlantilla || ""}
                         placeholder={intl.formatMessage({ id: 'Nombre de la plantilla' })}
                         onChange={(e) => setCorreoPlantilla({ ...correoPlantilla, nombrePlantilla: e.target.value })}
                         className={`${(estadoGuardando && correoPlantilla.nombrePlantilla === "") ? "p-invalid" : ""}`}
@@ -107,27 +116,13 @@ const EditarDatosCorreoPlantilla = ({ correoPlantilla, setCorreoPlantilla, conte
                         placeholder={intl.formatMessage({ id: 'Selecciona un idioma' })}
                     />
                 </div>
-
-                <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
-                    <label htmlFor="accion">{intl.formatMessage({ id: 'Accion' })}</label>
-                    <Dropdown
-                        value={accionSeleccionada || ""}
-                        onChange={(e) => setAccionSeleccionada(e.value)}
-                        options={accionesCorreo}
-                        onClick={() => setDropdownAbierto(true)}
-                        className={`p-column-filter ${(estadoGuardando && (accionSeleccionada == null || accionSeleccionada === "")) ? "p-invalid" : ""}`}
-                        showClear
-                        placeholder={intl.formatMessage({ id: 'Selecciona una accion' })}
-                    />
-                </div>
  
                 <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
                     <label htmlFor="titulo">{intl.formatMessage({ id: 'Titulo del mail' })}</label>
                     <InputText
-                        value={correoPlantilla.titulo}
+                        value={correoPlantilla.titulo || ""}
                         placeholder={intl.formatMessage({ id: 'Titulo del mail' })}
                         onChange={(e) => setCorreoPlantilla({ ...correoPlantilla, titulo: e.target.value })}
-                        //className={`${(estadoGuardando && correoPlantilla.titulo === "") ? "p-invalid" : ""}`}
                         rows={5}
                         cols={30}
                         maxLength={100}
@@ -142,16 +137,13 @@ const EditarDatosCorreoPlantilla = ({ correoPlantilla, setCorreoPlantilla, conte
                         style={{ height: '320px' }}
                     />
                     <label>
-                        {`Palabras: ${(((contenidoWysiwyg || '').replace(/<\/?[^>]+(>|$)/g, '')).replace(/\s/g, '')).length
-                            }`}
+                        {`Palabras: ${(((contenidoWysiwyg || '').replace(/<\/?[^>]+(>|$)/g, '')).replace(/\s/g, '')).length}`}
                     </label>
                 </div>
                 {
                     ...inputsDinamicos //Muestra los inputs generados
                 }
- 
             </div>
- 
         </Fieldset>
     );
 };

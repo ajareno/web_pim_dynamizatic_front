@@ -62,13 +62,13 @@ const Permiso = () => {
                 { header: intl.formatMessage({ id: 'Actualizar' }), seccion: 'Tipos de archivo-Actualizar' },
                 { header: intl.formatMessage({ id: 'Borrar' }), seccion: 'Tipos de archivo-Borrar' },
 
-                // Plantillas de correo
-                { header: intl.formatMessage({ id: 'Plantillas de correo' }), seccion: 'Plantillas de correo' },
-                { header: intl.formatMessage({ id: 'Acceder' }), seccion: 'Plantillas de correo-Acceder' },
-                { header: intl.formatMessage({ id: 'Ver' }), seccion: 'Plantillas de correo-Ver' },
-                { header: intl.formatMessage({ id: 'Nuevo' }), seccion: 'Plantillas de correo-Nuevo' },
-                { header: intl.formatMessage({ id: 'Actualizar' }), seccion: 'Plantillas de correo-Actualizar' },
-                { header: intl.formatMessage({ id: 'Borrar' }), seccion: 'Plantillas de correo-Borrar' },
+                // Plantillas de email
+                { header: intl.formatMessage({ id: 'Plantillas de email' }), seccion: 'Plantillas de email' },
+                { header: intl.formatMessage({ id: 'Acceder' }), seccion: 'Plantillas de email-Acceder' },
+                { header: intl.formatMessage({ id: 'Ver' }), seccion: 'Plantillas de email-Ver' },
+                { header: intl.formatMessage({ id: 'Nuevo' }), seccion: 'Plantillas de email-Nuevo' },
+                { header: intl.formatMessage({ id: 'Actualizar' }), seccion: 'Plantillas de email-Actualizar' },
+                { header: intl.formatMessage({ id: 'Borrar' }), seccion: 'Plantillas de email-Borrar' },
 
                 // Secciones
                 { header: intl.formatMessage({ id: 'Secciones' }), seccion: 'Secciones' },

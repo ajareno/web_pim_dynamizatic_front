@@ -100,7 +100,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
           "icon": "pi pi-fw pi-user-edit"
         },
         "Plantillas de email": {
-          "path": "/tablas-maestras/plantillas-email",
+          "path": "/tablas-maestras/plantilla_email",
           "icon": "pi pi-fw pi-user-edit"
         },
         "Roles": {

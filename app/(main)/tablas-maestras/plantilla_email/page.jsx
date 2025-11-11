@@ -6,13 +6,14 @@ import { useIntl } from 'react-intl'
 const CorreoPlantilla = () => {
     const intl = useIntl();
     const columnas = [
-        { campo: 'nombrePlantilla', header: intl.formatMessage({ id: 'Nombre' }), tipo: 'string' },
+        { campo: 'nombrePlantilla', header: intl.formatMessage({ id: 'Nombre de Plantilla' }), tipo: 'string' },
+        { campo: 'titulo', header: intl.formatMessage({ id: 'Título del Mail' }), tipo: 'string' },
     ]
  
     return (
         <div>
             <Crud
-                headerCrud={intl.formatMessage({ id: 'Plantillas de correo' })}
+                headerCrud={intl.formatMessage({ id: 'Plantillas de email' })}
                 seccion={"Correo plantilla"}
                 getRegistros={getVistaPlantillaEmailIdioma}
                 getRegistrosCount={getVistaPlantillaEmailIdiomaCount}
@@ -20,7 +21,7 @@ const CorreoPlantilla = () => {
                     empresaId: Number(localStorage.getItem('empresa'))
                 }}
                 botones={['nuevo','ver', 'editar', 'descargarCSV']}
-                controlador={"Plantillas de correo"}
+                controlador={"Plantillas de email"}
                 editarComponente={<EditarCorreoPlantilla />}
                 columnas={columnas}
                 deleteRegistro={deletePlantillaEmail}

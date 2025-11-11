@@ -98,7 +98,7 @@ const EnviarCorreoPlantilla = ({ }) => {
             const jsonIdiomasActivos = jsonIdiomas.filter(registro => registro.activoSn === 'S');
             setListaIdiomas(jsonIdiomasActivos);
 
-            // Obtenemos las plantillas de correo
+            // Obtenemos las Plantillas de email
             const registrosPlantillas = await getVistaPlantillaEmailIdioma(JSON.stringify({
                 where: {
                     and: {

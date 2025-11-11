@@ -1,7 +1,6 @@
 "use client";
 import React, { useEffect, useRef, useState } from "react";
 import { Toast } from "primereact/toast";
-import { Divider } from "primereact/divider";
 import { Button } from "primereact/button";
 import { getIdiomas } from "@/app/api-endpoints/idioma";
 import { postPlantillaEmail, patchPlantillaEmail } from "@/app/api-endpoints/plantilla_email";
@@ -12,9 +11,17 @@ import { getUsuarioSesion } from "@/app/utility/Utils";
 import { borrarFichero, postSubirImagen, postSubirFichero } from "@/app/api-endpoints/ficheros"
 import { postArchivo, deleteArchivo } from "@/app/api-endpoints/archivo"
 import { useIntl } from 'react-intl';
-import { getVistaPlantillaEmailIdioma, getVistaPlantillaEmailIdiomaCount, deletePlantillaEmail } from "@/app/api-endpoints/plantilla_email";
 
-const EditarCorreoPlantilla = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegistroResult, listaTipoArchivos, seccion, editable }) => {
+const EditarCorreoPlantilla = ({ 
+    idEditar, 
+    setIdEditar, 
+    rowData, 
+    emptyRegistro, 
+    setRegistroResult, 
+    listaTipoArchivos, 
+    seccion, 
+    editable 
+}) => {
     const toast = useRef(null);
     const intl = useIntl();
     const [correoPlantilla, setCorreoPlantilla] = useState(emptyRegistro);
@@ -24,8 +31,6 @@ const EditarCorreoPlantilla = ({ idEditar, setIdEditar, rowData, emptyRegistro, 
     const [estadoGuardando, setEstadoGuardando] = useState(false);
     const [estadoGuardandoBoton, setEstadoGuardandoBoton] = useState(false);
     const [listaArchivosAntiguos, setListaArchivosAntiguos] = useState([]);
-    const [accionSeleccionada, setAccionSeleccionada] = useState([]);
-    const [listaAcciones, setListaAcciones] = useState([]);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -37,44 +42,41 @@ const EditarCorreoPlantilla = ({ idEditar, setIdEditar, rowData, emptyRegistro, 
                 activoSn: idioma.activoSn
             })).sort((a, b) => a.nombre.localeCompare(b.nombre));
 
-            const accionesCorreo = [
-                { nombre: 'Recuperar contraseña', label: intl.formatMessage({ id: 'Recuperar contraseña' }) },
-                { nombre: 'Enviar un email a usuarios', label: intl.formatMessage({ id: 'Enviar un email a usuarios' }) },
-                { nombre: 'Felicitación fin evento', label: intl.formatMessage({ id: 'Felicitación a la finalización del evento' }) },
-            ];
-            //Si ya hay una plantilla de correo que no es la seleccionada con alguna accion de correo, la quitamos de la lista para que no se solapen
-            for (const accion of accionesCorreo) {
-                // Enviar un email a usuarios sera la excepcion, ya que puede haber varias plantillas con esa accion
-                if (accion.nombre === 'Enviar un email a usuarios') {
-                    continue;
-                }
-                const registrosAccion = await getVistaPlantillaEmailIdioma(JSON.stringify({ where: { and: { accion: accion.nombre } } }));
-                const plantillaConAccion = registrosAccion.find(
-                    (registro) => registro.accion === accion.nombre && registro.id !== idEditar
-                );
-                if (plantillaConAccion) {
-                    accionesCorreo.splice(accionesCorreo.indexOf(accion), 1);
-                }
-            }
-            setListaAcciones(accionesCorreo);
-
             //Quitamos los registros inactivos
             const jsonIdiomasActivos = jsonIdiomas.filter(registro => registro.activoSn === 'S');
             setListaIdiomas(jsonIdiomasActivos);
-            // Si el idEditar es diferente de nuevo, entonces se va a editar
+            
+            // Si el idEditar es diferente de 0, entonces se va a editar o visualizar
             if (idEditar !== 0) {
-                // Obtenemos el registro a editar
+                // Obtenemos el registro a editar por su ID
                 const registro = rowData.find((element) => element.id === idEditar);
                 setCorreoPlantilla(registro);
-                setContenidoWysiwyg(registro.cuerpo)
+                // setContenidoWysiwyg(registro.cuerpo)
+                 
+                 // Como el campo es de tipo BLOB tenemos que Convertir el Buffer a string
+                let cuerpoTexto = '';
+                if (registro.cuerpo) {
+                    if (registro.cuerpo.type === 'Buffer' && Array.isArray(registro.cuerpo.data)) {
+                        // Intentar con diferentes codificaciones
+                        try {
+                            cuerpoTexto = new TextDecoder('utf-8').decode(new Uint8Array(registro.cuerpo.data));
+                            if (cuerpoTexto.includes('�')) {
+                                cuerpoTexto = new TextDecoder('iso-8859-1').decode(new Uint8Array(registro.cuerpo.data));
+                            }
+                        } catch (e) {
+                            cuerpoTexto = new TextDecoder('iso-8859-1').decode(new Uint8Array(registro.cuerpo.data));
+                        }
+                    } else if (typeof registro.cuerpo === 'string') {
+                        cuerpoTexto = registro.cuerpo;
+                    } else {
+                        cuerpoTexto = String(registro.cuerpo);
+                    }
+                }
+                setContenidoWysiwyg(cuerpoTexto)
 
                 // Obtenemos el nombre del idioma seleccionado
                 const registroIdioma = registrosIdiomas.find((element) => element.id === registro.idiomaId).nombre;
                 setIdiomaSeleccionado(registroIdioma);
-
-                //Obtenemos la accion seleccionada
-                const accionSeleccionada = accionesCorreo.find((accion) => accion.nombre === registro.accion);
-                setAccionSeleccionada(accionSeleccionada);
 
                 //Guardamos los archivos para luego poder compararlos
                 const _listaArchivosAntiguos = {}
@@ -89,20 +91,17 @@ const EditarCorreoPlantilla = ({ idEditar, setIdEditar, rowData, emptyRegistro, 
 
     const validaciones = async () => {
         const vadlidaNombre = correoPlantilla.nombrePlantilla === undefined || correoPlantilla.nombrePlantilla === "";
-        //const validaTitulo = correoPlantilla.titulo === undefined || correoPlantilla.titulo === "";
-        //const validaCuerpo = contenidoWysiwyg === null || contenidoWysiwyg === "";
-        const validaIdioma = idiomaSeleccionado == null || idiomaSeleccionado.id === "";
-        //
-        //Si existe algún bloque vacio entonces no se puede guardar
-        //
-        return (!vadlidaNombre && /*!validaCuerpo && !validaTitulo && */ !validaIdioma)
+        const validaIdioma = idiomaSeleccionado == null || idiomaSeleccionado === "";
+        
+        return (!vadlidaNombre && !validaIdioma)
     }
 
     const guardarPlantillaEmail = async () => {
         setEstadoGuardando(true);
         setEstadoGuardandoBoton(true);
+        
         if (await validaciones()) {
-            // Obtenemos el registro actual y solo entramos si tiene nombre y contenido
+            // Obtenemos el registro actual
             let objGuardar = { ...correoPlantilla };
             const usuarioActual = getUsuarioSesion()?.id;
 
@@ -112,19 +111,20 @@ const EditarCorreoPlantilla = ({ idEditar, setIdEditar, rowData, emptyRegistro, 
                 delete objGuardar.id;
                 delete objGuardar.nombreIdioma;
                 delete objGuardar.archivos;
-                objGuardar['cuerpo'] = contenidoWysiwyg;
+                // Enviar el contenido como string (Axios lo enviará con UTF-8)
+                objGuardar['cuerpo'] = contenidoWysiwyg || '';
                 objGuardar['usuarioCreacion'] = usuarioActual;
-                objGuardar['accion'] = accionSeleccionada.nombre;
                 objGuardar['empresaId'] = Number(localStorage.getItem('empresa'));
+                
                 const registroSeleccionado = listaIdiomas.find(idioma => idioma.nombre === idiomaSeleccionado)
                 if (registroSeleccionado) {
                     objGuardar['idiomaId'] = registroSeleccionado.id;
                 }
 
-
                 try {
                     // Hacemos el insert del registro
                     const nuevoRegistro = await postPlantillaEmail(objGuardar);
+                    
                     //Si se crea el registro mostramos el toast
                     if (nuevoRegistro?.id) {
                         //Sube las imagenes al servidor
@@ -174,12 +174,13 @@ const EditarCorreoPlantilla = ({ idEditar, setIdEditar, rowData, emptyRegistro, 
                     objGuardar['idiomaId'] = registroSeleccionado.id;
                 }
                 objGuardar['usuarioModificacion'] = getUsuarioSesion()?.id
-                objGuardar['cuerpo'] = contenidoWysiwyg;
-                objGuardar['accion'] = accionSeleccionada.nombre;
+                // Enviar el contenido como string (Axios lo enviará con UTF-8)
+                objGuardar['cuerpo'] = contenidoWysiwyg || '';
                 objGuardar['empresaId'] = Number(localStorage.getItem('empresa'));
                 delete objGuardar.nombreIdioma;
                 delete objGuardar.archivos;
                 delete objGuardar.iso;
+                
                 await patchPlantillaEmail(objGuardar.id, objGuardar);
                 await editarArchivos(correoPlantilla, seccion)
                 setIdEditar(null)
@@ -195,13 +196,10 @@ const EditarCorreoPlantilla = ({ idEditar, setIdEditar, rowData, emptyRegistro, 
             });
         }
         setEstadoGuardandoBoton(false);
-        //setAccion("consulta");
-        //setIdEditar(null);
     };
 
     const cancelarEdicion = () => {
         setIdEditar(null)
-        //setAccion("consulta");
     };
 
     //Compara los archivos del registro antes de ser editado para actualizar los archivos
@@ -289,9 +287,6 @@ const EditarCorreoPlantilla = ({ idEditar, setIdEditar, rowData, emptyRegistro, 
                             setIdiomaSeleccionado={setIdiomaSeleccionado}
                             listaTipoArchivos={listaTipoArchivos}
                             estadoGuardando={estadoGuardando}
-                            accionSeleccionada={accionSeleccionada}
-                            setAccionSeleccionada={setAccionSeleccionada}
-                            accionesCorreo={listaAcciones}
                         />
 
                         <div className="flex justify-content-end mt-2">
