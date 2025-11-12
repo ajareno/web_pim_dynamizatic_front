@@ -1059,6 +1059,37 @@
         "operationId": "PermisoController.buscarPermiso"
       }
     },
+    "/buscarTraduccionLiteral": {
+      "get": {
+        "x-controller-name": "TraduccionLiteralController",
+        "x-operation-name": "buscarTraduccionLiteral",
+        "tags": [
+          "TraduccionLiteralController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Devuelve la traducción basada en el código ISO",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "iso",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "operationId": "TraduccionLiteralController.buscarTraduccionLiteral"
+      }
+    },
     "/calendarios-disponibilidades/count": {
       "get": {
         "x-controller-name": "CalendariosDisponibilidadController",
@@ -22728,6 +22759,46 @@
           "tiempoInactividad": {
             "type": "number",
             "nullable": false
+          },
+          "temaRipple": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "estiloInput": {
+            "type": "string",
+            "nullable": true
+          },
+          "modoMenu": {
+            "type": "string",
+            "nullable": true
+          },
+          "temaMenu": {
+            "type": "string",
+            "nullable": true
+          },
+          "esquemaColor": {
+            "type": "string",
+            "nullable": true
+          },
+          "tema": {
+            "type": "string",
+            "nullable": true
+          },
+          "escala": {
+            "type": "number",
+            "nullable": true
+          },
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "password": {
+            "type": "string",
+            "nullable": true
+          },
+          "servicio": {
+            "type": "string",
+            "nullable": true
           }
         },
         "required": [
@@ -22777,6 +22848,46 @@
           "tiempoInactividad": {
             "type": "number",
             "nullable": false
+          },
+          "temaRipple": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "estiloInput": {
+            "type": "string",
+            "nullable": true
+          },
+          "modoMenu": {
+            "type": "string",
+            "nullable": true
+          },
+          "temaMenu": {
+            "type": "string",
+            "nullable": true
+          },
+          "esquemaColor": {
+            "type": "string",
+            "nullable": true
+          },
+          "tema": {
+            "type": "string",
+            "nullable": true
+          },
+          "escala": {
+            "type": "number",
+            "nullable": true
+          },
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "password": {
+            "type": "string",
+            "nullable": true
+          },
+          "servicio": {
+            "type": "string",
+            "nullable": true
           }
         },
         "required": [
@@ -22831,6 +22942,46 @@
           "tiempoInactividad": {
             "type": "number",
             "nullable": false
+          },
+          "temaRipple": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "estiloInput": {
+            "type": "string",
+            "nullable": true
+          },
+          "modoMenu": {
+            "type": "string",
+            "nullable": true
+          },
+          "temaMenu": {
+            "type": "string",
+            "nullable": true
+          },
+          "esquemaColor": {
+            "type": "string",
+            "nullable": true
+          },
+          "tema": {
+            "type": "string",
+            "nullable": true
+          },
+          "escala": {
+            "type": "number",
+            "nullable": true
+          },
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "password": {
+            "type": "string",
+            "nullable": true
+          },
+          "servicio": {
+            "type": "string",
+            "nullable": true
           }
         },
         "required": [
@@ -22885,6 +23036,46 @@
           "tiempoInactividad": {
             "type": "number",
             "nullable": false
+          },
+          "temaRipple": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "estiloInput": {
+            "type": "string",
+            "nullable": true
+          },
+          "modoMenu": {
+            "type": "string",
+            "nullable": true
+          },
+          "temaMenu": {
+            "type": "string",
+            "nullable": true
+          },
+          "esquemaColor": {
+            "type": "string",
+            "nullable": true
+          },
+          "tema": {
+            "type": "string",
+            "nullable": true
+          },
+          "escala": {
+            "type": "number",
+            "nullable": true
+          },
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "password": {
+            "type": "string",
+            "nullable": true
+          },
+          "servicio": {
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false,
@@ -27691,6 +27882,36 @@
                   },
                   "tiempoInactividad": {
                     "type": "boolean"
+                  },
+                  "temaRipple": {
+                    "type": "boolean"
+                  },
+                  "estiloInput": {
+                    "type": "boolean"
+                  },
+                  "modoMenu": {
+                    "type": "boolean"
+                  },
+                  "temaMenu": {
+                    "type": "boolean"
+                  },
+                  "esquemaColor": {
+                    "type": "boolean"
+                  },
+                  "tema": {
+                    "type": "boolean"
+                  },
+                  "escala": {
+                    "type": "boolean"
+                  },
+                  "email": {
+                    "type": "boolean"
+                  },
+                  "password": {
+                    "type": "boolean"
+                  },
+                  "servicio": {
+                    "type": "boolean"
                   }
                 },
                 "additionalProperties": false
@@ -27709,7 +27930,17 @@
                     "fechaModificacion",
                     "usuarioCreacion",
                     "usuarioModificacion",
-                    "tiempoInactividad"
+                    "tiempoInactividad",
+                    "temaRipple",
+                    "estiloInput",
+                    "modoMenu",
+                    "temaMenu",
+                    "esquemaColor",
+                    "tema",
+                    "escala",
+                    "email",
+                    "password",
+                    "servicio"
                   ],
                   "example": "id"
                 },
@@ -27791,6 +28022,36 @@
                   },
                   "tiempoInactividad": {
                     "type": "boolean"
+                  },
+                  "temaRipple": {
+                    "type": "boolean"
+                  },
+                  "estiloInput": {
+                    "type": "boolean"
+                  },
+                  "modoMenu": {
+                    "type": "boolean"
+                  },
+                  "temaMenu": {
+                    "type": "boolean"
+                  },
+                  "esquemaColor": {
+                    "type": "boolean"
+                  },
+                  "tema": {
+                    "type": "boolean"
+                  },
+                  "escala": {
+                    "type": "boolean"
+                  },
+                  "email": {
+                    "type": "boolean"
+                  },
+                  "password": {
+                    "type": "boolean"
+                  },
+                  "servicio": {
+                    "type": "boolean"
                   }
                 },
                 "additionalProperties": false
@@ -27809,7 +28070,17 @@
                     "fechaModificacion",
                     "usuarioCreacion",
                     "usuarioModificacion",
-                    "tiempoInactividad"
+                    "tiempoInactividad",
+                    "temaRipple",
+                    "estiloInput",
+                    "modoMenu",
+                    "temaMenu",
+                    "esquemaColor",
+                    "tema",
+                    "escala",
+                    "email",
+                    "password",
+                    "servicio"
                   ],
                   "example": "id"
                 },

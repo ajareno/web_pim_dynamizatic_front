@@ -40,7 +40,7 @@ export const getVistaTraduccionLiteralIdiomaCount = async (filtrar) => {
 
 export const buscaTraduccionLiteral = async (iso) => {
     try {
-        const { data: dataTraduccionLiterales } = await apiTraduccion.traduccionControllerBuscarTraduccionLiteral(iso);
+        const { data: dataTraduccionLiterales } = await apiTraduccion.traduccionLiteralControllerBuscarTraduccionLiteral(iso);
         const newLanguageObj = {}; // {"Announcements": "Comunicados"}
 
         dataTraduccionLiterales?.forEach(traduccion => {

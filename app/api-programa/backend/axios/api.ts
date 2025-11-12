@@ -3464,6 +3464,66 @@ export interface Empresa {
      * @memberof Empresa
      */
     'tiempoInactividad'?: number;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof Empresa
+     */
+    'temaRipple'?: boolean | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof Empresa
+     */
+    'estiloInput'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof Empresa
+     */
+    'modoMenu'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof Empresa
+     */
+    'temaMenu'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof Empresa
+     */
+    'esquemaColor'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof Empresa
+     */
+    'tema'?: string | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof Empresa
+     */
+    'escala'?: number | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof Empresa
+     */
+    'email'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof Empresa
+     */
+    'password'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof Empresa
+     */
+    'servicio'?: string | null;
 }
 /**
  * 
@@ -3611,6 +3671,66 @@ export interface EmpresaPartial {
      * @memberof EmpresaPartial
      */
     'tiempoInactividad'?: number;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof EmpresaPartial
+     */
+    'temaRipple'?: boolean | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof EmpresaPartial
+     */
+    'estiloInput'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof EmpresaPartial
+     */
+    'modoMenu'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof EmpresaPartial
+     */
+    'temaMenu'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof EmpresaPartial
+     */
+    'esquemaColor'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof EmpresaPartial
+     */
+    'tema'?: string | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof EmpresaPartial
+     */
+    'escala'?: number | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof EmpresaPartial
+     */
+    'email'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof EmpresaPartial
+     */
+    'password'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof EmpresaPartial
+     */
+    'servicio'?: string | null;
 }
 /**
  * (tsType: EmpresaWithRelations, schemaOptions: { includeRelations: true })
@@ -3678,6 +3798,66 @@ export interface EmpresaWithRelations {
      * @memberof EmpresaWithRelations
      */
     'tiempoInactividad'?: number;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof EmpresaWithRelations
+     */
+    'temaRipple'?: boolean | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof EmpresaWithRelations
+     */
+    'estiloInput'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof EmpresaWithRelations
+     */
+    'modoMenu'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof EmpresaWithRelations
+     */
+    'temaMenu'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof EmpresaWithRelations
+     */
+    'esquemaColor'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof EmpresaWithRelations
+     */
+    'tema'?: string | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof EmpresaWithRelations
+     */
+    'escala'?: number | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof EmpresaWithRelations
+     */
+    'email'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof EmpresaWithRelations
+     */
+    'password'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof EmpresaWithRelations
+     */
+    'servicio'?: string | null;
 }
 /**
  * 
@@ -9021,6 +9201,66 @@ export interface NewEmpresa {
      * @memberof NewEmpresa
      */
     'tiempoInactividad'?: number;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof NewEmpresa
+     */
+    'temaRipple'?: boolean | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewEmpresa
+     */
+    'estiloInput'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewEmpresa
+     */
+    'modoMenu'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewEmpresa
+     */
+    'temaMenu'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewEmpresa
+     */
+    'esquemaColor'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewEmpresa
+     */
+    'tema'?: string | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof NewEmpresa
+     */
+    'escala'?: number | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewEmpresa
+     */
+    'email'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewEmpresa
+     */
+    'password'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewEmpresa
+     */
+    'servicio'?: string | null;
 }
 /**
  * (tsType: Omit<GrupoAtributo, \'id\'>, schemaOptions: { title: \'NewGrupoAtributo\', exclude: [ \'id\' ] })
@@ -43818,6 +44058,44 @@ export const TraduccionLiteralControllerApiAxiosParamCreator = function (configu
     return {
         /**
          * 
+         * @param {string} [iso] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        traduccionLiteralControllerBuscarTraduccionLiteral: async (iso?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/buscarTraduccionLiteral`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (iso !== undefined) {
+                localVarQueryParameter['iso'] = iso;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
          * @param {{ [key: string]: object; }} [where] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -44144,6 +44422,16 @@ export const TraduccionLiteralControllerApiFp = function(configuration?: Configu
     return {
         /**
          * 
+         * @param {string} [iso] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async traduccionLiteralControllerBuscarTraduccionLiteral(iso?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.traduccionLiteralControllerBuscarTraduccionLiteral(iso, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
          * @param {{ [key: string]: object; }} [where] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -44238,6 +44526,15 @@ export const TraduccionLiteralControllerApiFactory = function (configuration?: C
     return {
         /**
          * 
+         * @param {string} [iso] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        traduccionLiteralControllerBuscarTraduccionLiteral(iso?: string, options?: any): AxiosPromise<object> {
+            return localVarFp.traduccionLiteralControllerBuscarTraduccionLiteral(iso, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
          * @param {{ [key: string]: object; }} [where] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -44322,6 +44619,17 @@ export const TraduccionLiteralControllerApiFactory = function (configuration?: C
  * @extends {BaseAPI}
  */
 export class TraduccionLiteralControllerApi extends BaseAPI {
+    /**
+     * 
+     * @param {string} [iso] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof TraduccionLiteralControllerApi
+     */
+    public traduccionLiteralControllerBuscarTraduccionLiteral(iso?: string, options?: AxiosRequestConfig) {
+        return TraduccionLiteralControllerApiFp(this.configuration).traduccionLiteralControllerBuscarTraduccionLiteral(iso, options).then((request) => request(this.axios, this.basePath));
+    }
+
     /**
      * 
      * @param {{ [key: string]: object; }} [where] 
