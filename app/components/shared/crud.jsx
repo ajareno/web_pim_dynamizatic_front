@@ -26,11 +26,31 @@ import { formatPhoneNumberIntl } from 'react-phone-number-input'
 import PhoneInput from 'react-phone-input-2'
 import es from 'react-phone-input-2/lang/es.json'
 import { useRouter } from 'next/navigation';
+import { useTheme } from "@/app/providers/ThemeProvider";
 const Crud = ({ getRegistros, getRegistrosCount, botones, columnas, deleteRegistro, headerCrud, seccion,
     editarComponente, editarComponenteParametrosExtra, filtradoBase, procesarDatosParaCSV, controlador,
     parametrosEliminar, mensajeEliminar, registroEditar, urlQR, getRegistrosForaneos }) => {
     const intl = useIntl()
     const router = useRouter();
+    const { themeConfig } = useTheme(); // Hook para obtener el tema actual
+
+    // Función para obtener el color primario del tema actual
+    const obtenerColorPrimario = () => {
+        const coloresTemas = {
+            'indigo': '#6366F1',
+            'blue': '#3B82F6', 
+            'purple': '#8B5CF6',
+            'teal': '#14B8A6',
+            'cyan': '#06B6D4',
+            'green': '#10B981',
+            'orange': '#F59E0B',
+            'pink': '#EC4899',
+            'mitema': '#db336e' // Color por defecto
+        };
+        
+        return coloresTemas[themeConfig?.theme] || coloresTemas['mitema'];
+    };
+
     //Crea el registro vacio con solo id para luego crear el resto de campos vacios dinamicamente
     let emptyRegistro = {
         id: ""
@@ -1194,7 +1214,7 @@ const Crud = ({ getRegistros, getRegistrosCount, botones, columnas, deleteRegist
                                         <span>{intl.formatMessage({ id: 'No se han encontrado registros' })}</span> :
                                         <div className="w-100" style={{
                                             display: 'flex', alignItems: 'center', justifyContent: 'center',
-                                            height: '35px', backgroundColor: '#db336e', marginTop: '-0.5rem', marginRight: '-1rem', marginBottom: '-0.5rem', marginLeft: '-1rem'
+                                            height: '35px', backgroundColor: obtenerColorPrimario(), marginTop: '-0.5rem', marginRight: '-1rem', marginBottom: '-0.5rem', marginLeft: '-1rem'
                                         }}>
                                             <span style={{ color: 'white', fontWeight: 'bold' }}>{intl.formatMessage({ id: 'Realiza una búsqueda para mostrar los datos' })}</span>
                                         </div>

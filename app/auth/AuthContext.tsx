@@ -46,6 +46,22 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     Cookies.set('authToken', token, { expires: rememberMe ? 7 : undefined });
     setUsuarioAutenticado(true);
     await almacenarLogin(data);
+    //
+    //Al loguearnos creamos un evento indicando la empresaId y userId para que el gestor de temas dinamicos pueda actualizar el tema
+    //
+    if (typeof window !== 'undefined') {
+      //
+      //Creamos el evento personalizado con los datos de empresaId y userId
+      //
+      const loginEvent = new CustomEvent('user-logged-in', {
+        detail: { empresaId: data.empresaId, userId: data.id }
+      });
+      //
+      //Lanzamos el evento para que lo escuche el gestor de temas dinamicos y aplique el tema correspondiente según los datos pasados
+      //
+      window.dispatchEvent(loginEvent);
+    }
+    
     router.push(await obtenerRolDashboard());
   };
 
@@ -187,6 +203,19 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     if (empresa?.tiempoInactividad && empresa?.tiempoInactividad > 0) {
       localStorage.setItem('tiempoDeEsperaInactividad', '' + empresa?.tiempoInactividad);
     }
+    
+    // Almacenar configuración de tema de la empresa
+    if (empresa) {
+      const themeConfig = {
+        tema: empresa.tema || 'indigo',
+        esquemaColor: empresa.esquemaColor || 'light',
+        escala: empresa.escala || 14,
+        temaRipple: empresa.temaRipple || 'N'
+      };
+      localStorage.setItem('empresaThemeConfig', JSON.stringify(themeConfig));
+      console.log('💾 Configuración de tema almacenada:', themeConfig);
+    }
+    
     if (await compruebaRolUsuario({ ...data })) {
       //Si tiene que mostrar la empresa, obtenemos el logo
       localStorage.setItem('logoEmpresaUrl', await obtenerLogoEmpresa());
@@ -266,6 +295,13 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     //Vaciamos localStorage y cookies
     Cookies.remove('authToken');
     localStorage.clear();
+
+    // Disparar evento personalizado para notificar el logout
+    if (typeof window !== 'undefined') {
+      const logoutEvent = new CustomEvent('user-logged-out');
+      window.dispatchEvent(logoutEvent);
+      console.log('🔔 Evento de logout disparado para restaurar tema por defecto');
+    }
 
     // Limio la caché y espero a que devuelva la respuesta para luego hacer el dispatch
     emptyCache().then(() => {

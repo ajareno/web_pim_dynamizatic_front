@@ -1,7 +1,6 @@
 "use client";
 import React, { useEffect, useRef, useState } from "react";
 import { Toast } from "primereact/toast";
-import { Divider } from "primereact/divider";
 import { Button } from "primereact/button";
 import { getEmpresa, postEmpresa, patchEmpresa } from "@/app/api-endpoints/empresa";
 import { editarArchivos, insertarArchivo, procesarArchivosNuevoRegistro, validarImagenes, crearListaArchivosAntiguos } from "@/app/utility/FileUtils"
@@ -13,12 +12,21 @@ import { useIntl } from 'react-intl';
 const EditarEmpresa = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegistroResult, listaTipoArchivos, seccion, editable }) => {
     const intl = useIntl();
     const toast = useRef(null);
+    
     const [empresa, setEmpresa] = useState(emptyRegistro || {
         codigo: "",
         nombre: "",
         descripcion: "",
         tiempoInactividad: null,
-        activoSn: "S"
+        activoSn: "S",
+        // Campos de configuración del layout (separados)
+        temaRipple: false,
+        estiloInput: "outlined",
+        modoMenu: "static",
+        temaMenu: "colorScheme",
+        esquemaColor: "light",
+        tema: "mitema",
+        escala: 14
     });
     const [estadoGuardando, setEstadoGuardando] = useState(false);
     const [estadoGuardandoBoton, setEstadoGuardandoBoton] = useState(false);
@@ -35,11 +43,37 @@ const EditarEmpresa = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegis
             if (idEditar !== 0) {
                 // Obtenemos el registro a editar
                 const registro = rowData.find((element) => element.id === idEditar);
-                setEmpresa(registro);
+    
+                // Aseguramos que los campos de configuración existan con valores por defecto
+                const empresaConDefaults = {
+                    ...registro,
+                    temaRipple: registro.temaRipple !== undefined ? registro.temaRipple : false,
+                    estiloInput: registro.estiloInput || "outlined",
+                    modoMenu: registro.modoMenu || "static",
+                    temaMenu: registro.temaMenu || "colorScheme",
+                    esquemaColor: registro.esquemaColor || "light",
+                    tema: registro.tema || "mitema",
+                    escala: registro.escala || 14
+                };
+                
+                console.log('Empresa con valores por defecto:', empresaConDefaults);
+                setEmpresa(empresaConDefaults);
                 
                 //Guardamos los archivos para luego poder compararlos
                 const _listaArchivosAntiguos = crearListaArchivosAntiguos(registro, listaTipoArchivos);
                 setListaTipoArchivosAntiguos(_listaArchivosAntiguos);
+            } else {
+                // Para empresa nueva, asegurar que tenga los valores por defecto
+                setEmpresa(prevEmpresa => ({
+                    ...prevEmpresa,
+                    temaRipple: prevEmpresa.temaRipple !== undefined ? prevEmpresa.temaRipple : false,
+                    estiloInput: prevEmpresa.estiloInput || "outlined",
+                    modoMenu: prevEmpresa.modoMenu || "static",
+                    temaMenu: prevEmpresa.temaMenu || "colorScheme",
+                    esquemaColor: prevEmpresa.esquemaColor || "light",
+                    tema: prevEmpresa.tema || "mitema",
+                    escala: prevEmpresa.escala || 14
+                }));
             }
         };
         fetchData();
@@ -89,6 +123,15 @@ const EditarEmpresa = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegis
                 objGuardar['usuarioCreacion'] = usuarioActual;
                 objGuardar['tiempoInactividad'] = objGuardar.tiempoInactividad === null || objGuardar.tiempoInactividad === undefined || objGuardar.tiempoInactividad === "" ? 100 : objGuardar.tiempoInactividad;
                 
+                // Asegurar que los campos de configuración estén incluidos
+                objGuardar['temaRipple'] = objGuardar.temaRipple || false;
+                objGuardar['estiloInput'] = objGuardar.estiloInput || "outlined";
+                objGuardar['modoMenu'] = objGuardar.modoMenu || "static";
+                objGuardar['temaMenu'] = objGuardar.temaMenu || "colorScheme";
+                objGuardar['esquemaColor'] = objGuardar.esquemaColor || "light";
+                objGuardar['tema'] = objGuardar.tema || "mitema";
+                objGuardar['escala'] = objGuardar.escala || 14;
+                
                 if (objGuardar.activoSn === '') {
                     objGuardar.activoSn = 'S';
                 }
@@ -121,6 +164,14 @@ const EditarEmpresa = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegis
                     descripcion: objGuardar.descripcion,
                     tiempoInactividad: objGuardar.tiempoInactividad || 0,
                     activoSn: objGuardar.activoSn || 'N',
+                    // Campos de configuración del layout
+                    temaRipple: objGuardar.temaRipple || false,
+                    estiloInput: objGuardar.estiloInput || "outlined",
+                    modoMenu: objGuardar.modoMenu || "static",
+                    temaMenu: objGuardar.temaMenu || "colorScheme",
+                    esquemaColor: objGuardar.esquemaColor || "light",
+                    tema: objGuardar.tema || "mitema",
+                    escala: objGuardar.escala || 14,
                     usuarioModificacion: usuarioActual,
                 };
                 
@@ -163,7 +214,7 @@ const EditarEmpresa = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegis
                             estadoGuardando={estadoGuardando}
                             isEdit={isEdit}
                         />
-                        
+                       
                         <div className="flex justify-content-end mt-2">
                             {editable && (
                                 <Button

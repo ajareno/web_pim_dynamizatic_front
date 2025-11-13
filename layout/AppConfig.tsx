@@ -19,6 +19,7 @@ const AppConfig = (props: AppConfigProps) => {
         isSlimPlus,
         isHorizontal,
     } = useContext(LayoutContext);
+    
     const { changeTheme } = useContext(PrimeReactContext);
     const scales = [12, 13, 14, 15, 16];
     const componentThemes = [
