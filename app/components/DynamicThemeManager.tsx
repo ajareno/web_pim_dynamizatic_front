@@ -1,5 +1,5 @@
 // ============================================================================
-// MANAGER DE TEMA DINÁMICO - DynamicThemeManager.tsx
+// MANAGER DE TEMA DINÁMICO - Se usa para aplicar temas basados en login/logout
 // ============================================================================
 
 "use client";
@@ -25,45 +25,59 @@ interface ThemeConfig {
 const DynamicThemeManager = () => {
     const [currentTheme, setCurrentTheme] = useState<ThemeConfig | null>(null);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
-
-    // Función para cargar tema de empresa
+    //
+    //Cargamos los tema de empresa
+    //
     const loadEmpresaTheme = async (empresaId: string) => {
         try {
-            console.log('🔄 DynamicThemeManager: Cargando tema para empresa:', empresaId);
-            
+            //
+            // Cargamos la información de la empresa y si existe esta aplicamos sus estilos
+            //      
             const empresa = await getEmpresa(Number(empresaId));
             if (empresa) {
+                //
+                // Obtenemos la configuración de tema de la empresa 
+                //
                 const themeConfig = getLayoutConfigFromEmpresa(empresa);
                 setCurrentTheme(themeConfig);
-                
-                // Aplicar tema inmediatamente
+                //
+                //Aplicamos el tema inmediatamente
+                //
                 applyThemeConfig({
                     colorScheme: themeConfig.colorScheme,
                     theme: themeConfig.theme
                 }, () => {
-                    console.log('✅ Tema de empresa aplicado:', {
+                    console.log('Tema de empresa aplicado:', {
                         theme: themeConfig.theme,
                         colorScheme: themeConfig.colorScheme
                     });
                 });
-
-                // Aplicar escala
+                //
+                //Si había escala la aplicamos
+                //
                 if (themeConfig.scale) {
                     document.documentElement.style.fontSize = `${themeConfig.scale}px`;
                 }
-
+                //
+                //Especificamos que el usuario está logueado
+                //
                 setIsLoggedIn(true);
             }
         } catch (error) {
-            console.error('❌ Error al cargar tema de empresa:', error);
+            //
+            //Si ha habido algún error lo mostramos por consola y cargando el tema defecto
+            //
+            console.error('Error al cargar tema de empresa:', error);
             loadDefaultTheme();
         }
     };
-
+    //
     // Función para cargar tema por defecto
+    //
     const loadDefaultTheme = () => {
-        console.log('🔄 DynamicThemeManager: Aplicando tema por defecto');
-        
+        //
+        //Especificamos la configuración por defecto
+        //  
         const defaultConfig: ThemeConfig = {
             colorScheme: 'light',
             theme: 'mitema',
@@ -73,34 +87,41 @@ const DynamicThemeManager = () => {
             menuMode: 'static',
             menuTheme: 'colorScheme'
         };
-        
+        //
+        // Aplicamos la configuración por defecto
+        //
         setCurrentTheme(defaultConfig);
         
         applyThemeConfig({
             colorScheme: defaultConfig.colorScheme,
             theme: defaultConfig.theme
         }, () => {
-            console.log('✅ Tema por defecto aplicado');
+            console.log('Tema por defecto aplicado');
         });
-
-        // Aplicar escala por defecto
+        //
+        // Aplicamos escala por defecto
+        //
         document.documentElement.style.fontSize = '14px';
         setIsLoggedIn(false);
     };
-
-    // Verificar estado inicial al montar el componente
+    //
+    // Verificamos el estado inicial al montar el componente
+    //
     useEffect(() => {
         const checkAuthAndLoadTheme = () => {
-            // Verificar localStorage
+            //
+            //Obtenemos la empresaId de localStorage o sessionStorage por si usamos ambos
+            //
             const empresaId = localStorage.getItem('empresa');
-            
-            // Verificar sessionStorage (por si usa ambos)
             const sessionEmpresaId = sessionStorage.getItem('empresa');
-            
-            // También verificar si hay datos de usuario en localStorage
+            //
+            //Verificamos los datos datos del usuario en localStorage
+            //
             const usuarioData = localStorage.getItem('userData');
             let userEmpresaId = null;
-            
+            //
+            //Si existe el usuario obtenemos su empresaId 
+            //
             if (usuarioData) {
                 try {
                     const userData = JSON.parse(usuarioData);
@@ -109,33 +130,34 @@ const DynamicThemeManager = () => {
                     console.error('Error parsing userData:', err);
                 }
             }
-            
+            //
+            //Aquí debemos haber obtenido al menos un id de empresa ya sea por el localStorage, por la SessionStorage o por los datos del usuario
+            //
             const finalEmpresaId = empresaId || sessionEmpresaId || userEmpresaId;
-            
+            //
+            //Si tenemos empresaId cargamos su tema, sino cargamos el tema por defecto
+            //
             if (finalEmpresaId) {
-                console.log('ℹ️ DynamicThemeManager: Usuario ya logueado, cargando tema para empresa:', finalEmpresaId);
                 loadEmpresaTheme(finalEmpresaId.toString());
             } else {
-                console.log('ℹ️ DynamicThemeManager: Usuario no logueado, tema por defecto');
                 loadDefaultTheme();
             }
         };
-
-        // Verificar inmediatamente
+        //
+        //Comprobamos que está logueado y cargamos el tema
+        //
         checkAuthAndLoadTheme();
-        
-        // También verificar después de múltiples delays por si los datos de sesión se cargan después
+        //
+        //Verificamos múltiples delays por si los datos de sesión se cargan después
+        //
         const timeoutIds = [
             setTimeout(() => {
-                console.log('🔄 DynamicThemeManager: Verificación secundaria (500ms)');
                 checkAuthAndLoadTheme();
             }, 500),
             setTimeout(() => {
-                console.log('🔄 DynamicThemeManager: Verificación terciaria (1000ms)');
                 checkAuthAndLoadTheme();
             }, 1000),
             setTimeout(() => {
-                console.log('🔄 DynamicThemeManager: Verificación final (2000ms)');
                 checkAuthAndLoadTheme();
             }, 2000)
         ];
@@ -145,93 +167,142 @@ const DynamicThemeManager = () => {
         };
     }, []);
 
+    //
     // Escuchar eventos de autenticación
+    //
     useEffect(() => {
-        // Función para verificar sesión
+        //
+        // Verificamos que estemos logueados para sacar la empresa y aplicar el tema
+        //
         const recheckSession = () => {
+            //
+            //Obtenemos la empresaId de localStorage y los datos del usuario
+            //
             const empresaId = localStorage.getItem('empresa');
             const userData = localStorage.getItem('userData');
-            
+            //
+            //Si tenemos los datos de alguno de los dos entramos para crear el tema
+            //
             if (empresaId || userData) {
+                //
+                //Con los datos que tenemos debemos ser capaces de obtener la empresaId
+                //
                 const finalEmpresaId = empresaId || (userData ? JSON.parse(userData).empresaId : null);
                 if (finalEmpresaId && !isLoggedIn) {
-                    console.log('🔄 DynamicThemeManager: Re-verificando sesión, aplicando tema');
+                    //
+                    //Si tenemos la empresaId cargamos la configuración de tema
+                    //
                     loadEmpresaTheme(finalEmpresaId.toString());
                 }
             }
         };
 
-        // Evento personalizado de login
+        //
+        //Controlamos el login para obtener el tema de la empresa a partir de empresaId
+        //
         const handleLogin = (event: CustomEvent) => {
             const empresaId = event.detail?.empresaId;
             if (empresaId) {
-                console.log('👤 DynamicThemeManager: Login detectado via evento');
+                //
+                //Hemos detectado el evento del login por lo que le pasamos la empresaId para cargar su tema
+                //
                 loadEmpresaTheme(empresaId.toString());
             }
         };
 
-        // Evento personalizado de logout
+        //
+        //Controlamos el logout para cargar el tema por defecto
+        //
         const handleLogout = () => {
-            console.log('🚪 DynamicThemeManager: Logout detectado via evento');
             loadDefaultTheme();
         };
-
-        // Evento para forzar verificación de tema
+        //
+        // Función que fuerza la verificación de tema
+        //
         const handleForceThemeCheck = (event: CustomEvent) => {
+            //
+            //Recupero la empresa y si existe pongo el tema que tenga, sino recomprueba la sesión y si no hay empresa carga el tema por defecto
+            //
             const empresaId = event.detail?.empresaId;
-            console.log('🎯 DynamicThemeManager: Forzando verificación de tema para empresa:', empresaId);
             if (empresaId) {
                 loadEmpresaTheme(empresaId.toString());
             } else {
                 recheckSession();
             }
         };
-
-        // Listener para cuando se carga completamente la página
+        //
+        // Listener para cuando se carga completamente la página recomprobar la sesión y si no hay empresa cargar el tema por defecto
+        //
         const handleDOMContentLoaded = () => {
-            console.log('📄 DOMContentLoaded: Re-verificando tema');
             recheckSession();
         };
 
-        // Cambios en localStorage y sessionStorage (para casos edge)
+        //
+        // Cambios en localStorage y sessionStorage para casos poco comunes como:
+        // - El usuario inicia/cierra sesión en otra pestaña/ventana y el cambio se refleja mediante eventos de almacenamiento.
+        // - Los datos de sesión se modifican fuera del flujo normal de la aplicación.
+        // - Hay sincronización entre varias pestañas o ventanas abiertas.
+        // Estos listeners ayudan a detectar y reaccionar ante esos cambios inesperados para mantener el tema actualizado.
+        //
         const handleStorageChange = (e: StorageEvent) => {
+            //
+            //Si la clave modificada es 'empresa' o 'userData' reaccionamos 
+            //
             if (e.key === 'empresa' || e.key === 'userData') {
+                //
+                //Si hay un nuevo valor cargamos el tema correspondiente
+                //
                 if (e.newValue) {
                     let empresaId = null;
-                    
+                    //
+                    //Obtenemos el nuevo valor de empresa si ha cambiado
+                    //
                     if (e.key === 'empresa') {
                         empresaId = e.newValue;
-                    } else if (e.key === 'userData') {
-                        try {
-                            const userData = JSON.parse(e.newValue);
-                            empresaId = userData.empresaId;
-                        } catch (err) {
-                            console.error('Error parsing userData from storage:', err);
+                    } else {
+                        //
+                        //Si lo que ha cambiado son los datos del usuario obtenemos la empresaId de ahí
+                        //
+                        if (e.key === 'userData') {
+                            try {
+                                const userData = JSON.parse(e.newValue);
+                                empresaId = userData.empresaId;
+                            } catch (err) {
+                                console.error('Error parsing userData from storage:', err);
+                            }
                         }
                     }
-                    
+                    //
+                    //Si detectamos que se ha loguea a traves del Storage cargamos su tema
+                    //
                     if (empresaId) {
-                        console.log('👤 DynamicThemeManager: Login detectado via storage, empresa:', empresaId);
                         loadEmpresaTheme(empresaId.toString());
                     }
                 } else {
-                    console.log('🚪 DynamicThemeManager: Logout detectado via storage');
+                    //
+                    //Si se ha eliminado la empresaId o los datos del usuario cargamos el tema por defecto
+                    //
                     loadDefaultTheme();
                 }
             }
         };
-
-        // Registrar listeners
+        //
+        //Controlamos las funciones a las que hemos llamado y eliminamos cada listener al desmontar
+        //
         window.addEventListener('user-logged-in', handleLogin as EventListener);
         window.addEventListener('user-logged-out', handleLogout);
         window.addEventListener('force-theme-check', handleForceThemeCheck as EventListener);
         window.addEventListener('storage', handleStorageChange);
-        
-        // Solo agregar DOMContentLoaded si no está ya cargado
+        //
+        // Si la página aún se está cargando, esperamos al evento DOMContentLoaded
+        //
         if (document.readyState === 'loading') {
+            //
+            // Si la página aún se está cargando, esperamos al evento DOMContentLoaded que llama a su vez a recheckSession para cargar el tema correspondiente de la empresa
+            //
             document.addEventListener('DOMContentLoaded', handleDOMContentLoaded);
         } else {
-            // Si ya está cargado, verificar inmediatamente
+            // Si ya está cargado, recomprobamos la sesión inmediatamente
             recheckSession();
         }
 

@@ -34,8 +34,9 @@ export default function RootLayout({ children }: RootLayoutProps) {
         const checkAndApplyTheme = () => {
             const empresaId = localStorage.getItem('empresa');
             if (empresaId) {
-                console.log('🎯 Layout: Detectada empresa en localStorage al cargar:', empresaId);
-                // Disparar evento personalizado para que el DynamicThemeManager reaccione
+                //
+                // Dispara el evento personalizado para que el DynamicThemeManager reaccione
+                //
                 const event = new CustomEvent('force-theme-check', { detail: { empresaId } });
                 window.dispatchEvent(event);
             }
@@ -57,46 +58,57 @@ export default function RootLayout({ children }: RootLayoutProps) {
                         __html: `
                         (function() {
                             try {
+                                //
+                                // Detectamos la empresa actual del localStorage y nos guardamos el tema por defecto
+                                //
                                 const empresaId = localStorage.getItem('empresa');
-                                let themeHref = '/theme/theme-light/mitema/theme.css'; // Tema por defecto
-                                
+                                let themeHref = '/theme/theme-light/mitema/theme.css'; 
+                                //
+                                //Si existe la empresa cargamos su tema
+                                //
                                 if (empresaId) {
-                                    console.log('🎯 Head Script: Empresa detectada:', empresaId);
-                                    
-                                    // Intentar obtener configuración de tema almacenada
+                                    //                                    
+                                    // Intentamos obtener configuración de tema almacenada para cambiarlo
+                                    //
                                     const empresaThemeConfig = localStorage.getItem('empresaThemeConfig');
                                     
                                     if (empresaThemeConfig) {
                                         try {
+                                            //
+                                            //Intentamos cargar la información, en caso contrario cargamos los valores por defecto
+                                            //
                                             const themeConfig = JSON.parse(empresaThemeConfig);
                                             const colorScheme = themeConfig.esquemaColor || 'light';
-                                            const theme = themeConfig.tema || 'indigo';
+                                            const theme = themeConfig.tema || 'mitema';
                                             
                                             themeHref = '/theme/theme-' + colorScheme + '/' + theme + '/theme.css';
-                                            console.log('✅ Head Script: Configuración de tema cargada:', themeConfig);
-                                            console.log('✅ Head Script: Aplicando tema de empresa:', themeHref);
                                         } catch (configErr) {
-                                            console.error('❌ Error parsing empresaThemeConfig:', configErr);
-                                            // Fallback: tema por defecto para empresas
-                                            themeHref = '/theme/theme-light/indigo/theme.css';
+                                            //
+                                            //Si ha ocurrido algun error obteniendo la información ponemos el tema por defecto
+                                            //
+                                            themeHref = '/theme/theme-light/mitema/theme.css';
                                         }
                                     } else {
-                                        console.log('⚠️ Head Script: Sin configuración de tema almacenada, usando tema por defecto para empresa');
-                                        // Tema por defecto para empresas (mejor que mitema)
-                                        themeHref = '/theme/theme-light/indigo/theme.css';
+                                        //
+                                        //Si la empresa no tenía información del tema almacenado usamos el por defecto
+                                        //
+                                        themeHref = '/theme/theme-light/mitema/theme.css';
                                     }
                                 } else {
-                                    console.log('🎯 Head Script: Sin empresa, tema por defecto');
+                                    //
+                                    //Si la empresa no tenía información del tema almacenado usamos el por defecto
+                                    //
                                     themeHref = '/theme/theme-light/mitema/theme.css';
                                 }
-                                
-                                // Escribir el link del tema
+                                //
+                                // Escribimos el link del tema en el head
+                                //
                                 document.write('<link id="theme-link" href="' + themeHref + '" rel="stylesheet">');
-                                console.log('✅ Head Script: Tema aplicado:', themeHref);
                                 
                             } catch (err) {
-                                console.error('❌ Error en script de tema:', err);
-                                // Fallback en caso de error
+                                //
+                                //Si ha habido algún error aplicamos el tema por defecto
+                                //
                                 document.write('<link id="theme-link" href="/theme/theme-light/mitema/theme.css" rel="stylesheet">');
                             }
                         })();
@@ -111,6 +123,9 @@ export default function RootLayout({ children }: RootLayoutProps) {
             <body>
                 <IntlProviderWrapper>
                     <PrimeReactProvider>
+                        {/*
+                        Controlamos el tema de la empresa de forma global
+                        */}
                         <ThemeProvider>
                             {/* Componente que actualiza el tema dinámicamente basado en login/logout */}
                             <DynamicThemeManager />

@@ -46,14 +46,20 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     Cookies.set('authToken', token, { expires: rememberMe ? 7 : undefined });
     setUsuarioAutenticado(true);
     await almacenarLogin(data);
-    
-    // Disparar evento personalizado para notificar el login
+    //
+    //Al loguearnos creamos un evento indicando la empresaId y userId para que el gestor de temas dinamicos pueda actualizar el tema
+    //
     if (typeof window !== 'undefined') {
+      //
+      //Creamos el evento personalizado con los datos de empresaId y userId
+      //
       const loginEvent = new CustomEvent('user-logged-in', {
         detail: { empresaId: data.empresaId, userId: data.id }
       });
+      //
+      //Lanzamos el evento para que lo escuche el gestor de temas dinamicos y aplique el tema correspondiente según los datos pasados
+      //
       window.dispatchEvent(loginEvent);
-      console.log('🔔 Evento de login disparado para tema:', data.empresaId);
     }
     
     router.push(await obtenerRolDashboard());

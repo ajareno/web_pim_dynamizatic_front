@@ -17,9 +17,14 @@ export const LayoutContext = React.createContext({} as LayoutContextProps);
 
 export const LayoutProvider = (props: ChildContainerProps) => {
     const [breadcrumbs, setBreadcrumbs] = useState<Breadcrumb[]>([]);
-    const { themeConfig } = useEmpresaTheme(); // Usar el hook centralizado
-    
-    // Usar la configuración del hook como layoutConfig
+    //
+    //Obtenemos la configuración del tema de la empresa actual o los valores por defecto
+    //
+    const { themeConfig } = useEmpresaTheme(); 
+    //
+    //Definimos el layoutConfig y establecemos los valores por defecto
+    //Nota: LayoutConfig es un objeto de configuración central que controla el comportamiento y la apariencia visual de toda la interfaz. Funciona como el "centro de control" del layout.
+    //
     const [layoutConfig, setLayoutConfig] = useState<LayoutConfig>({
         ripple: false,
         inputStyle: "outlined",
@@ -29,8 +34,9 @@ export const LayoutProvider = (props: ChildContainerProps) => {
         theme: "mitema",
         scale: 14,
     });
-
-    // Sincronizar layoutConfig con themeConfig del hook
+    //
+    //Una vez obtenida la configuración de la empresa, sincronizamos el layoutConfig con ella 
+    //
     useEffect(() => {
         if (themeConfig) {
             setLayoutConfig(prev => ({
@@ -43,7 +49,6 @@ export const LayoutProvider = (props: ChildContainerProps) => {
                 theme: themeConfig.theme,
                 scale: themeConfig.scale
             }));
-            console.log('🔧 Layout config sincronizado con empresa:', themeConfig);
         }
     }, [themeConfig]);
 
@@ -136,40 +141,7 @@ export const LayoutProvider = (props: ChildContainerProps) => {
         <LayoutContext.Provider value={value}>
             <>
                 <Head>
-                    <title>PrimeReact - APOLLO</title>
-                    <meta charSet="UTF-8" />
-                    <meta
-                        name="description"
-                        content="The ultimate collection of design-agnostic, flexible and accessible React UI Components."
-                    />
-                    <meta name="robots" content="index, follow" />
-                    <meta
-                        name="viewport"
-                        content="initial-scale=1, width=device-width"
-                    />
-                    <meta property="og:type" content="website"></meta>
-                    <meta
-                        property="og:title"
-                        content="Apollo by PrimeReact for Next.js"
-                    ></meta>
-                    <meta
-                        property="og:url"
-                        content="https://www.primefaces.org/apollo-react"
-                    ></meta>
-                    <meta
-                        property="og:description"
-                        content="The ultimate collection of design-agnostic, flexible and accessible React UI Components."
-                    />
-                    <meta
-                        property="og:image"
-                        content="https://www.primefaces.org/static/social/apollo-react.png"
-                    ></meta>
-                    <meta property="og:ttl" content="604800"></meta>
-                    <link
-                        rel="icon"
-                        href={`/favicon.ico`}
-                        type="image/x-icon"
-                    ></link>
+                    <meta charSet="UTF-8" />                    
                 </Head>
                 {props.children}
             </>

@@ -1,5 +1,5 @@
 // ============================================================================
-// SERVICIO PARA GESTIÓN DINÁMICA DE TEMAS - ThemeService.js
+// SERVICIO PARA GESTIÓN DINÁMICA DE TEMAS - Premite el cambio de temas en tiempo de ejecución
 // ============================================================================
 
 /**
@@ -10,22 +10,35 @@
  * @param {Function} callback - Función callback a ejecutar después del cambio
  */
 export const changeTheme = (currentTheme, newTheme, linkElementId = 'theme-link', callback) => {
+    //
+    //Obtenemos el tema actual
+    //
     const linkElement = document.getElementById(linkElementId);
-    
+    //
+    //Si no existe, salimos
+    //
     if (!linkElement) {
         console.error(`No se encontró el elemento link con ID: ${linkElementId}`);
         return;
     }
-
+    //
+    //Obteemos la ruta actual para modificarla mas adelante
+    //
     const currentHref = linkElement.getAttribute('href');
     let newHref;
 
-    // Determinar si estamos cambiando colorScheme o theme
+    //
+    //Controlamos si estamos cambiando el color de fondo o el color de los botones...
+    //
     if (['light', 'dim', 'dark'].includes(newTheme)) {
-        // Cambio de esquema de color (light/dim/dark)
+        //
+        // Cambio el color de fondo a las posibilidades: light/dim/dark
+        //
         newHref = currentHref.replace(/theme-(light|dim|dark)/, `theme-${newTheme}`);
     } else {
-        // Cambio de tema (indigo/blue/purple/etc.)
+        //
+        // Cambio el color
+        //
         const pathParts = currentHref.split('/');
         if (pathParts.length >= 4) {
             pathParts[pathParts.length - 2] = newTheme; // Reemplazar el nombre del tema
@@ -42,15 +55,15 @@ export const changeTheme = (currentTheme, newTheme, linkElementId = 'theme-link'
         if (callback) callback();
         return;
     }
-
-    console.log(`Cambiando tema de ${currentHref} a ${newHref}`);
-
-    // Aplicar el nuevo tema
-    linkElement.setAttribute('href', newHref);
-    
-    // Ejecutar callback si se proporciona
+    //
+    // Cambiamos la url por la del nuevo tema
+    //
+    linkElement.setAttribute('href', newHref);    
+    //
+    // Ejecutamos el callback si lo hemos pasado
+    //
     if (callback && typeof callback === 'function') {
-        // Pequeño delay para asegurar que el CSS se cargue
+        // Delay para asegurar que el CSS se cargue
         setTimeout(callback, 100);
     }
 };
@@ -60,21 +73,31 @@ export const changeTheme = (currentTheme, newTheme, linkElementId = 'theme-link'
  * @returns {Object} Objeto con colorScheme y theme actuales
  */
 export const getCurrentThemeConfig = () => {
+    //
+    //Obtenemos el tema seleccionado
+    //
     const linkElement = document.getElementById('theme-link');
-    
+    //
+    //Si no existe, devolvemos valores por defecto
+    //
     if (!linkElement) {
         return {
             colorScheme: 'light',
             theme: 'mitema'
         };
     }
-
+    //
+    //Obtenemos la url para cambiarla mas adelante
+    //
     const href = linkElement.getAttribute('href') || '';
-    
-    // Extraer colorScheme y theme del href
+    //
+    // Extraemos colorScheme y theme del href
+    //
     const colorSchemeMatch = href.match(/theme-(light|dim|dark)/);
     const themeMatch = href.match(/theme-(?:light|dim|dark)\/([^\/]+)\/theme\.css/);
-    
+    //
+    //Devolvemos los datos cambiados o el valor por defecto
+    //
     return {
         colorScheme: colorSchemeMatch ? colorSchemeMatch[1] : 'light',
         theme: themeMatch ? themeMatch[1] : 'mitema'
@@ -99,30 +122,42 @@ export const buildThemeUrl = (colorScheme = 'light', theme = 'mitema') => {
  * @param {Function} callback - Función callback
  */
 export const applyThemeConfig = (themeConfig, callback) => {
+    //
+    //Obtenemos la url, el color y el tema actual
+    //
     const { colorScheme, theme } = themeConfig;
     const newHref = buildThemeUrl(colorScheme, theme);
-    
-    console.log(`🎨 ThemeService: Aplicando tema ${theme} con esquema ${colorScheme}`);
-    
+    //
+    //Obtenemos el tema seleccionado si ha cambiado
+    //
     const linkElement = document.getElementById('theme-link');
+    //
+    //Si existe, procedemos al cambio
+    //
     if (linkElement) {
+        //
+        //Si la url actual es diferente a la nueva (porque hemos cambiado el tema) entramos en el if para realizar los cambios a todo 
+        //
         const currentHref = linkElement.getAttribute('href');
         
         if (currentHref !== newHref) {
-            console.log(`🔄 Cambiando de ${currentHref} a ${newHref}`);
-            
-            // Forzar la recarga del CSS
+            //
+            // Forzamos la recarga del CSS
+            //
             linkElement.setAttribute('href', newHref + '?t=' + Date.now());
             
-            // Esperar a que se cargue el nuevo CSS
+            //
+            // Aplicamos el nuevo tema
+            //
             linkElement.onload = () => {
-                console.log('✅ Tema aplicado correctamente');
                 if (callback && typeof callback === 'function') {
                     callback();
                 }
             };
             
-            // Fallback en caso de que onload no se dispare
+            //
+            // Esperamos a que se cargue el nuevo CSS y ejecutamos el callback si viene informado
+            //
             setTimeout(() => {
                 if (callback && typeof callback === 'function') {
                     callback();
@@ -130,11 +165,14 @@ export const applyThemeConfig = (themeConfig, callback) => {
             }, 200);
             
         } else {
-            console.log('ℹ️ La configuración de tema ya está aplicada');
+            //
+            //si no hemos realizado cambios o cambiamos al mismo que tenemos no hacemos nada
+            //
+            console.log('La configuración de tema ya está aplicada');
             if (callback) callback();
         }
     } else {
-        console.error('❌ No se encontró el elemento theme-link');
+        console.error('No se encontró el elemento theme-link');
         if (callback) callback();
     }
 };

@@ -1,5 +1,5 @@
 // ============================================================================
-// COMPONENTE ACTUALIZADOR DE TEMA POST-LOGIN - ThemeUpdater.tsx
+// COMPONENTE ACTUALIZADOR DE TEMA POST-LOGIN - Se ejecuta después del login para aplicar el tema de la empresa
 // ============================================================================
 
 "use client";
@@ -15,81 +15,97 @@ const ThemeUpdater = () => {
     const { themeConfig, loading } = useEmpresaTheme();
 
     useEffect(() => {
-        // Solo aplicar el tema si:
+        //
+        //Obtensmos el ID de la empresa del localStorage
+        //
+        const empresaId = localStorage.getItem('empresa');
+        //
+        // Solo aplica el tema si:
         // 1. No está cargando
         // 2. Hay configuración disponible
         // 3. Hay datos de empresa en localStorage (usuario logueado)
-        const empresaId = localStorage.getItem('empresa');
-        
+        //
         if (!loading && themeConfig && empresaId) {
-            console.log('🎨 ThemeUpdater: Aplicando tema de empresa:', {
-                empresa: empresaId,
-                tema: themeConfig.theme,
-                esquema: themeConfig.colorScheme
-            });
-
-            // Aplicar el tema inmediatamente
+            //
+            // Aplica el tema
+            //
             applyThemeConfig({
                 colorScheme: themeConfig.colorScheme,
                 theme: themeConfig.theme
             }, () => {
-                console.log('✅ Tema de empresa aplicado exitosamente');
+                console.log('Tema de empresa aplicado exitosamente');
             });
-
-            // Aplicar escala si está definida
+            //
+            // Aplica la escala si está definida
+            //
             if (themeConfig.scale) {
                 document.documentElement.style.fontSize = `${themeConfig.scale}px`;
-                console.log(`📏 Escala aplicada: ${themeConfig.scale}px`);
             }
         } else if (!empresaId) {
-            console.log('ℹ️ ThemeUpdater: Usuario no logueado, manteniendo tema por defecto');
+            //
+            //Si no existe la empresa es porque el usuario no está logueado y se mantiene el tema por defecto
+            //
+            console.log('Usuario no logueado, se mantiene el tema por defecto');
         }
     }, [themeConfig, loading]);
 
-    // Escuchar eventos de login/logout y cambios en localStorage
+    //
+    // Escuchamos los eventos de login/logout y cambios en localStorage
+    //
     useEffect(() => {
-        // Manejar evento de login
+        //
+        // Manejamos el evento de login
+        //
         const handleLogin = (event: CustomEvent) => {
-            console.log('👤 ThemeUpdater: Login detectado via evento, empresa:', event.detail?.empresaId);
-            // Forzar recarga de configuración después de un pequeño delay
-            // para asegurar que localStorage ya esté actualizado
+            //
+            // Forzamos la recarga de configuración después de un pequeño delay para asegurar que localStorage ya esté actualizado
+            //
             setTimeout(() => {
                 window.location.reload(); // Temporal: recargar para aplicar tema
             }, 100);
         };
-
-        // Manejar evento de logout
+        //
+        // Manejamos el evento de logout
+        //
         const handleLogout = () => {
-            console.log('🚪 ThemeUpdater: Logout detectado via evento');
-            // Restaurar tema por defecto inmediatamente
+            //
+            // Restauramos el tema por defecto al hacer logout
+            //
             applyThemeConfig({
                 colorScheme: 'light',
                 theme: 'mitema'
             }, () => {
-                console.log('🔄 Tema por defecto restaurado tras logout');
+                console.log('Tema por defecto restaurado tras logout');
             });
-            // Restaurar escala por defecto
+            //
+            // Restauramos la escala por defecto al hacer logout
+            //
             document.documentElement.style.fontSize = '14px';
         };
-
-        // Manejar cambios en localStorage (para detección en el mismo tab)
+        //
+        // Manejamos los cambios en localStorage (para detección en el mismo tab)
+        //
         const handleStorageChange = (e: StorageEvent) => {
             if (e.key === 'empresa') {
                 if (e.newValue) {
-                    console.log('👤 ThemeUpdater: Login detectado via localStorage, empresa:', e.newValue);
+                    console.log('ThemeUpdater: Login detectado via localStorage, empresa:', e.newValue);
                     // La configuración se recargará automáticamente por el hook
                 } else {
-                    console.log('🚪 ThemeUpdater: Logout detectado via localStorage');
+                    console.log('ThemeUpdater: Logout detectado via localStorage');
                     handleLogout();
                 }
             }
         };
 
-        // Registrar event listeners
+        //
+        //Controlamos las funciones a las que hemos llamado y eliminamos cada listener al desmontar
+        //
         window.addEventListener('user-logged-in', handleLogin as EventListener);
         window.addEventListener('user-logged-out', handleLogout);
         window.addEventListener('storage', handleStorageChange);
-        
+        //
+        //Eliminamos los listeners al desmontar
+        //
         return () => {
             window.removeEventListener('user-logged-in', handleLogin as EventListener);
             window.removeEventListener('user-logged-out', handleLogout);
