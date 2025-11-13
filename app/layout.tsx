@@ -29,8 +29,9 @@ export default function RootLayout({ children }: RootLayoutProps) {
     useEffect(() => {
         addLocale("es", locales["es"]); // -> Añadimos lenguaje español
         locale("es"); //-> Configuramos por defecto el lenguaje añadido
-        
+        //
         // Verificación adicional para aplicar tema después de la carga inicial
+        //
         const checkAndApplyTheme = () => {
             const empresaId = localStorage.getItem('empresa');
             if (empresaId) {
@@ -41,8 +42,9 @@ export default function RootLayout({ children }: RootLayoutProps) {
                 window.dispatchEvent(event);
             }
         };
-        
-        // Verificar inmediatamente y después de un breve delay
+        //
+        // Verifica y aplica el tema si fuera necesario además esperamos brevemente para que aplique los cambios
+        //
         checkAndApplyTheme();
         const timeoutId = setTimeout(checkAndApplyTheme, 100);
         
@@ -50,9 +52,11 @@ export default function RootLayout({ children }: RootLayoutProps) {
     }, []);
 
     return (
-        <html lang="en" suppressHydrationWarning>
+        <html lang="es" suppressHydrationWarning>
             <head>
-                {/* Tema dinámico basado en empresa en localStorage */}
+                {/* 
+                Creamos una función en javascript puro para que coja el tema correcto cuando recargamos la página una vez logueados, sino pierde el tema. 
+                */}
                 <script
                     dangerouslySetInnerHTML={{
                         __html: `
