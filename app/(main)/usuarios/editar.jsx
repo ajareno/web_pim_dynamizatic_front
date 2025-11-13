@@ -3,11 +3,13 @@ import React, { useEffect, useRef, useState } from "react";
 import { Toast } from "primereact/toast";
 import { Divider } from "primereact/divider";
 import { Button } from "primereact/button";
+import { TabView, TabPanel } from 'primereact/tabview';
 import { getUsuarios, postUsuario, patchUsuario } from "@/app/api-endpoints/usuario";
 import { getRol } from "@/app/api-endpoints/rol";
 import { getIdiomas } from "@/app/api-endpoints/idioma";
 import { editarArchivos, insertarArchivo, procesarArchivosNuevoRegistro, validarImagenes, crearListaArchivosAntiguos } from "@/app/utility/FileUtils"
 import EditarDatosUsuario from "./EditarDatosUsuario";
+import PasswordHistorico from "./passwordHistorico";
 import 'primeicons/primeicons.css';
 import { getUsuarioSesion } from "@/app/utility/Utils";
 import { useIntl } from 'react-intl';
@@ -194,6 +196,14 @@ const EditarUsuario = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegis
                             isEdit={isEdit}
                         />
                         
+                        <Divider type="solid" />
+                        
+                        <TabView scrollable>
+                            <TabPanel header={intl.formatMessage({ id: 'Historico de contraseñas' })}>
+                                <PasswordHistorico usuarioId={idEditar} editable={editable}/>
+                            </TabPanel>
+                        </TabView>
+
                         <div className="flex justify-content-end mt-2">
                             {editable && (
                                 <Button
