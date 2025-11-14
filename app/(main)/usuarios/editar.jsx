@@ -13,6 +13,7 @@ import PasswordHistorico from "./passwordHistorico";
 import 'primeicons/primeicons.css';
 import { getUsuarioSesion } from "@/app/utility/Utils";
 import { useIntl } from 'react-intl';
+import { tieneUsuarioPermiso } from "@/app/components/shared/componentes";
 
 const EditarUsuario = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegistroResult, listaTipoArchivos, seccion, editable }) => {
     const intl = useIntl();
@@ -28,6 +29,7 @@ const EditarUsuario = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegis
     });
     const [estadoGuardando, setEstadoGuardando] = useState(false);
     const [estadoGuardandoBoton, setEstadoGuardandoBoton] = useState(false);
+    const [puedeVerHistorico, setPuedeVerHistorico] = useState(false);
     const [isEdit, setIsEdit] = useState(false);
     const [listaTipoArchivosAntiguos, setListaTipoArchivosAntiguos] = useState([]);
     const [listaRoles, setListaRoles] = useState([]);
@@ -67,6 +69,11 @@ const EditarUsuario = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegis
                 const _listaArchivosAntiguos = crearListaArchivosAntiguos(registro, listaTipoArchivos);
                 setListaTipoArchivosAntiguos(_listaArchivosAntiguos);
             }
+                    
+            // Verificar permiso para ver historial de contraseñas
+            const permiso = await tieneUsuarioPermiso('Usuarios', 'VerHistoricoPassword');
+            setPuedeVerHistorico(!!permiso);
+
         };
         fetchData();
     }, [idEditar, rowData]);  
@@ -198,11 +205,13 @@ const EditarUsuario = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegis
                         
                         <Divider type="solid" />
                         
-                        <TabView scrollable>
-                            <TabPanel header={intl.formatMessage({ id: 'Historico de contraseñas' })}>
-                                <PasswordHistorico usuarioId={idEditar} editable={editable}/>
-                            </TabPanel>
-                        </TabView>
+                        {puedeVerHistorico && idEditar !== 0 && (
+                            <TabView scrollable>
+                                <TabPanel header={intl.formatMessage({ id: 'Historico de contraseñas' })}>
+                                    <PasswordHistorico usuarioId={idEditar}/>
+                                </TabPanel>
+                            </TabView>
+                        )}
 
                         <div className="flex justify-content-end mt-2">
                             {editable && (

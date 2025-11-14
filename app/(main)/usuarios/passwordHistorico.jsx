@@ -3,15 +3,12 @@ import { getUsuarioPasswordHistoricos, getUsuarioPasswordHistoricosCount, delete
 import Crud from "../../components/shared/crud";
 import { useIntl } from 'react-intl'
 
-const PasswordHistorico = ({usuarioId, editable}) => {
+const PasswordHistorico = ({usuarioId}) => {
     const intl = useIntl()
     const columnas = [
-        { campo: 'password', header: intl.formatMessage({ id: 'Contraseña' }), tipo: 'string' },
+        { campo: 'password', header: intl.formatMessage({ id: 'Contraseña' }), style: { wordBreak: 'break-all', whiteSpace: 'normal' } },
         { campo: 'fechaCreacion', header: intl.formatMessage({ id: 'Fecha' }), tipo: 'fechaHora' },
     ]
-
-    // Mostrar botón eliminar solo en modo edición
-    const botones = editable ? ['descargarCSV', 'eliminar'] : ['descargarCSV'];
 
     return (
         <div>
@@ -19,10 +16,10 @@ const PasswordHistorico = ({usuarioId, editable}) => {
                 headerCrud={intl.formatMessage({ id: 'Historico de contraseñas' })}
                 getRegistros={getUsuarioPasswordHistoricos}
                 getRegistrosCount={getUsuarioPasswordHistoricosCount}
-                botones={botones}
+                botones={['descargarCSV']}
                 filtradoBase={{ usuarioId:  usuarioId}}
                 columnas={columnas}
-                deleteRegistro={deleteUsuarioPasswordHistorico}
+                //deleteRegistro={deleteUsuarioPasswordHistorico}
             />
         </div>
     );
