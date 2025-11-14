@@ -3,13 +3,13 @@ import { TraduccionLiteralControllerApi, IdiomaControllerApi, settings } from "@
 const apiTraduccion = new TraduccionLiteralControllerApi(settings)
 const apiIdioma = new IdiomaControllerApi(settings)
 
-export const getTraduccionLiterales = async () => {
-    const { data: dataTraduccionLiterales } = await apiTraduccion.traduccionLiteralControllerFind()
+export const getTraduccionLiterales = async (filtrar) => {
+    const { data: dataTraduccionLiterales } = await apiTraduccion.traduccionLiteralControllerFind(filtrar)
     return dataTraduccionLiterales
 }
 
-export const getTraduccionLiteralesCount = async () => {
-    const { data: dataTraduccionLiteralesCount } = await apiTraduccion.traduccionLiteralControllerCount()
+export const getTraduccionLiteralesCount = async (filtrar) => {
+    const { data: dataTraduccionLiteralesCount } = await apiTraduccion.traduccionLiteralControllerCount(filtrar)
     return dataTraduccionLiteralesCount
 }
 
@@ -28,15 +28,15 @@ export const deleteTraduccionLiteral = async (idTraduccion) => {
     return dataTraduccionLiterales
 }
 
-export const getVistaTraduccionLiteralIdioma = async (filtrar) => {
-    const { data: dataTraduccionLiterales } = await apiTraduccion.traduccionLiteralControllerVistaTraduccionIdioma(filtrar)
-    return dataTraduccionLiterales
-}
+// export const getVistaTraduccionLiteralIdioma = async (filtrar) => {
+//     const { data: dataTraduccionLiterales } = await apiTraduccion.traduccionLiteralControllerVistaTraduccionLiteralIdioma(filtrar)
+//     return dataTraduccionLiterales
+// }
 
-export const getVistaTraduccionLiteralIdiomaCount = async (filtrar) => {
-    const { data: dataTraduccionLiterales } = await apiTraduccion.traduccionLiteralControllerVistaTraduccionIdiomaCount(filtrar)
-    return dataTraduccionLiterales
-}
+// export const getVistaTraduccionLiteralIdiomaCount = async (filtrar) => {
+//     const { data: dataTraduccionLiterales } = await apiTraduccion.traduccionLiteralControllerVistaTraduccionLiteralIdiomaCount(filtrar)
+//     return dataTraduccionLiterales
+// }
 
 export const buscaTraduccionLiteral = async (iso) => {
     try {

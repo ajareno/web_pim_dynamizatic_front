@@ -44436,7 +44436,7 @@ export const TraduccionLiteralControllerApiFp = function(configuration?: Configu
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async traduccionLiteralControllerCount(where?: { [key: string]: object; }, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<LoopbackCount>> {
+        async traduccionLiteralControllerCount(where?: { [key: string]: object; }, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.traduccionLiteralControllerCount(where, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -44466,7 +44466,7 @@ export const TraduccionLiteralControllerApiFp = function(configuration?: Configu
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async traduccionLiteralControllerFind(filter?: TraduccionLiteralFilter1, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<TraduccionLiteralWithRelations>>> {
+        async traduccionLiteralControllerFind(filter?: TraduccionLiteralFilter1, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.traduccionLiteralControllerFind(filter, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -44539,7 +44539,7 @@ export const TraduccionLiteralControllerApiFactory = function (configuration?: C
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        traduccionLiteralControllerCount(where?: { [key: string]: object; }, options?: any): AxiosPromise<LoopbackCount> {
+        traduccionLiteralControllerCount(where?: { [key: string]: object; }, options?: any): AxiosPromise<object> {
             return localVarFp.traduccionLiteralControllerCount(where, options).then((request) => request(axios, basePath));
         },
         /**
@@ -44566,7 +44566,7 @@ export const TraduccionLiteralControllerApiFactory = function (configuration?: C
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        traduccionLiteralControllerFind(filter?: TraduccionLiteralFilter1, options?: any): AxiosPromise<Array<TraduccionLiteralWithRelations>> {
+        traduccionLiteralControllerFind(filter?: TraduccionLiteralFilter1, options?: any): AxiosPromise<object> {
             return localVarFp.traduccionLiteralControllerFind(filter, options).then((request) => request(axios, basePath));
         },
         /**
